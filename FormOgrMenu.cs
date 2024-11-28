@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DershaneYonetimSistemi.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,12 @@ namespace DershaneYonetimSistemi
     public partial class FormOgrMenu : Form
     {
         SqlConnection baglanti = new SqlConnection(@"Data Source=DESKTOP-T90QPC7\SQLEXPRESS;Initial Catalog=DERSHANE;Integrated Security=True;TrustServerCertificate=True");
+        KullaniciYetkileri kullaniciYetkileri;
+        public FormOgrMenu(KullaniciYetkileri yetkiler)
+        {
+            InitializeComponent();
+            kullaniciYetkileri = yetkiler;
+        }
         private void studentIDYukle()
         {
             try
@@ -40,7 +47,8 @@ namespace DershaneYonetimSistemi
                 comboBoxOgrenciNo.Items.Clear();
                 comboBoxOgrenciNo.Items.AddRange(studentIDs.ToArray());
 
-
+                comboBoxOgrenciID.Items.Clear();
+                comboBoxOgrenciID.Items.AddRange(studentIDs.ToArray());
             }
             catch (Exception ex)
             {
@@ -52,6 +60,7 @@ namespace DershaneYonetimSistemi
                 baglanti.Close();
             }
         }
+
         private void studentCourseIDYukle()
         {
             try
@@ -66,7 +75,7 @@ namespace DershaneYonetimSistemi
 
                 List<string> studentCourseIDs = new List<string>();
 
-                // Gelen rolleri ComboBox'a ekliyoruz
+
                 while (reader.Read())
                 {
                     studentCourseIDs.Add(reader["StudentCourseID"].ToString());
@@ -77,6 +86,9 @@ namespace DershaneYonetimSistemi
 
                 comboBoxOgrenciDersID.Items.Clear();
                 comboBoxOgrenciDersID.Items.AddRange(studentCourseIDs.ToArray());
+
+                comboBoxStudentLessonID.Items.Clear();
+                comboBoxStudentLessonID.Items.AddRange(studentCourseIDs.ToArray());
 
             }
             catch (Exception ex)
@@ -131,15 +143,19 @@ namespace DershaneYonetimSistemi
                 SqlCommand komut = new SqlCommand("SELECT AttendanceId FROM Devamsizlik", baglanti);
                 SqlDataReader reader = komut.ExecuteReader();
 
-                // ComboBox'ı temizliyoruz (yeniden yüklenirse eski değerler kalmasın)
-                comboBoxTemporaryDevamsizlikID.Items.Clear();
+                List<string> attendanceIDs = new List<string>();
 
-                // Gelen rolleri ComboBox'a ekliyoruz
+
                 while (reader.Read())
                 {
-                    comboBoxTemporaryDevamsizlikID.Items.Add(reader["AttendanceId"].ToString());
+                    attendanceIDs.Add(reader["AttendanceId"].ToString());
                 }
 
+                comboBoxTemporaryDevamsizlikID.Items.Clear();
+                comboBoxTemporaryDevamsizlikID.Items.AddRange(attendanceIDs.ToArray());
+
+                comboBoxDevamsizlikID.Items.Clear();
+                comboBoxDevamsizlikID.Items.AddRange(attendanceIDs.ToArray());
             }
             catch (Exception ex)
             {
@@ -154,260 +170,326 @@ namespace DershaneYonetimSistemi
 
         private void ogrencileriGoster()
         {
-            string query = "SELECT * FROM Ogrenci";
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
-            DataTable dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
-
-
-            if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
+            if (kullaniciYetkileri.CanRead)
             {
-                dataGridViewOgrenciler.DataSource = dataTable;
+                string query = "SELECT * FROM Ogrenci";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+
+
+                if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
+                {
+                    dataGridViewOgrenciler.DataSource = dataTable;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Öğrencileri görüntüleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
         }
         private void ogrenciDersleriGoster()
         {
-            string query = "SELECT * FROM OgrenciDers";
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
-            DataTable dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
-
-
-            if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
+            if (kullaniciYetkileri.CanRead)
             {
-                dataGridViewOgrenciDersleri.DataSource = dataTable;
+                string query = "SELECT * FROM OgrenciDers";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+
+
+                if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
+                {
+                    dataGridViewOgrenciDersleri.DataSource = dataTable;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Öğrenci Dersleri görüntüleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
         }
         private void devamsizliklariGoster()
         {
-            string query = "SELECT * FROM Devamsizlik";
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
-            DataTable dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
-
-
-            if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
+            if (kullaniciYetkileri.CanRead)
             {
-                dataGridViewDevamsizliklar.DataSource = dataTable;
+                string query = "SELECT * FROM Devamsizlik";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+
+
+                if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
+                {
+                    dataGridViewDevamsizliklar.DataSource = dataTable;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Devamsızlıkları görüntüleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
         }
-
-
 
         private void ogrenciEkle()
         {
-            try
+            if (kullaniciYetkileri.CanInsert)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("INSERT INTO Ogrenci (StudentID ,FirstName, LastName, DateOfBirth, Gender, RegistrationDate, Adres, OgrenciAlan) VALUES (@P1, @P2, @P3, @P4, @P5, @P6, @P7, @P8)", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", textBoxStudentID.Text);
-                sqlCommand.Parameters.AddWithValue("@P2", textBoxOgrenciAdi.Text);
-                sqlCommand.Parameters.AddWithValue("@P3", textBoxOgrenciSoyadi.Text);
-                sqlCommand.Parameters.AddWithValue("@P4", dateTimePickerDogumTarihi.Value);
-                sqlCommand.Parameters.AddWithValue("@P5", textBoxOgrenciCinsiyet.Text);
-                sqlCommand.Parameters.AddWithValue("@P6", dateTimePickerKayitTarihi.Value);
-                sqlCommand.Parameters.AddWithValue("@P7", richTextBoxOgrenciAdres.Text);
-                sqlCommand.Parameters.AddWithValue("@P8", textBoxOgrenciAlan.Text);
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO Ogrenci (StudentID ,FirstName, LastName, DateOfBirth, Gender, RegistrationDate, Adres, OgrenciAlan) VALUES (@P1, @P2, @P3, @P4, @P5, @P6, @P7, @P8)", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", textBoxStudentID.Text);
+                    sqlCommand.Parameters.AddWithValue("@P2", textBoxOgrenciAdi.Text);
+                    sqlCommand.Parameters.AddWithValue("@P3", textBoxOgrenciSoyadi.Text);
+                    sqlCommand.Parameters.AddWithValue("@P4", dateTimePickerDogumTarihi.Value);
+                    sqlCommand.Parameters.AddWithValue("@P5", textBoxOgrenciCinsiyet.Text);
+                    sqlCommand.Parameters.AddWithValue("@P6", dateTimePickerKayitTarihi.Value);
+                    sqlCommand.Parameters.AddWithValue("@P7", richTextBoxOgrenciAdres.Text);
+                    sqlCommand.Parameters.AddWithValue("@P8", textBoxOgrenciAlan.Text);
 
-                sqlCommand.ExecuteNonQuery();
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Öğrenci eklenirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                studentIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Öğrenci eklenirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Öğrenci ekleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            ogrencileriGoster();
-            studentIDYukle();
         }
         private void ogrenciGuncelle()
         {
-            try
+            if (kullaniciYetkileri.CanUpdate)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("UPDATE Ogrenci SET StudentID = @P1, FirstName = @P2, LastName = @P3, DateOfBirth = @P4, Gender = @P5, RegistrationDate = @P6, Adres = @P7, OgrenciAlan = @P8 WHERE StudentID = @P9", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", textBoxStudentID.Text);
-                sqlCommand.Parameters.AddWithValue("@P2", textBoxOgrenciAdi.Text);
-                sqlCommand.Parameters.AddWithValue("@P3", textBoxOgrenciSoyadi.Text);
-                sqlCommand.Parameters.AddWithValue("@P4", dateTimePickerDogumTarihi.Value);
-                sqlCommand.Parameters.AddWithValue("@P5", textBoxOgrenciCinsiyet.Text);
-                sqlCommand.Parameters.AddWithValue("@P6", dateTimePickerKayitTarihi.Value);
-                sqlCommand.Parameters.AddWithValue("@P7", richTextBoxOgrenciAdres.Text);
-                sqlCommand.Parameters.AddWithValue("@P8", textBoxOgrenciAlan.Text);
-                sqlCommand.Parameters.AddWithValue("@P9", comboBoxTemporaryStudentID.SelectedItem.ToString());
-                sqlCommand.ExecuteNonQuery();
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("UPDATE Ogrenci SET StudentID = @P1, FirstName = @P2, LastName = @P3, DateOfBirth = @P4, Gender = @P5, RegistrationDate = @P6, Adres = @P7, OgrenciAlan = @P8 WHERE StudentID = @P9", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", textBoxStudentID.Text);
+                    sqlCommand.Parameters.AddWithValue("@P2", textBoxOgrenciAdi.Text);
+                    sqlCommand.Parameters.AddWithValue("@P3", textBoxOgrenciSoyadi.Text);
+                    sqlCommand.Parameters.AddWithValue("@P4", dateTimePickerDogumTarihi.Value);
+                    sqlCommand.Parameters.AddWithValue("@P5", textBoxOgrenciCinsiyet.Text);
+                    sqlCommand.Parameters.AddWithValue("@P6", dateTimePickerKayitTarihi.Value);
+                    sqlCommand.Parameters.AddWithValue("@P7", richTextBoxOgrenciAdres.Text);
+                    sqlCommand.Parameters.AddWithValue("@P8", textBoxOgrenciAlan.Text);
+                    sqlCommand.Parameters.AddWithValue("@P9", comboBoxTemporaryStudentID.SelectedItem.ToString());
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Öğrenci güncellenirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                studentIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Öğrenci güncellenirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Öğrenci güncelleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            ogrencileriGoster();
-            studentIDYukle();
         }
         private void ogrenciSil()
         {
-            try
+            if (kullaniciYetkileri.CanDelete)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("DELETE FROM Ogrenci WHERE StudentID = @P1", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", textBoxSilinecekOgrenci.Text);
-                sqlCommand.ExecuteNonQuery();
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("DELETE FROM Ogrenci WHERE StudentID = @P1", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciID.SelectedItem.ToString());
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Öğrenci silinirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                studentIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Öğrenci silinirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Öğrenci silme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            ogrencileriGoster();
-            studentIDYukle();
         }
 
         private void ogrenciDersEkle()
         {
-            try
+            if (kullaniciYetkileri.CanInsert)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("INSERT INTO OgrenciDers (StudentID, CourseID, DerseKayitTarihi) VALUES (@P1, @P2, @P3)", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciNo.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P2", comboBoxDersID.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDerseKayitTarihi.Value);
-                sqlCommand.ExecuteNonQuery();
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO OgrenciDers (StudentID, CourseID, DerseKayitTarihi) VALUES (@P1, @P2, @P3)", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciNo.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", comboBoxDersID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDerseKayitTarihi.Value);
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Öğrenci Ders eklenirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                studentCourseIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Öğrenci Ders eklenirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Öğrenci ders ekleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            ogrenciDersleriGoster();
-            studentCourseIDYukle();
         }
         private void ogrenciDersGuncelle()
         {
-            try
+            if (kullaniciYetkileri.CanUpdate)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("UPDATE OgrenciDers SET StudentID = @P1, CourseID = @P2, DerseKayitTarihi = @P3 WHERE StudentCourseID = @P4", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciNo.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P2", comboBoxDersID.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDerseKayitTarihi.Value);
-                sqlCommand.Parameters.AddWithValue("@P4", comboBoxTemporaryOgrenciDersID.SelectedItem.ToString());
-                sqlCommand.ExecuteNonQuery();
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("UPDATE OgrenciDers SET StudentID = @P1, CourseID = @P2, DerseKayitTarihi = @P3 WHERE StudentCourseID = @P4", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciNo.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", comboBoxDersID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDerseKayitTarihi.Value);
+                    sqlCommand.Parameters.AddWithValue("@P4", comboBoxTemporaryOgrenciDersID.SelectedItem.ToString());
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Öğrenci Ders güncellenirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                studentCourseIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Öğrenci Ders güncellenirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Öğrenci ders güncelleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            ogrenciDersleriGoster();
-            studentCourseIDYukle();
         }
         private void ogrenciDersSil()
         {
-            try
+            if (kullaniciYetkileri.CanDelete)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("DELETE FROM OgrenciDers WHERE StudentCourseID = @P1", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", textBoxSilinecekOgrenciDers.Text);
-                sqlCommand.ExecuteNonQuery();
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("DELETE FROM OgrenciDers WHERE StudentCourseID = @P1", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxStudentLessonID.SelectedItem.ToString());
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Öğrenci ders silinirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                studentCourseIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Öğrenci ders silinirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Öğrenci ders silme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            ogrenciDersleriGoster();
-            studentCourseIDYukle();
         }
 
         private void devamsizlikEkle()
         {
-            try
+            if (kullaniciYetkileri.CanInsert)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("INSERT INTO Devamsizlik (StudentCourseID, Durum, AttendanceDate) VALUES (@P1, @P2, @P3)", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciDersID.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P2", checkBoxDevamsizlikBilgisi.Checked ? 1 : 0);
-                sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDevamsizlikTarihi.Value);
-                sqlCommand.ExecuteNonQuery();
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO Devamsizlik (StudentCourseID, Durum, AttendanceDate) VALUES (@P1, @P2, @P3)", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciDersID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", checkBoxDevamsizlikBilgisi.Checked ? 1 : 0);
+                    sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDevamsizlikTarihi.Value);
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Devamsızlık eklenirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                AttendanceIdYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Devamsızlık eklenirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Devamsızlık ekleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            devamsizliklariGoster();
-            AttendanceIdYukle();
         }
         private void devamsizlikGuncelle()
         {
-            try
+            if (kullaniciYetkileri.CanUpdate)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("UPDATE Devamsizlik SET StudentCourseID = @P1, Durum = @P2, AttendanceDate = @P3 WHERE AttendanceId = @P4", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciDersID.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P2", checkBoxDevamsizlikBilgisi.Checked ? 1 : 0);
-                sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDevamsizlikTarihi.Value);
-                sqlCommand.Parameters.AddWithValue("@P4", comboBoxTemporaryDevamsizlikID.SelectedItem.ToString());
-                sqlCommand.ExecuteNonQuery();
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("UPDATE Devamsizlik SET StudentCourseID = @P1, Durum = @P2, AttendanceDate = @P3 WHERE AttendanceId = @P4", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciDersID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", checkBoxDevamsizlikBilgisi.Checked ? 1 : 0);
+                    sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDevamsizlikTarihi.Value);
+                    sqlCommand.Parameters.AddWithValue("@P4", comboBoxTemporaryDevamsizlikID.SelectedItem.ToString());
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Devamsızlık güncellenirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                AttendanceIdYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Devamsızlık güncellenirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Devamsızlık güncelleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            devamsizliklariGoster();
-            AttendanceIdYukle();
         }
         private void devamsizlikSil()
         {
-            try
+            if (kullaniciYetkileri.CanDelete)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("DELETE FROM Devamsizlik WHERE AttendanceId = @P1", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", textBoxSilinecekDevamsizlikID.Text);
-                sqlCommand.ExecuteNonQuery();
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("DELETE FROM Devamsizlik WHERE AttendanceId = @P1", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxDevamsizlikID.SelectedItem.ToString());
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Devamsızlık silinirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                AttendanceIdYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Devamsızlık silinirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Devamsızlık silme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            devamsizliklariGoster();
-            AttendanceIdYukle();
-        }
-
-
-
-        public FormOgrMenu()
-        {
-            InitializeComponent();
         }
 
         private void FormOgrMenu_Load(object sender, EventArgs e)
@@ -416,9 +498,6 @@ namespace DershaneYonetimSistemi
             studentCourseIDYukle();
             CourseIDYukle();
             AttendanceIdYukle();
-            ogrencileriGoster();
-            ogrenciDersleriGoster();
-            devamsizliklariGoster();
         }
 
         private void buttonOgrenciEkle_Click(object sender, EventArgs e)
@@ -463,6 +542,23 @@ namespace DershaneYonetimSistemi
         private void buttonDevamsızlıkSil_Click(object sender, EventArgs e)
         {
             devamsizlikSil();
+        }
+
+
+
+        private void buttonOgrencileriGoruntule_Click(object sender, EventArgs e)
+        {
+            ogrencileriGoster();
+        }
+
+        private void buttonOgrenciDersleriGoruntule_Click(object sender, EventArgs e)
+        {
+            ogrenciDersleriGoster();
+        }
+
+        private void buttonDevamsizlikGoruntule_Click(object sender, EventArgs e)
+        {
+            devamsizliklariGoster();
         }
     }
 }

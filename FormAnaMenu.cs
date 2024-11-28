@@ -1,7 +1,9 @@
-﻿using System;
+﻿using DershaneYonetimSistemi.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,11 +19,62 @@ namespace DershaneYonetimSistemi
         FormOgrMenu formStdDersTch;
         FormExamMenu formExamMenu;
         FormYetkilendirmeMenu formYetkilendirmeMenu;
+        FormTchANDLessonMenu formTchANDLessonMenu;
+        FormOdemeMenu formOdemeMenu;
         private string kullaniciRol;
-        public FormAnaMenu(string rol)
+        private KullaniciYetkileri kullaniciYetkileri;
+        public FormAnaMenu(string rol, KullaniciYetkileri yetkiler)
         {
             InitializeComponent();
             kullaniciRol = rol; //FormGiris'den gelen rolü constructor aracılığya aldık.
+            kullaniciYetkileri = yetkiler; // Yetkileri saklıyoruz
+        }
+
+        
+
+        private void Yedekle()
+        {
+            string connectionString = "Data Source=DESKTOP-T90QPC7\\SQLEXPRESS;Initial Catalog=DERSHANE;Integrated Security=True;TrustServerCertificate=True";
+            string sql = "BACKUP DATABASE [DERSHANE] TO DISK = 'C:\\DershaneVeritabaniYedekler\\DershaneYedek.bak' WITH INIT;";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Veritabanı başarıyla yedeklendi!");
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Yedekleme sırasında hata: " + ex.Message);
+            }
+           
+        }
+        private void YedektenDon()
+        {
+            string connectionString = "Data Source=DESKTOP-T90QPC7\\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;TrustServerCertificate=True";
+            string sql = @" ALTER DATABASE [DERSHANE] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+                            RESTORE DATABASE [DERSHANE] FROM DISK = 'C:\\DershaneVeritabaniYedekler\\DershaneYedek.bak' WITH REPLACE;
+                            ALTER DATABASE [DERSHANE] SET MULTI_USER;";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.ExecuteNonQuery();
+                    MessageBox.Show("Veritabanı başarıyla geri yüklendi!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Geri yükleme sırasında hata: " + ex.Message);
+            }
         }
 
         private void buttonQuit_Click(object sender, EventArgs e)
@@ -33,13 +86,13 @@ namespace DershaneYonetimSistemi
 
         private void buttonStdDersTch_Click(object sender, EventArgs e)
         {
-            formStdDersTch = new FormOgrMenu();
+            formStdDersTch = new FormOgrMenu(kullaniciYetkileri);
             formStdDersTch.Show();
         }
 
         private void buttonExam_Click(object sender, EventArgs e)
         {
-            formExamMenu = new FormExamMenu();
+            formExamMenu = new FormExamMenu(kullaniciYetkileri);
             formExamMenu.Show();
         }
 
@@ -56,6 +109,31 @@ namespace DershaneYonetimSistemi
             }
         }
 
-       
+        private void buttonOgretmenDers_Click(object sender, EventArgs e)
+        {
+            formTchANDLessonMenu = new FormTchANDLessonMenu(kullaniciYetkileri);
+            formTchANDLessonMenu.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            formOdemeMenu = new FormOdemeMenu(kullaniciYetkileri);
+            formOdemeMenu.Show();
+        }
+
+        private void FormAnaMenu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonYedekle_Click(object sender, EventArgs e)
+        {
+            Yedekle();
+        }
+
+        private void buttonYedekdenDon_Click(object sender, EventArgs e)
+        {
+            YedektenDon();
+        }
     }
 }

@@ -36,6 +36,13 @@
             label6 = new Label();
             label7 = new Label();
             buttonQuit = new Button();
+            label2 = new Label();
+            buttonOgretmenDers = new Button();
+            button1 = new Button();
+            label3 = new Label();
+            buttonYedekdenDon = new Button();
+            label4 = new Label();
+            buttonYedekle = new Button();
             SuspendLayout();
             // 
             // buttonStdDersTch
@@ -44,7 +51,7 @@
             buttonStdDersTch.Name = "buttonStdDersTch";
             buttonStdDersTch.Size = new Size(152, 50);
             buttonStdDersTch.TabIndex = 0;
-            buttonStdDersTch.Text = "Öğrenci/Ders/Öğretmen işlemlerine git.";
+            buttonStdDersTch.Text = "Öğrenci ve Devamsızlık işlemlerine git";
             buttonStdDersTch.UseVisualStyleBackColor = true;
             buttonStdDersTch.Click += buttonStdDersTch_Click;
             // 
@@ -85,9 +92,9 @@
             label5.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             label5.Location = new Point(30, 65);
             label5.Name = "label5";
-            label5.Size = new Size(272, 16);
+            label5.Size = new Size(244, 16);
             label5.TabIndex = 7;
-            label5.Text = "Öğrenci, Ders ve Öğretmen İşlemleri";
+            label5.Text = "Öğrenci ve Devamsızlık İşlemleri";
             // 
             // label6
             // 
@@ -111,7 +118,7 @@
             // 
             // buttonQuit
             // 
-            buttonQuit.Location = new Point(451, 359);
+            buttonQuit.Location = new Point(611, 432);
             buttonQuit.Name = "buttonQuit";
             buttonQuit.Size = new Size(122, 40);
             buttonQuit.TabIndex = 10;
@@ -119,11 +126,88 @@
             buttonQuit.UseVisualStyleBackColor = true;
             buttonQuit.Click += buttonQuit_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(358, 65);
+            label2.Name = "label2";
+            label2.Size = new Size(207, 16);
+            label2.TabIndex = 11;
+            label2.Text = "Öğretmen ve Ders İşlemleri";
+            // 
+            // buttonOgretmenDers
+            // 
+            buttonOgretmenDers.Location = new Point(398, 99);
+            buttonOgretmenDers.Name = "buttonOgretmenDers";
+            buttonOgretmenDers.Size = new Size(152, 50);
+            buttonOgretmenDers.TabIndex = 12;
+            buttonOgretmenDers.Text = "Öğretmen ve Ders  işlemlerine git";
+            buttonOgretmenDers.UseVisualStyleBackColor = true;
+            buttonOgretmenDers.Click += buttonOgretmenDers_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(398, 211);
+            button1.Name = "button1";
+            button1.Size = new Size(152, 50);
+            button1.TabIndex = 14;
+            button1.Text = "Ödeme İşlemlerine git";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Location = new Point(358, 170);
+            label3.Name = "label3";
+            label3.Size = new Size(127, 16);
+            label3.TabIndex = 13;
+            label3.Text = "Ödeme İşlemleri";
+            // 
+            // buttonYedekdenDon
+            // 
+            buttonYedekdenDon.Location = new Point(536, 325);
+            buttonYedekdenDon.Name = "buttonYedekdenDon";
+            buttonYedekdenDon.Size = new Size(107, 50);
+            buttonYedekdenDon.TabIndex = 16;
+            buttonYedekdenDon.Text = "Yedekten Dön";
+            buttonYedekdenDon.UseVisualStyleBackColor = true;
+            buttonYedekdenDon.Click += buttonYedekdenDon_Click;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Location = new Point(358, 278);
+            label4.Name = "label4";
+            label4.Size = new Size(306, 16);
+            label4.TabIndex = 15;
+            label4.Text = "Yedekleme ve Yedekten Dönme İşlemleri";
+            // 
+            // buttonYedekle
+            // 
+            buttonYedekle.Location = new Point(398, 325);
+            buttonYedekle.Name = "buttonYedekle";
+            buttonYedekle.Size = new Size(110, 50);
+            buttonYedekle.TabIndex = 17;
+            buttonYedekle.Text = "Yedekle";
+            buttonYedekle.UseVisualStyleBackColor = true;
+            buttonYedekle.Click += buttonYedekle_Click;
+            // 
             // FormAnaMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(607, 432);
+            ClientSize = new Size(769, 496);
+            Controls.Add(buttonYedekle);
+            Controls.Add(buttonYedekdenDon);
+            Controls.Add(label4);
+            Controls.Add(button1);
+            Controls.Add(label3);
+            Controls.Add(buttonOgretmenDers);
+            Controls.Add(label2);
             Controls.Add(buttonQuit);
             Controls.Add(label7);
             Controls.Add(label6);
@@ -138,6 +222,7 @@
             MinimizeBox = false;
             Name = "FormAnaMenu";
             Text = "Dershane Yönetim Sistemi";
+            Load += FormAnaMenu_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -153,5 +238,12 @@
         private Label label7;
         private Button buttonQuit;
         private Button button4;
+        private Label label2;
+        private Button buttonOgretmenDers;
+        private Button button1;
+        private Label label3;
+        private Button buttonYedekdenDon;
+        private Label label4;
+        private Button buttonYedekle;
     }
 }

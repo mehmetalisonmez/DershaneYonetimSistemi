@@ -1,3 +1,4 @@
+using DershaneYonetimSistemi.Models;
 using System.Data.SqlClient;
 
 namespace DershaneYonetimSistemi
@@ -11,7 +12,37 @@ namespace DershaneYonetimSistemi
         }
 
         SqlConnection baglanti = new SqlConnection(@"Data Source=DESKTOP-T90QPC7\SQLEXPRESS;Initial Catalog=DERSHANE;Integrated Security=True;TrustServerCertificate=True");
+        private KullaniciYetkileri YetkileriGetir(string rol)
+        {
+            try
+            {
+                baglanti.Open();
+                SqlCommand komut = new SqlCommand("SELECT CanRead, CanInsert, CanDelete, CanUpdate FROM Yetki WHERE Rol = @Rol", baglanti);
+                komut.Parameters.AddWithValue("@Rol", rol);
+                SqlDataReader reader = komut.ExecuteReader();
 
+                if (reader.Read())
+                {
+                    return new KullaniciYetkileri
+                    {
+                        CanRead = Convert.ToBoolean(reader["CanRead"]),
+                        CanInsert = Convert.ToBoolean(reader["CanInsert"]),
+                        CanDelete = Convert.ToBoolean(reader["CanDelete"]),
+                        CanUpdate = Convert.ToBoolean(reader["CanUpdate"])
+                    };
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Yetkiler alýnýrken hata: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                baglanti.Close();
+            }
+        }
         private bool KullaniciDogrula(string kullaniciAdi, string sifre, out string rol)  //Kullanýcý adý ve þifrenin doðrulanmasý, out olarak kullancýý rolünü alýyoruz
         {
             rol = "";
@@ -77,11 +108,24 @@ namespace DershaneYonetimSistemi
             // Giriþ loglama
             LogGirisDenemesi(kullaniciAdi, basarili);
 
+
             if (basarili)
             {
-                label3.Text = "Þifre Doðru";
-                formAnamenu = new FormAnaMenu(rol); //Ana menüye geçiþ yaparken constructor aracýlýðýyla rol deðerini gönderiyoruz.
-                formAnamenu.Show();
+                // Yetkileri çek
+                KullaniciYetkileri yetkiler = YetkileriGetir(rol);
+
+                if (yetkiler != null)
+                {
+                    // Ana menü formuna yetkileri gönder
+                    formAnamenu = new FormAnaMenu(rol,yetkiler);
+                    formAnamenu.Show();
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Yetkiler alýnamadý!");
+                }
+                
 
             }
             else

@@ -30,11 +30,9 @@
         {
             buttonOgrencileriGoruntule = new Button();
             buttonDevamsızlıkSil = new Button();
-            textBoxSilinecekDevamsizlikID = new TextBox();
             labelSilinecekDevamsizlikID = new Label();
             buttonOgrenciSil = new Button();
-            textBoxSilinecekOgrenci = new TextBox();
-            labelSilinecekRol = new Label();
+            labelSilinecekOgrenci = new Label();
             groupBox3 = new GroupBox();
             dataGridViewOgrenciler = new DataGridView();
             groupBox2 = new GroupBox();
@@ -65,7 +63,7 @@
             textBoxOgrenciSoyadi = new TextBox();
             dateTimePickerDogumTarihi = new DateTimePicker();
             buttonOgrenciGuncelle = new Button();
-            labelTemporarySinavID = new Label();
+            labelTemporaryOGrenciID = new Label();
             buttonOgrenciEkle = new Button();
             labelSoyad = new Label();
             labelFirstName = new Label();
@@ -92,7 +90,9 @@
             dataGridViewOgrenciDersleri = new DataGridView();
             buttonDevamsizlikGoruntule = new Button();
             buttonOgrenciDersSil = new Button();
-            textBoxSilinecekOgrenciDers = new TextBox();
+            comboBoxStudentLessonID = new ComboBox();
+            comboBoxDevamsizlikID = new ComboBox();
+            comboBoxOgrenciID = new ComboBox();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewOgrenciler).BeginInit();
             groupBox2.SuspendLayout();
@@ -106,12 +106,13 @@
             // 
             // buttonOgrencileriGoruntule
             // 
-            buttonOgrencileriGoruntule.Location = new Point(682, 6);
+            buttonOgrencileriGoruntule.Location = new Point(479, 313);
             buttonOgrencileriGoruntule.Name = "buttonOgrencileriGoruntule";
             buttonOgrencileriGoruntule.Size = new Size(108, 38);
             buttonOgrencileriGoruntule.TabIndex = 42;
             buttonOgrencileriGoruntule.Text = "Öğrencileri Görüntüle";
             buttonOgrencileriGoruntule.UseVisualStyleBackColor = true;
+            buttonOgrencileriGoruntule.Click += buttonOgrencileriGoruntule_Click;
             // 
             // buttonDevamsızlıkSil
             // 
@@ -123,13 +124,6 @@
             buttonDevamsızlıkSil.UseVisualStyleBackColor = true;
             buttonDevamsızlıkSil.Click += buttonDevamsızlıkSil_Click;
             // 
-            // textBoxSilinecekDevamsizlikID
-            // 
-            textBoxSilinecekDevamsizlikID.Location = new Point(1248, 363);
-            textBoxSilinecekDevamsizlikID.Name = "textBoxSilinecekDevamsizlikID";
-            textBoxSilinecekDevamsizlikID.Size = new Size(118, 23);
-            textBoxSilinecekDevamsizlikID.TabIndex = 40;
-            // 
             // labelSilinecekDevamsizlikID
             // 
             labelSilinecekDevamsizlikID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
@@ -137,7 +131,7 @@
             labelSilinecekDevamsizlikID.Name = "labelSilinecekDevamsizlikID";
             labelSilinecekDevamsizlikID.Size = new Size(162, 36);
             labelSilinecekDevamsizlikID.TabIndex = 39;
-            labelSilinecekDevamsizlikID.Text = "Silinecek devamsızlığın ID değerini giriniz :";
+            labelSilinecekDevamsizlikID.Text = "Silinecek devamsızlığın ID değerini seçiniz :";
             // 
             // buttonOgrenciSil
             // 
@@ -149,21 +143,14 @@
             buttonOgrenciSil.UseVisualStyleBackColor = true;
             buttonOgrenciSil.Click += buttonOgrenciSil_Click;
             // 
-            // textBoxSilinecekOgrenci
+            // labelSilinecekOgrenci
             // 
-            textBoxSilinecekOgrenci.Location = new Point(183, 489);
-            textBoxSilinecekOgrenci.Name = "textBoxSilinecekOgrenci";
-            textBoxSilinecekOgrenci.Size = new Size(131, 23);
-            textBoxSilinecekOgrenci.TabIndex = 37;
-            // 
-            // labelSilinecekRol
-            // 
-            labelSilinecekRol.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            labelSilinecekRol.Location = new Point(41, 480);
-            labelSilinecekRol.Name = "labelSilinecekRol";
-            labelSilinecekRol.Size = new Size(149, 39);
-            labelSilinecekRol.TabIndex = 36;
-            labelSilinecekRol.Text = "Silinecek Öğrencinin numarasını giriniz :";
+            labelSilinecekOgrenci.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSilinecekOgrenci.Location = new Point(41, 480);
+            labelSilinecekOgrenci.Name = "labelSilinecekOgrenci";
+            labelSilinecekOgrenci.Size = new Size(149, 39);
+            labelSilinecekOgrenci.TabIndex = 36;
+            labelSilinecekOgrenci.Text = "Silinecek Öğrencinin numarasını seçiniz :";
             // 
             // groupBox3
             // 
@@ -315,7 +302,7 @@
             groupBox1.Controls.Add(textBoxOgrenciSoyadi);
             groupBox1.Controls.Add(dateTimePickerDogumTarihi);
             groupBox1.Controls.Add(buttonOgrenciGuncelle);
-            groupBox1.Controls.Add(labelTemporarySinavID);
+            groupBox1.Controls.Add(labelTemporaryOGrenciID);
             groupBox1.Controls.Add(buttonOgrenciEkle);
             groupBox1.Controls.Add(labelSoyad);
             groupBox1.Controls.Add(labelFirstName);
@@ -461,15 +448,15 @@
             buttonOgrenciGuncelle.UseVisualStyleBackColor = true;
             buttonOgrenciGuncelle.Click += buttonOgrenciGuncelle_Click;
             // 
-            // labelTemporarySinavID
+            // labelTemporaryOGrenciID
             // 
-            labelTemporarySinavID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            labelTemporarySinavID.Location = new Point(15, 19);
-            labelTemporarySinavID.Name = "labelTemporarySinavID";
-            labelTemporarySinavID.Size = new Size(187, 84);
-            labelTemporarySinavID.TabIndex = 19;
-            labelTemporarySinavID.Text = "Bu alana sadece güncelleme yapacağınız zaman, güncellecemek istediğiniz öğrencinin mevcut numarasını seçiniz :";
-            labelTemporarySinavID.TextAlign = ContentAlignment.MiddleLeft;
+            labelTemporaryOGrenciID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelTemporaryOGrenciID.Location = new Point(15, 19);
+            labelTemporaryOGrenciID.Name = "labelTemporaryOGrenciID";
+            labelTemporaryOGrenciID.Size = new Size(187, 84);
+            labelTemporaryOGrenciID.TabIndex = 19;
+            labelTemporaryOGrenciID.Text = "Bu alana sadece güncelleme yapacağınız zaman, güncellecemek istediğiniz öğrencinin mevcut numarasını seçiniz :";
+            labelTemporaryOGrenciID.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // buttonOgrenciEkle
             // 
@@ -558,7 +545,7 @@
             label3.Name = "label3";
             label3.Size = new Size(161, 36);
             label3.TabIndex = 60;
-            label3.Text = "Silinecek öğrenci dersin ID değerini giriniz :";
+            label3.Text = "Silinecek öğrenci dersin ID değerini seçiniz :";
             // 
             // groupBox6
             // 
@@ -680,17 +667,18 @@
             // 
             // buttonOgrenciDersleriGoruntule
             // 
-            buttonOgrenciDersleriGoruntule.Location = new Point(655, 555);
+            buttonOgrenciDersleriGoruntule.Location = new Point(482, 868);
             buttonOgrenciDersleriGoruntule.Name = "buttonOgrenciDersleriGoruntule";
             buttonOgrenciDersleriGoruntule.Size = new Size(113, 38);
             buttonOgrenciDersleriGoruntule.TabIndex = 58;
             buttonOgrenciDersleriGoruntule.Text = "Öğrenci Dersleri Görüntüle";
             buttonOgrenciDersleriGoruntule.UseVisualStyleBackColor = true;
+            buttonOgrenciDersleriGoruntule.Click += buttonOgrenciDersleriGoruntule_Click;
             // 
             // groupBox4
             // 
             groupBox4.Controls.Add(dataGridViewOgrenciDersleri);
-            groupBox4.Location = new Point(464, 594);
+            groupBox4.Location = new Point(479, 594);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(505, 268);
             groupBox4.TabIndex = 57;
@@ -711,12 +699,13 @@
             // 
             // buttonDevamsizlikGoruntule
             // 
-            buttonDevamsizlikGoruntule.Location = new Point(1233, 430);
+            buttonDevamsizlikGoruntule.Location = new Point(1046, 735);
             buttonDevamsizlikGoruntule.Name = "buttonDevamsizlikGoruntule";
             buttonDevamsizlikGoruntule.Size = new Size(113, 38);
             buttonDevamsizlikGoruntule.TabIndex = 70;
             buttonDevamsizlikGoruntule.Text = "Devamsızlıkları Görüntüle";
             buttonDevamsizlikGoruntule.UseVisualStyleBackColor = true;
+            buttonDevamsizlikGoruntule.Click += buttonDevamsizlikGoruntule_Click;
             // 
             // buttonOgrenciDersSil
             // 
@@ -728,19 +717,38 @@
             buttonOgrenciDersSil.UseVisualStyleBackColor = true;
             buttonOgrenciDersSil.Click += buttonOgrenciDersSil_Click;
             // 
-            // textBoxSilinecekOgrenciDers
+            // comboBoxStudentLessonID
             // 
-            textBoxSilinecekOgrenciDers.Location = new Point(186, 897);
-            textBoxSilinecekOgrenciDers.Name = "textBoxSilinecekOgrenciDers";
-            textBoxSilinecekOgrenciDers.Size = new Size(131, 23);
-            textBoxSilinecekOgrenciDers.TabIndex = 72;
+            comboBoxStudentLessonID.FormattingEnabled = true;
+            comboBoxStudentLessonID.Location = new Point(193, 897);
+            comboBoxStudentLessonID.Name = "comboBoxStudentLessonID";
+            comboBoxStudentLessonID.Size = new Size(121, 23);
+            comboBoxStudentLessonID.TabIndex = 73;
+            // 
+            // comboBoxDevamsizlikID
+            // 
+            comboBoxDevamsizlikID.FormattingEnabled = true;
+            comboBoxDevamsizlikID.Location = new Point(1248, 363);
+            comboBoxDevamsizlikID.Name = "comboBoxDevamsizlikID";
+            comboBoxDevamsizlikID.Size = new Size(121, 23);
+            comboBoxDevamsizlikID.TabIndex = 74;
+            // 
+            // comboBoxOgrenciID
+            // 
+            comboBoxOgrenciID.FormattingEnabled = true;
+            comboBoxOgrenciID.Location = new Point(193, 483);
+            comboBoxOgrenciID.Name = "comboBoxOgrenciID";
+            comboBoxOgrenciID.Size = new Size(121, 23);
+            comboBoxOgrenciID.TabIndex = 75;
             // 
             // FormOgrMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1539, 953);
-            Controls.Add(textBoxSilinecekOgrenciDers);
+            Controls.Add(comboBoxOgrenciID);
+            Controls.Add(comboBoxDevamsizlikID);
+            Controls.Add(comboBoxStudentLessonID);
             Controls.Add(buttonOgrenciDersSil);
             Controls.Add(buttonDevamsizlikGoruntule);
             Controls.Add(labelOgrenciDersCRUD);
@@ -753,11 +761,9 @@
             Controls.Add(groupBox5);
             Controls.Add(buttonOgrencileriGoruntule);
             Controls.Add(buttonDevamsızlıkSil);
-            Controls.Add(textBoxSilinecekDevamsizlikID);
             Controls.Add(labelSilinecekDevamsizlikID);
             Controls.Add(buttonOgrenciSil);
-            Controls.Add(textBoxSilinecekOgrenci);
-            Controls.Add(labelSilinecekRol);
+            Controls.Add(labelSilinecekOgrenci);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -777,17 +783,14 @@
             groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewOgrenciDersleri).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
         private Button buttonOgrencileriGoruntule;
         private Button buttonDevamsızlıkSil;
-        private TextBox textBoxSilinecekDevamsizlikID;
         private Label labelSilinecekDevamsizlikID;
         private Button buttonOgrenciSil;
-        private TextBox textBoxSilinecekOgrenci;
-        private Label labelSilinecekRol;
+        private Label labelSilinecekOgrenci;
         private GroupBox groupBox3;
         private DataGridView dataGridViewOgrenciler;
         private GroupBox groupBox2;
@@ -808,7 +811,7 @@
         private TextBox textBoxOgrenciSoyadi;
         private DateTimePicker dateTimePickerDogumTarihi;
         private Button buttonOgrenciGuncelle;
-        private Label labelTemporarySinavID;
+        private Label labelTemporaryOGrenciID;
         private Button buttonOgrenciEkle;
         private Label labelSoyad;
         private Label labelFirstName;
@@ -857,8 +860,10 @@
         private Button buttonOgrenciDersGuncelle;
         private DateTimePicker dateTimePickerDerseKayitTarihi;
         private Button buttonOgrenciDersSil;
-        private TextBox textBoxSilinecekOgrenciDers;
         private TextBox textBoxStudentID;
         private Label labelStudentID;
+        private ComboBox comboBoxStudentLessonID;
+        private ComboBox comboBoxDevamsizlikID;
+        private ComboBox comboBoxOgrenciID;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DershaneYonetimSistemi.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,13 @@ namespace DershaneYonetimSistemi
     public partial class FormExamMenu : Form
     {
         SqlConnection baglanti = new SqlConnection(@"Data Source=DESKTOP-T90QPC7\SQLEXPRESS;Initial Catalog=DERSHANE;Integrated Security=True;TrustServerCertificate=True");
+
+        private KullaniciYetkileri kullaniciYetkileri;
+        public FormExamMenu(KullaniciYetkileri yetkiler)
+        {
+            InitializeComponent();
+            kullaniciYetkileri = yetkiler;
+        }
         private void courseIDYukle()
         {
             try
@@ -50,7 +58,7 @@ namespace DershaneYonetimSistemi
                 baglanti.Close();
             }
         } // Sadece Ders tablosundan CourseID'leri çeker
-        private void examIDYukle()
+        private void sinavIDYukle()
         {
             try
             {
@@ -61,20 +69,59 @@ namespace DershaneYonetimSistemi
                 SqlCommand komut = new SqlCommand("SELECT ExamID FROM Sinav", baglanti);
                 SqlDataReader reader = komut.ExecuteReader();
 
-                // ComboBox'ı temizliyoruz (yeniden yüklenirse eski değerler kalmasın)
-                comboBoxSinavIDforSınavSonuc.Items.Clear();
+                // Öğeleri bir listeye kaydediyoruz
+                List<string> examIDs = new List<string>();
 
-                // Gelen rolleri ComboBox'a ekliyoruz
+                // Gelen verileri listeye ekliyoruz
                 while (reader.Read())
                 {
-                    comboBoxSinavIDforSınavSonuc.Items.Add(reader["ExamID"].ToString());
+                    examIDs.Add(reader["ExamID"].ToString());
                 }
 
-                // İlk seçili öğeyi belirtebilirsiniz (opsiyonel)
-                if (comboBoxSinavIDforSınavSonuc.Items.Count > 0)
+                comboBoxSinavIDforSınavSonuc.Items.Clear();
+                comboBoxSinavIDforSınavSonuc.Items.AddRange(examIDs.ToArray());
+
+                comboBoxSilinecekSinavID.Items.Clear();
+                comboBoxSilinecekSinavID.Items.AddRange(examIDs.ToArray());
+
+                comboBoxTemporarySinavID.Items.Clear();
+                comboBoxTemporarySinavID.Items.AddRange(examIDs.ToArray());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exam ID'ler yüklenirken bir hata oluştu: " + ex.Message);
+            }
+            finally
+            {
+                // Bağlantıyı kapatıyoruz
+                baglanti.Close();
+            }
+        }
+        private void sinavSonucIDYukle()
+        {
+            try
+            {
+                // Bağlantıyı açıyoruz
+                baglanti.Open();
+
+                // SQL sorgusu ile rolleri çekiyoruz
+                SqlCommand komut = new SqlCommand("SELECT ResultID FROM SinavSonuc", baglanti);
+                SqlDataReader reader = komut.ExecuteReader();
+
+                // Öğeleri bir listeye kaydediyoruz
+                List<string> examResultIDs = new List<string>();
+
+                // Gelen verileri listeye ekliyoruz
+                while (reader.Read())
                 {
-                    comboBoxSinavIDforSınavSonuc.SelectedIndex = 0;
+                    examResultIDs.Add(reader["ResultID"].ToString());
                 }
+
+                comboBoxSilinecekSinavSonucID.Items.Clear();
+                comboBoxSilinecekSinavSonucID.Items.AddRange(examResultIDs.ToArray());
+
+                comboBoxTemporarySinavSonucID.Items.Clear();
+                comboBoxTemporarySinavSonucID.Items.AddRange(examResultIDs.ToArray());
             }
             catch (Exception ex)
             {
@@ -122,176 +169,241 @@ namespace DershaneYonetimSistemi
                 baglanti.Close();
             }
         }
+
+
         private void sinavlariGoster()
         {
-            string query = "SELECT * FROM Sinav";
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
-            DataTable dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
-
-
-            if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
+            if (kullaniciYetkileri.CanRead)
             {
-                dataGridViewSinavlar.DataSource = dataTable;
+                string query = "SELECT * FROM Sinav";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+
+
+                if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
+                {
+                    dataGridViewSinavlar.DataSource = dataTable;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Sınavları görüntüleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
         }
         private void sinavSonuclariGoster()
         {
-            string query = "SELECT * FROM SinavSonuc";
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
-            DataTable dataTable = new DataTable();
-            dataAdapter.Fill(dataTable);
-
-
-            if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
+            if (kullaniciYetkileri.CanRead)
             {
-                dataGridViewSinavSonuclari.DataSource = dataTable;
+                string query = "SELECT * FROM SinavSonuc";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+
+
+                if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
+                {
+                    dataGridViewSinavSonuclari.DataSource = dataTable;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Sınav sonuçlarını görüntüleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
         }
+
+
         private void sinavEkle()
         {
-            try
+            if (kullaniciYetkileri.CanInsert)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("INSERT INTO Sinav (CourseID, ExamName, ExamDate) VALUES (@P1, @P2, @P3)", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", comboBoxCourseID.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P2", textBoxSinavIsmi.Text);
-                sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerSinavTarihi.Value);
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO Sinav (CourseID, ExamName, ExamDate) VALUES (@P1, @P2, @P3)", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxCourseID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", textBoxSinavIsmi.Text);
+                    sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerSinavTarihi.Value);
 
-                sqlCommand.ExecuteNonQuery();
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sınav eklenirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                sinavlariGoster();
+                sinavIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Sınav eklenirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Sınav eklemeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            sinavlariGoster();
         }
         private void sinavGuncelle()
         {
-            try
+            if (kullaniciYetkileri.CanUpdate)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("UPDATE Sinav SET CourseID = @P1, ExamName = @P2, ExamDate = @P3 WHERE ExamID = @P4", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", comboBoxCourseID.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P2", textBoxSinavIsmi.Text);
-                sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerSinavTarihi.Value);
-                sqlCommand.Parameters.AddWithValue("@P4", textBoxTemporarySinavID.Text);
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("UPDATE Sinav SET CourseID = @P1, ExamName = @P2, ExamDate = @P3 WHERE ExamID = @P4", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxCourseID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", textBoxSinavIsmi.Text);
+                    sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerSinavTarihi.Value);
+                    sqlCommand.Parameters.AddWithValue("@P4", comboBoxTemporarySinavID.SelectedItem.ToString());
 
-                sqlCommand.ExecuteNonQuery();
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sınav güncellenirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                sinavlariGoster();
+                sinavIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Sınav güncellenirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Sınav güncellemeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            sinavlariGoster();
-            textBoxTemporarySinavID.Text = "";
+
         }
         private void sinavSil()
         {
-            try
+            if (kullaniciYetkileri.CanDelete)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("DELETE FROM Sinav WHERE ExamID = @P1", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", textBoxSilinecekSinav.Text);
-                sqlCommand.ExecuteNonQuery();
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("DELETE FROM Sinav WHERE ExamID = @P1", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSilinecekSinavID.SelectedItem.ToString());
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sınav silinirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                sinavlariGoster();
+                sinavIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Sınav silinirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Sınav silmeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            sinavlariGoster();
+
         }
+
         private void sinavSonucEkle()
         {
-            try
+            if (kullaniciYetkileri.CanInsert)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("INSERT INTO SinavSonuc (ExamID, StudentID, AlinanPuan) VALUES (@P1, @P2, @P3)", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", comboBoxSinavIDforSınavSonuc.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P2", comboBoxStudentID.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P3", textBoxAlinanPuan.Text);
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO SinavSonuc (ExamID, StudentID, AlinanPuan) VALUES (@P1, @P2, @P3)", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSinavIDforSınavSonuc.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", comboBoxStudentID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P3", textBoxAlinanPuan.Text);
 
-                sqlCommand.ExecuteNonQuery();
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sınav sonucu eklenirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                sinavSonuclariGoster();
+                sinavSonucIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Sınav sonucu eklenirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Sınav sonuç ekleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            sinavSonuclariGoster();
+
         }
         private void sinavSonucGuncelle()
         {
-            try
+            if (kullaniciYetkileri.CanUpdate)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("UPDATE SinavSonuc SET ExamID = @P1, StudentID = @P2, AlinanPuan = @P3 WHERE ResultID = @P4", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", comboBoxSinavIDforSınavSonuc.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P2", comboBoxStudentID.SelectedItem.ToString());
-                sqlCommand.Parameters.AddWithValue("@P3", textBoxAlinanPuan.Text);
-                sqlCommand.Parameters.AddWithValue("@P4", textBoxTemporaryResultID.Text);
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("UPDATE SinavSonuc SET ExamID = @P1, StudentID = @P2, AlinanPuan = @P3 WHERE ResultID = @P4", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSinavIDforSınavSonuc.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", comboBoxStudentID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P3", textBoxAlinanPuan.Text);
+                    sqlCommand.Parameters.AddWithValue("@P4", comboBoxTemporarySinavSonucID.SelectedItem.ToString());
 
-                sqlCommand.ExecuteNonQuery();
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sınav sonucu güncellenirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                sinavSonuclariGoster();
+                sinavSonucIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Sınav sonucu güncellenirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Sınav sonuç güncelleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            sinavSonuclariGoster();
-            textBoxTemporaryResultID.Text = "";
         }
         private void sinavSonucSil()
         {
-            try
+            if (kullaniciYetkileri.CanDelete)
             {
-                baglanti.Open();
-                SqlCommand sqlCommand = new SqlCommand("DELETE FROM SinavSonuc WHERE ResultID = @P1", baglanti);
-                sqlCommand.Parameters.AddWithValue("@P1", textBoxSilinecekSinavSonucID.Text);
-                sqlCommand.ExecuteNonQuery();
+                try
+                {
+                    baglanti.Open();
+                    SqlCommand sqlCommand = new SqlCommand("DELETE FROM SinavSonuc WHERE ResultID = @P1", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSilinecekSinavSonucID.SelectedItem.ToString());
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Sınav sonucu silinirken hata oluştu ! " + ex.Message);
+                }
+                finally
+                {
+                    baglanti.Close();
+                }
+                sinavSonuclariGoster();
+                sinavSonucIDYukle();
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Sınav sonucu silinirken hata oluştu ! " + ex.Message);
+                MessageBox.Show("Sınav sonuç silme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-            finally
-            {
-                baglanti.Close();
-            }
-            sinavSonuclariGoster();
         }
 
-        public FormExamMenu()
-        {
-            InitializeComponent();
-        }
+
 
 
         private void FormExamMenu_Load(object sender, EventArgs e)
         {
+            sinavSonucIDYukle();
             courseIDYukle();
-            examIDYukle();
+            sinavIDYukle();
             studentIDYukle();
-            sinavlariGoster();
-            sinavSonuclariGoster();
+
         }
 
         private void buttonSinavEkle_Click(object sender, EventArgs e)
@@ -321,6 +433,16 @@ namespace DershaneYonetimSistemi
         private void buttonSinavSonucSil_Click(object sender, EventArgs e)
         {
             sinavSonucSil();
+        }
+
+        private void buttonSinavlariGoruntule_Click(object sender, EventArgs e)
+        {
+            sinavlariGoster();
+        }
+
+        private void buttonSinavSonucGoruntule_Click(object sender, EventArgs e)
+        {
+            sinavSonuclariGoster();
         }
     }
 }
