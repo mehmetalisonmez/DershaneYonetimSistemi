@@ -48,6 +48,9 @@
             buttonOdemeleriGoruntule = new Button();
             groupBox4 = new GroupBox();
             dataGridViewOdemeler = new DataGridView();
+            buttonSaveWord = new Button();
+            buttonVeriAl = new Button();
+            buttonSaveExcelOdemeler = new Button();
             groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownOdemeMiktari).BeginInit();
             groupBox4.SuspendLayout();
@@ -74,7 +77,7 @@
             // 
             // labelOdemeCRUD
             // 
-            labelOdemeCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelOdemeCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold);
             labelOdemeCRUD.Location = new Point(12, 26);
             labelOdemeCRUD.Name = "labelOdemeCRUD";
             labelOdemeCRUD.Size = new Size(446, 18);
@@ -83,7 +86,7 @@
             // 
             // label3
             // 
-            label3.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Century", 9F);
             label3.Location = new Point(19, 380);
             label3.Name = "label3";
             label3.Size = new Size(161, 36);
@@ -156,7 +159,7 @@
             // labelOdemeTuru
             // 
             labelOdemeTuru.AutoSize = true;
-            labelOdemeTuru.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelOdemeTuru.Font = new Font("Century", 9F);
             labelOdemeTuru.Location = new Point(15, 201);
             labelOdemeTuru.Name = "labelOdemeTuru";
             labelOdemeTuru.Size = new Size(82, 16);
@@ -166,7 +169,7 @@
             // labelAmount
             // 
             labelAmount.AutoSize = true;
-            labelAmount.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelAmount.Font = new Font("Century", 9F);
             labelAmount.Location = new Point(15, 167);
             labelAmount.Name = "labelAmount";
             labelAmount.Size = new Size(146, 16);
@@ -183,7 +186,7 @@
             // 
             // labelTemporaryOgrenciDersID
             // 
-            labelTemporaryOgrenciDersID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelTemporaryOgrenciDersID.Font = new Font("Century", 9F);
             labelTemporaryOgrenciDersID.Location = new Point(10, 19);
             labelTemporaryOgrenciDersID.Name = "labelTemporaryOgrenciDersID";
             labelTemporaryOgrenciDersID.Size = new Size(168, 67);
@@ -202,7 +205,7 @@
             // labelOgrenciID
             // 
             labelOgrenciID.AutoSize = true;
-            labelOgrenciID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelOgrenciID.Font = new Font("Century", 9F);
             labelOgrenciID.Location = new Point(11, 100);
             labelOgrenciID.Name = "labelOgrenciID";
             labelOgrenciID.Size = new Size(74, 16);
@@ -212,7 +215,7 @@
             // labelOdemeTarihi
             // 
             labelOdemeTarihi.AutoSize = true;
-            labelOdemeTarihi.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelOdemeTarihi.Font = new Font("Century", 9F);
             labelOdemeTarihi.Location = new Point(11, 135);
             labelOdemeTarihi.Name = "labelOdemeTarihi";
             labelOdemeTarihi.Size = new Size(141, 16);
@@ -251,11 +254,44 @@
             dataGridViewOdemeler.Size = new Size(499, 246);
             dataGridViewOdemeler.TabIndex = 0;
             // 
+            // buttonSaveWord
+            // 
+            buttonSaveWord.Location = new Point(621, 321);
+            buttonSaveWord.Name = "buttonSaveWord";
+            buttonSaveWord.Size = new Size(113, 38);
+            buttonSaveWord.TabIndex = 104;
+            buttonSaveWord.Text = "Word dosyası olarak kaydet";
+            buttonSaveWord.UseVisualStyleBackColor = true;
+            buttonSaveWord.Click += buttonSavePdf_Click;
+            // 
+            // buttonVeriAl
+            // 
+            buttonVeriAl.Location = new Point(756, 321);
+            buttonVeriAl.Name = "buttonVeriAl";
+            buttonVeriAl.Size = new Size(113, 38);
+            buttonVeriAl.TabIndex = 105;
+            buttonVeriAl.Text = "Veri al";
+            buttonVeriAl.UseVisualStyleBackColor = true;
+            buttonVeriAl.Click += buttonVeriAl_Click;
+            // 
+            // buttonSaveExcelOdemeler
+            // 
+            buttonSaveExcelOdemeler.Location = new Point(884, 321);
+            buttonSaveExcelOdemeler.Name = "buttonSaveExcelOdemeler";
+            buttonSaveExcelOdemeler.Size = new Size(113, 38);
+            buttonSaveExcelOdemeler.TabIndex = 106;
+            buttonSaveExcelOdemeler.Text = "Excel dosyası olarak kaydet";
+            buttonSaveExcelOdemeler.UseVisualStyleBackColor = true;
+            buttonSaveExcelOdemeler.Click += buttonSaveExcelOdemeler_Click;
+            // 
             // FormOdemeMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1000, 568);
+            Controls.Add(buttonSaveExcelOdemeler);
+            Controls.Add(buttonVeriAl);
+            Controls.Add(buttonSaveWord);
             Controls.Add(comboBoxSilinecekOdemeID);
             Controls.Add(buttonOdemeSil);
             Controls.Add(labelOdemeCRUD);
@@ -296,5 +332,8 @@
         private GroupBox groupBox4;
         private DataGridView dataGridViewOdemeler;
         private ComboBox comboBoxOdemeTuru;
+        private Button buttonSaveWord;
+        private Button buttonVeriAl;
+        private Button buttonSaveExcelOdemeler;
     }
 }

@@ -14,17 +14,17 @@ using Xceed.Words.NET;
 
 namespace DershaneYonetimSistemi
 {
-    public partial class FormExamMenu : Form
+    public partial class FormSinifMenu : Form
     {
         SqlConnection baglanti = new SqlConnection(@"Data Source=DESKTOP-T90QPC7\SQLEXPRESS;Initial Catalog=DERSHANE;Integrated Security=True;TrustServerCertificate=True");
 
         private KullaniciYetkileri kullaniciYetkileri;
-        public FormExamMenu(KullaniciYetkileri yetkiler)
+        public FormSinifMenu(KullaniciYetkileri yetkiler)
         {
             InitializeComponent();
             kullaniciYetkileri = yetkiler;
+
         }
-      
         private void courseIDYukle()
         {
             try
@@ -36,20 +36,20 @@ namespace DershaneYonetimSistemi
                 SqlCommand komut = new SqlCommand("SELECT CourseID FROM Ders", baglanti);
                 SqlDataReader reader = komut.ExecuteReader();
 
-                // Öğeleri bir listeye kaydediyoruz
-                List<string> courseIDs = new List<string>();
+                // ComboBox'ı temizliyoruz (yeniden yüklenirse eski değerler kalmasın)
+                comboBoxCourseID.Items.Clear();
 
-                // Gelen verileri listeye ekliyoruz
+                // Gelen rolleri ComboBox'a ekliyoruz
                 while (reader.Read())
                 {
-                    courseIDs.Add(reader["CourseID"].ToString());
+                    comboBoxCourseID.Items.Add(reader["CourseID"].ToString());
                 }
 
-                comboBoxCourseID.Items.Clear();
-                comboBoxCourseID.Items.AddRange(courseIDs.ToArray());
-
-                comboBoxCourseID2.Items.Clear();
-                comboBoxCourseID2.Items.AddRange(courseIDs.ToArray());
+                // İlk seçili öğeyi belirtebilirsiniz (opsiyonel)
+                if (comboBoxCourseID.Items.Count > 0)
+                {
+                    comboBoxCourseID.SelectedIndex = 0;
+                }
             }
             catch (Exception ex)
             {
@@ -61,7 +61,7 @@ namespace DershaneYonetimSistemi
                 baglanti.Close();
             }
         }
-        private void sinavIDYukle()
+        private void sinifIDYukle()
         {
             try
             {
@@ -69,30 +69,30 @@ namespace DershaneYonetimSistemi
                 baglanti.Open();
 
                 // SQL sorgusu ile rolleri çekiyoruz
-                SqlCommand komut = new SqlCommand("SELECT ExamID FROM Sinav", baglanti);
+                SqlCommand komut = new SqlCommand("SELECT ClassID FROM Sinif", baglanti);
                 SqlDataReader reader = komut.ExecuteReader();
 
                 // Öğeleri bir listeye kaydediyoruz
-                List<string> examIDs = new List<string>();
+                List<string> classIDs = new List<string>();
 
                 // Gelen verileri listeye ekliyoruz
                 while (reader.Read())
                 {
-                    examIDs.Add(reader["ExamID"].ToString());
+                    classIDs.Add(reader["ClassID"].ToString());
                 }
 
-                comboBoxSinavIDforSınavSonuc.Items.Clear();
-                comboBoxSinavIDforSınavSonuc.Items.AddRange(examIDs.ToArray());
+                comboBoxSinifID.Items.Clear();
+                comboBoxSinifID.Items.AddRange(classIDs.ToArray());
 
-                comboBoxSilinecekSinavID.Items.Clear();
-                comboBoxSilinecekSinavID.Items.AddRange(examIDs.ToArray());
+                comboBoxSilinecekSinifID.Items.Clear();
+                comboBoxSilinecekSinifID.Items.AddRange(classIDs.ToArray());
 
-                comboBoxTemporarySinavID.Items.Clear();
-                comboBoxTemporarySinavID.Items.AddRange(examIDs.ToArray());
+                comboBoxTemporarySinifID.Items.Clear();
+                comboBoxTemporarySinifID.Items.AddRange(classIDs.ToArray());
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exam ID'ler yüklenirken bir hata oluştu: " + ex.Message);
+                MessageBox.Show("Sınıf ID'ler yüklenirken bir hata oluştu: " + ex.Message);
             }
             finally
             {
@@ -100,7 +100,7 @@ namespace DershaneYonetimSistemi
                 baglanti.Close();
             }
         }
-        private void sinavSonucIDYukle()
+        private void sinifDersIDYukle()
         {
             try
             {
@@ -108,27 +108,27 @@ namespace DershaneYonetimSistemi
                 baglanti.Open();
 
                 // SQL sorgusu ile rolleri çekiyoruz
-                SqlCommand komut = new SqlCommand("SELECT ResultID FROM SinavSonuc", baglanti);
+                SqlCommand komut = new SqlCommand("SELECT SinifDersID FROM SinifDers", baglanti);
                 SqlDataReader reader = komut.ExecuteReader();
 
                 // Öğeleri bir listeye kaydediyoruz
-                List<string> examResultIDs = new List<string>();
+                List<string> classLessonIDs = new List<string>();
 
                 // Gelen verileri listeye ekliyoruz
                 while (reader.Read())
                 {
-                    examResultIDs.Add(reader["ResultID"].ToString());
+                    classLessonIDs.Add(reader["SinifDersID"].ToString());
                 }
 
-                comboBoxSilinecekSinavSonucID.Items.Clear();
-                comboBoxSilinecekSinavSonucID.Items.AddRange(examResultIDs.ToArray());
+                comboBoxTemporarySinifDersID.Items.Clear();
+                comboBoxTemporarySinifDersID.Items.AddRange(classLessonIDs.ToArray());
 
-                comboBoxTemporarySinavSonucID.Items.Clear();
-                comboBoxTemporarySinavSonucID.Items.AddRange(examResultIDs.ToArray());
+                comboBoxSilinecekSinifDersID.Items.Clear();
+                comboBoxSilinecekSinifDersID.Items.AddRange(classLessonIDs.ToArray());
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Exam ID'ler yüklenirken bir hata oluştu: " + ex.Message);
+                MessageBox.Show("Sınıf Ders ID'ler yüklenirken bir hata oluştu: " + ex.Message);
             }
             finally
             {
@@ -136,7 +136,7 @@ namespace DershaneYonetimSistemi
                 baglanti.Close();
             }
         }
-        private void studentIDYukle()
+        private void teacherIDYukle()
         {
             try
             {
@@ -144,27 +144,27 @@ namespace DershaneYonetimSistemi
                 baglanti.Open();
 
                 // SQL sorgusu ile rolleri çekiyoruz
-                SqlCommand komut = new SqlCommand("SELECT StudentID FROM Ogrenci", baglanti);
+                SqlCommand komut = new SqlCommand("SELECT TeacherID FROM Ogretmen", baglanti);
                 SqlDataReader reader = komut.ExecuteReader();
 
-                // ComboBox'ı temizliyoruz (yeniden yüklenirse eski değerler kalmasın)
-                comboBoxStudentID.Items.Clear();
+                // Öğeleri bir listeye kaydediyoruz
+                List<string> teacherIDs = new List<string>();
 
-                // Gelen rolleri ComboBox'a ekliyoruz
+                // Gelen verileri listeye ekliyoruz
                 while (reader.Read())
                 {
-                    comboBoxStudentID.Items.Add(reader["StudentID"].ToString());
+                    teacherIDs.Add(reader["TeacherID"].ToString());
                 }
 
-                // İlk seçili öğeyi belirtebilirsiniz (opsiyonel)
-                if (comboBoxStudentID.Items.Count > 0)
-                {
-                    comboBoxStudentID.SelectedIndex = 0;
-                }
+                comboBoxOgretmenID.Items.Clear();
+                comboBoxOgretmenID.Items.AddRange(teacherIDs.ToArray());
+
+                comboBoxTeacherID.Items.Clear();
+                comboBoxTeacherID.Items.AddRange(teacherIDs.ToArray());
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Student ID'ler yüklenirken bir hata oluştu: " + ex.Message);
+                MessageBox.Show("Teacher ID'ler yüklenirken bir hata oluştu: " + ex.Message);
             }
             finally
             {
@@ -172,13 +172,18 @@ namespace DershaneYonetimSistemi
                 baglanti.Close();
             }
         }
+        private void sinifAdYukle()
+        {
+            string[] sinifAdlari = { "Say1", "Say2", "Say3", "Söz1", "Söz2", "Söz3", "EA1", "EA2", "EA3", "Dil1", "Dil2", "Dil3" };
+            comboBoxSinifIsimleri.Items.AddRange(sinifAdlari);
+        }
 
 
-        private void sinavlariGoster()
+        private void siniflariGoster()
         {
             if (kullaniciYetkileri.CanRead)
             {
-                string query = "SELECT * FROM Sinav";
+                string query = "SELECT * FROM Sinif";
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
@@ -186,19 +191,19 @@ namespace DershaneYonetimSistemi
 
                 if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
                 {
-                    dataGridViewSinavlar.DataSource = dataTable;
+                    dataGridViewSiniflar.DataSource = dataTable;
                 }
             }
             else
             {
-                MessageBox.Show("Sınavları görüntüleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
+                MessageBox.Show("Sınıfları görüntüleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
         }
-        private void sinavSonuclariGoster()
+        private void sinifDersleriGoster()
         {
             if (kullaniciYetkileri.CanRead)
             {
-                string query = "SELECT * FROM SinavSonuc";
+                string query = "SELECT * FROM SinifDers";
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(query, baglanti);
                 DataTable dataTable = new DataTable();
                 dataAdapter.Fill(dataTable);
@@ -206,268 +211,223 @@ namespace DershaneYonetimSistemi
 
                 if (dataTable.Rows.Count >= 0) //DataTable içerisinde veri var ise
                 {
-                    dataGridViewSinavSonuclari.DataSource = dataTable;
+                    dataGridViewSinifDersler.DataSource = dataTable;
                 }
             }
             else
             {
-                MessageBox.Show("Sınav sonuçlarını görüntüleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
+                MessageBox.Show("Sınıf dersleri görüntüleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
         }
 
 
-        private void sinavEkle()
+        private void sinifEkle()
         {
             if (kullaniciYetkileri.CanInsert)
             {
                 try
                 {
                     baglanti.Open();
-                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO Sinav (CourseID, ExamName, ExamDate) VALUES (@P1, @P2, @P3)", baglanti);
-                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxCourseID.SelectedItem.ToString());
-                    sqlCommand.Parameters.AddWithValue("@P2", textBoxSinavIsmi.Text);
-                    sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerSinavTarihi.Value);
+                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO Sinif (TeacherID, ClassName, Capacity, CreationDate) VALUES (@P1, @P2, @P3,  @P4)", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxTeacherID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", comboBoxSinifIsimleri.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P3", numericUpDownCapacity.Value);
+                    sqlCommand.Parameters.AddWithValue("@P4", dateTimePickerOlusturulmaTarihi.Value);
 
                     sqlCommand.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sınav eklenirken hata oluştu ! " + ex.Message);
+                    MessageBox.Show("Sınıf eklenirken hata oluştu ! " + ex.Message);
                 }
                 finally
                 {
                     baglanti.Close();
                 }
-                sinavIDYukle();
+                sinifIDYukle();
             }
             else
             {
-                MessageBox.Show("Sınav eklemeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
+                MessageBox.Show("Sınıf eklemeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
         }
-        private void sinavGuncelle()
+        private void sinifGuncelle()
         {
             if (kullaniciYetkileri.CanUpdate)
             {
                 try
                 {
                     baglanti.Open();
-                    SqlCommand sqlCommand = new SqlCommand("UPDATE Sinav SET CourseID = @P1, ExamName = @P2, ExamDate = @P3 WHERE ExamID = @P4", baglanti);
-                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxCourseID.SelectedItem.ToString());
-                    sqlCommand.Parameters.AddWithValue("@P2", textBoxSinavIsmi.Text);
-                    sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerSinavTarihi.Value);
-                    sqlCommand.Parameters.AddWithValue("@P4", comboBoxTemporarySinavID.SelectedItem.ToString());
+                    SqlCommand sqlCommand = new SqlCommand("UPDATE Sinif SET TeacherID = @P1, ClassName = @P2, Capacity = @P3, CreationDate = @P4 WHERE ClassID = @P5", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxTeacherID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", comboBoxSinifIsimleri.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P3", numericUpDownCapacity.Value);
+                    sqlCommand.Parameters.AddWithValue("@P4", dateTimePickerOlusturulmaTarihi.Value);
+                    sqlCommand.Parameters.AddWithValue("@P5", comboBoxTemporarySinifID.SelectedItem.ToString());
 
                     sqlCommand.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sınav güncellenirken hata oluştu ! " + ex.Message);
+                    MessageBox.Show("Sınıf güncellenirken hata oluştu ! " + ex.Message);
                 }
                 finally
                 {
                     baglanti.Close();
                 }
-                sinavIDYukle();
+                sinifIDYukle();
             }
             else
             {
-                MessageBox.Show("Sınav güncellemeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
+                MessageBox.Show("Sınıf güncellemeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
 
         }
-        private void sinavSil()
+        private void sinifSil()
         {
             if (kullaniciYetkileri.CanDelete)
             {
                 try
                 {
                     baglanti.Open();
-                    SqlCommand sqlCommand = new SqlCommand("DELETE FROM Sinav WHERE ExamID = @P1", baglanti);
-                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSilinecekSinavID.SelectedItem.ToString());
+                    SqlCommand sqlCommand = new SqlCommand("DELETE FROM Sinif WHERE ClassID = @P1", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSilinecekSinifID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sınav silinirken hata oluştu ! " + ex.Message);
+                    MessageBox.Show("Sınıf silinirken hata oluştu ! " + ex.Message);
                 }
                 finally
                 {
                     baglanti.Close();
                 }
-                sinavIDYukle();
             }
             else
             {
-                MessageBox.Show("Sınav silmeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
+                MessageBox.Show("Sınıf silmeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-
+            sinifIDYukle();
         }
 
-        private void sinavSonucEkle()
+        private void sinifDersEkle()
         {
             if (kullaniciYetkileri.CanInsert)
             {
                 try
                 {
                     baglanti.Open();
-                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO SinavSonuc (ExamID, StudentID, AlinanPuan, CourseID) VALUES (@P1, @P2, @P3, @P4)", baglanti);
-                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSinavIDforSınavSonuc.SelectedItem.ToString());
-                    sqlCommand.Parameters.AddWithValue("@P2", comboBoxStudentID.SelectedItem.ToString());
-                    sqlCommand.Parameters.AddWithValue("@P3", textBoxAlinanPuan.Text);
-                    sqlCommand.Parameters.AddWithValue("@P4", comboBoxCourseID2.SelectedItem.ToString());
+                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO SinifDers (ClassID, CourseID, TeacherID) VALUES (@P1, @P2, @P3)", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSinifID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", comboBoxCourseID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P3", comboBoxOgretmenID.SelectedItem.ToString());
 
                     sqlCommand.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sınav sonucu eklenirken hata oluştu ! " + ex.Message);
+                    MessageBox.Show("Sınıf Ders eklenirken hata oluştu ! " + ex.Message);
                 }
                 finally
                 {
                     baglanti.Close();
                 }
-                sinavSonucIDYukle();
+                sinifDersIDYukle();
+
             }
             else
             {
-                MessageBox.Show("Sınav sonuç ekleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
+                MessageBox.Show("Sınıf Ders eklemeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
-
         }
-        private void sinavSonucGuncelle()
+        private void sinifDersGuncelle()
         {
             if (kullaniciYetkileri.CanUpdate)
             {
                 try
                 {
                     baglanti.Open();
-                    SqlCommand sqlCommand = new SqlCommand("UPDATE SinavSonuc SET ExamID = @P1, StudentID = @P2, AlinanPuan = @P3, CourseID = @P4 WHERE ResultID = @P5", baglanti);
-                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSinavIDforSınavSonuc.SelectedItem.ToString());
-                    sqlCommand.Parameters.AddWithValue("@P2", comboBoxStudentID.SelectedItem.ToString());
-                    sqlCommand.Parameters.AddWithValue("@P3", textBoxAlinanPuan.Text);
-                    sqlCommand.Parameters.AddWithValue("@P4", comboBoxCourseID2.SelectedItem.ToString());
-                    sqlCommand.Parameters.AddWithValue("@P5", comboBoxTemporarySinavSonucID.SelectedItem.ToString());
+                    SqlCommand sqlCommand = new SqlCommand("UPDATE SinifDers SET ClassID = @P1, CourseID = @P2, TeacherID = @P3 WHERE SinifDersID = @P4", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSinifID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P2", comboBoxCourseID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P3", comboBoxOgretmenID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P4", comboBoxTemporarySinifDersID.SelectedItem.ToString());
 
                     sqlCommand.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sınav sonucu güncellenirken hata oluştu ! " + ex.Message);
+                    MessageBox.Show("Sınıf Ders güncellenirken hata oluştu ! " + ex.Message);
                 }
                 finally
                 {
                     baglanti.Close();
                 }
-                sinavSonucIDYukle();
+                sinifDersIDYukle();
             }
             else
             {
-                MessageBox.Show("Sınav sonuç güncelleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
+                MessageBox.Show("Sınıf Ders güncellemeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
+
         }
-        private void sinavSonucSil()
+        private void sinifDersSil()
         {
             if (kullaniciYetkileri.CanDelete)
             {
                 try
                 {
                     baglanti.Open();
-                    SqlCommand sqlCommand = new SqlCommand("DELETE FROM SinavSonuc WHERE ResultID = @P1", baglanti);
-                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSilinecekSinavSonucID.SelectedItem.ToString());
+                    SqlCommand sqlCommand = new SqlCommand("DELETE FROM SinifDers WHERE SinifDersID = @P1", baglanti);
+                    sqlCommand.Parameters.AddWithValue("@P1", comboBoxSilinecekSinifDersID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Sınav sonucu silinirken hata oluştu ! " + ex.Message);
+                    MessageBox.Show("Sınıf Ders silinirken hata oluştu ! " + ex.Message);
                 }
                 finally
                 {
                     baglanti.Close();
                 }
-                sinavSonucIDYukle();
             }
             else
             {
-                MessageBox.Show("Sınav sonuç silme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
+                MessageBox.Show("Sınıf Ders silmeye yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
+            sinifDersIDYukle();
         }
 
 
-
-
-        private void FormExamMenu_Load(object sender, EventArgs e)
+        private void FormSinifMenu_Load(object sender, EventArgs e)
         {
-            sinavSonucIDYukle();
             courseIDYukle();
-            sinavIDYukle();
-            studentIDYukle();
-
-        }
-
-        private void buttonSinavEkle_Click(object sender, EventArgs e)
-        {
-            sinavEkle();
-        }
-        private void buttonSinavGuncelle_Click(object sender, EventArgs e)
-        {
-            sinavGuncelle();
-        }
-
-        private void buttonSinavSil_Click(object sender, EventArgs e)
-        {
-            sinavSil();
-        }
-
-        private void buttonSinavSonucEkle_Click(object sender, EventArgs e)
-        {
-            sinavSonucEkle();
-        }
-
-        private void buttonSinavSonucGuncelle_Click(object sender, EventArgs e)
-        {
-            sinavSonucGuncelle();
-        }
-
-        private void buttonSinavSonucSil_Click(object sender, EventArgs e)
-        {
-            sinavSonucSil();
-        }
-
-        private void buttonSinavlariGoruntule_Click(object sender, EventArgs e)
-        {
-            sinavlariGoster();
-        }
-
-        private void buttonSinavSonucGoruntule_Click(object sender, EventArgs e)
-        {
-            sinavSonuclariGoster();
+            sinifIDYukle();
+            sinifDersIDYukle();
+            teacherIDYukle();
+            sinifAdYukle();
         }
 
 
-
-
-
-
-        private void SaveAsWordExams(string filePath)
+        private void SaveAsWordClasses(string filePath)
         {
             using (var doc = DocX.Create(filePath))
             {
-                int rowCount = dataGridViewSinavlar.Rows.Count;
-                int colCount = dataGridViewSinavlar.Columns.Count;
+                int rowCount = dataGridViewSiniflar.Rows.Count;
+                int colCount = dataGridViewSiniflar.Columns.Count;
 
                 var table = doc.AddTable(rowCount + 1, colCount);
 
                 for (int col = 0; col < colCount; col++)
                 {
-                    table.Rows[0].Cells[col].Paragraphs[0].Append(dataGridViewSinavlar.Columns[col].HeaderText).Bold();
+                    table.Rows[0].Cells[col].Paragraphs[0].Append(dataGridViewSiniflar.Columns[col].HeaderText).Bold();
                 }
 
                 for (int row = 0; row < rowCount; row++)
                 {
                     for (int col = 0; col < colCount; col++)
                     {
-                        var cellValue = dataGridViewSinavlar.Rows[row].Cells[col].Value?.ToString() ?? string.Empty;
+                        var cellValue = dataGridViewSiniflar.Rows[row].Cells[col].Value?.ToString() ?? string.Empty;
                         table.Rows[row + 1].Cells[col].Paragraphs[0].Append(cellValue);
                     }
                 }
@@ -478,25 +438,25 @@ namespace DershaneYonetimSistemi
 
             MessageBox.Show("Word belgesi başarıyla kaydedildi.");
         }
-        private void SaveAsWordExamResults(string filePath)
+        private void SaveAsWordClassLessons(string filePath)
         {
             using (var doc = DocX.Create(filePath))
             {
-                int rowCount = dataGridViewSinavSonuclari.Rows.Count;
-                int colCount = dataGridViewSinavSonuclari.Columns.Count;
+                int rowCount = dataGridViewSinifDersler.Rows.Count;
+                int colCount = dataGridViewSinifDersler.Columns.Count;
 
                 var table = doc.AddTable(rowCount + 1, colCount);
 
                 for (int col = 0; col < colCount; col++)
                 {
-                    table.Rows[0].Cells[col].Paragraphs[0].Append(dataGridViewSinavSonuclari.Columns[col].HeaderText).Bold();
+                    table.Rows[0].Cells[col].Paragraphs[0].Append(dataGridViewSinifDersler.Columns[col].HeaderText).Bold();
                 }
 
                 for (int row = 0; row < rowCount; row++)
                 {
                     for (int col = 0; col < colCount; col++)
                     {
-                        var cellValue = dataGridViewSinavSonuclari.Rows[row].Cells[col].Value?.ToString() ?? string.Empty;
+                        var cellValue = dataGridViewSinifDersler.Rows[row].Cells[col].Value?.ToString() ?? string.Empty;
                         table.Rows[row + 1].Cells[col].Paragraphs[0].Append(cellValue);
                     }
                 }
@@ -508,9 +468,7 @@ namespace DershaneYonetimSistemi
             MessageBox.Show("Word belgesi başarıyla kaydedildi.");
         }
 
-
-
-        private void buttonSaveAsWordExams_Click(object sender, EventArgs e)
+        private void buttonSaveAsWordSinif_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -521,10 +479,10 @@ namespace DershaneYonetimSistemi
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveFileDialog.FileName;
-                SaveAsWordExams(filePath);
+                SaveAsWordClasses(filePath);
             }
         }
-        private void buttonSaveAsWordExamResults_Click(object sender, EventArgs e)
+        private void buttonSaveAsWordSinifDers_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -535,7 +493,7 @@ namespace DershaneYonetimSistemi
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveFileDialog.FileName;
-                SaveAsWordExamResults(filePath);
+                SaveAsWordClassLessons(filePath);
             }
         }
 
@@ -543,47 +501,91 @@ namespace DershaneYonetimSistemi
 
 
 
+        private void buttonSiniflariGoruntule_Click(object sender, EventArgs e)
+        {
+            siniflariGoster();
+        }
+        private void buttonSinifEkle_Click(object sender, EventArgs e)
+        {
+            sinifEkle();
+        }
+        private void buttonSinifGuncelle_Click(object sender, EventArgs e)
+        {
+            sinifGuncelle();
+        }
 
-        private void ImportExams(string filePath)
+        private void buttonSinifSil_Click(object sender, EventArgs e)
+        {
+            sinifSil();
+        }
+
+
+
+        private void buttonSinifDersleriGoruntule_Click(object sender, EventArgs e)
+        {
+            sinifDersleriGoster();
+        }
+        private void buttonSinifDersEkle_Click(object sender, EventArgs e)
+        {
+            sinifDersEkle();
+        }
+
+        private void buttonSinifDersGuncelle_Click(object sender, EventArgs e)
+        {
+            sinifDersGuncelle();
+        }
+
+        private void buttonSinifDersSil_Click(object sender, EventArgs e)
+        {
+            sinifDersSil();
+        }
+
+
+
+
+
+
+        private void ImportClasses(string filePath)
         {
             using (var package = new ExcelPackage(new FileInfo(filePath)))
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
 
                 DataTable dataTable = new DataTable();
-                dataTable.Columns.Add("CourseID", typeof(short));
-                dataTable.Columns.Add("ExamName", typeof(string));
-                dataTable.Columns.Add("ExamDate", typeof(DateTime));
-
+                dataTable.Columns.Add("TeacherID", typeof(string));
+                dataTable.Columns.Add("ClassName", typeof(string));
+                dataTable.Columns.Add("Capacity", typeof(byte));
+                dataTable.Columns.Add("CreationDate", typeof(DateTime));
 
 
                 for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
                 {
                     DataRow dataRow = dataTable.NewRow();
-                    dataRow["CourseID"] = short.Parse(worksheet.Cells[row, 1].Text);
-                    dataRow["ExamName"] = worksheet.Cells[row, 2].Text;
-                    dataRow["ExamDate"] = DateTime.Parse(worksheet.Cells[row, 3].Text);
+                    dataRow["TeacherID"] = worksheet.Cells[row, 1].Text;
+                    dataRow["ClassName"] = worksheet.Cells[row, 2].Text;
+                    dataRow["Capacity"] = byte.Parse(worksheet.Cells[row, 3].Text);
+                    dataRow["CreationDate"] = DateTime.Parse(worksheet.Cells[row, 4].Text);
                     dataTable.Rows.Add(dataRow);
                 }
 
-                if (dataGridViewSinavlar.DataSource != null)
+                if (dataGridViewSiniflar.DataSource != null)
                 {
-                    DataTable existingTable = (DataTable)dataGridViewSinavlar.DataSource;
+                    DataTable existingTable = (DataTable)dataGridViewSiniflar.DataSource;
                     foreach (DataRow row in dataTable.Rows)
                     {
                         existingTable.ImportRow(row);
                     }
-                    dataGridViewSinavlar.DataSource = existingTable;
+                    dataGridViewSiniflar.DataSource = existingTable;
                 }
                 else
                 {
-                    dataGridViewSinavlar.DataSource = dataTable;
+                    dataGridViewSiniflar.DataSource = dataTable;
                 }
 
-                AddExamToDatabase(dataTable);
+                AddClassToDatabase(dataTable);
             }
         } //İMPORT ETMEDEN ÖNCE DATAGRİDVİEW'DA VERİLERİN GÖRÜNTÜLENMESİ GEREKİYOR DİĞER TÜRLÜ PK EN SON KOLONA GEÇİYOR
-        private void AddExamToDatabase(DataTable dataTable)
+        private void AddClassToDatabase(DataTable dataTable)
         {
             SqlCommand command = null;
             try
@@ -593,16 +595,17 @@ namespace DershaneYonetimSistemi
                 {
                     try
                     {
-                        command = new SqlCommand("INSERT INTO Sinav (CourseID, ExamName, ExamDate) VALUES (@CourseID, @ExamName, @ExamDate)", baglanti);
-                        command.Parameters.AddWithValue("@CourseID", row["CourseID"]);
-                        command.Parameters.AddWithValue("@ExamName", row["ExamName"]);
-                        command.Parameters.AddWithValue("@ExamDate", row["ExamDate"]);
+                        command = new SqlCommand("INSERT INTO Sinif (TeacherID, ClassName, Capacity, CreationDate) VALUES (@TeacherID, @ClassName, @Capacity, @CreationDate)", baglanti);
+                        command.Parameters.AddWithValue("@TeacherID", row["TeacherID"]);
+                        command.Parameters.AddWithValue("@ClassName", row["ClassName"]);
+                        command.Parameters.AddWithValue("@Capacity", row["Capacity"]);
+                        command.Parameters.AddWithValue("@CreationDate", row["CreationDate"]);
                         command.ExecuteNonQuery();
                     }
                     catch (SqlException ex)
                     {
                         // Satır hatalarını yakala
-                        MessageBox.Show($"Bir hata oluştu: {ex.Message}\nHatalı veri: {row["CourseID"]}, {row["ExamName"]}, {row["ExamDate"]}",
+                        MessageBox.Show($"Bir hata oluştu: {ex.Message}\nHatalı veri: {row["TeacherID"]}, {row["ClassName"]}, {row["Capacity"]}, {row["CreationDate"]}",
                                         "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -618,7 +621,7 @@ namespace DershaneYonetimSistemi
                 baglanti.Close();
             }
         }
-        private void buttonVeriAlSinav_Click(object sender, EventArgs e)
+        private void buttonVeriAlSinif_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -628,10 +631,10 @@ namespace DershaneYonetimSistemi
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                ImportExams(openFileDialog.FileName);
+                ImportClasses(openFileDialog.FileName);
             }
         }
-        private void ExportToExcelSinavlar(string filePath)
+        private void ExportToExcelSiniflar(string filePath)
         {
             try
             {
@@ -641,17 +644,17 @@ namespace DershaneYonetimSistemi
                     var worksheet = package.Workbook.Worksheets.Add("ExportedData");
 
                     // DataGridView'in kolon başlıklarını yaz
-                    for (int col = 0; col < dataGridViewSinavlar.Columns.Count; col++)
+                    for (int col = 0; col < dataGridViewSiniflar.Columns.Count; col++)
                     {
-                        worksheet.Cells[1, col + 1].Value = dataGridViewSinavlar.Columns[col].HeaderText;
+                        worksheet.Cells[1, col + 1].Value = dataGridViewSiniflar.Columns[col].HeaderText;
                     }
 
                     // DataGridView'in verilerini yaz
-                    for (int row = 0; row < dataGridViewSinavlar.Rows.Count; row++)
+                    for (int row = 0; row < dataGridViewSiniflar.Rows.Count; row++)
                     {
-                        for (int col = 0; col < dataGridViewSinavlar.Columns.Count; col++)
+                        for (int col = 0; col < dataGridViewSiniflar.Columns.Count; col++)
                         {
-                            worksheet.Cells[row + 2, col + 1].Value = dataGridViewSinavlar.Rows[row].Cells[col].Value;
+                            worksheet.Cells[row + 2, col + 1].Value = dataGridViewSiniflar.Rows[row].Cells[col].Value;
                         }
                     }
 
@@ -666,7 +669,7 @@ namespace DershaneYonetimSistemi
                 MessageBox.Show($"Hata: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void buttonSaveExcelSinav_Click(object sender, EventArgs e)
+        private void buttonSaveExcelSinif_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -676,54 +679,51 @@ namespace DershaneYonetimSistemi
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                ExportToExcelSinavlar(saveFileDialog.FileName);
+                ExportToExcelSiniflar(saveFileDialog.FileName);
             }
         }
 
 
 
-
-
-        private void ImportExamResults(string filePath)
+        private void ImportClassLessons(string filePath)
         {
             using (var package = new ExcelPackage(new FileInfo(filePath)))
             {
                 ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
 
                 DataTable dataTable = new DataTable();
-                dataTable.Columns.Add("ExamID", typeof(int));
-                dataTable.Columns.Add("StudentID", typeof(string));
-                dataTable.Columns.Add("AlinanPuan", typeof(byte));
-                dataTable.Columns.Add("CourseID", typeof(short));
+                dataTable.Columns.Add("ClassID", typeof(int));
+                dataTable.Columns.Add("CourseID", typeof(short)); //Ogretmen tablosundan bak
+                dataTable.Columns.Add("TeacherID", typeof(string));
+
 
                 for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
                 {
                     DataRow dataRow = dataTable.NewRow();
-                    dataRow["ExamID"] = int.Parse(worksheet.Cells[row, 1].Text);
-                    dataRow["StudentID"] = worksheet.Cells[row, 2].Text;
-                    dataRow["AlinanPuan"] = byte.Parse(worksheet.Cells[row, 3].Text);
-                    dataRow["CourseID"] = short.Parse(worksheet.Cells[row, 4].Text);
+                    dataRow["ClassID"] = worksheet.Cells[row, 1].Text;
+                    dataRow["CourseID"] = worksheet.Cells[row, 2].Text;
+                    dataRow["TeacherID"] = worksheet.Cells[row, 3].Text;
                     dataTable.Rows.Add(dataRow);
                 }
 
-                if (dataGridViewSinavSonuclari.DataSource != null)
+                if (dataGridViewSinifDersler.DataSource != null)
                 {
-                    DataTable existingTable = (DataTable)dataGridViewSinavSonuclari.DataSource;
+                    DataTable existingTable = (DataTable)dataGridViewSinifDersler.DataSource;
                     foreach (DataRow row in dataTable.Rows)
                     {
                         existingTable.ImportRow(row);
                     }
-                    dataGridViewSinavSonuclari.DataSource = existingTable;
+                    dataGridViewSinifDersler.DataSource = existingTable;
                 }
                 else
                 {
-                    dataGridViewSinavSonuclari.DataSource = dataTable;
+                    dataGridViewSinifDersler.DataSource = dataTable;
                 }
 
-                AddSinavSonucToDatabase(dataTable);
+                AddClassLessonToDatabase(dataTable);
             }
         } //İMPORT ETMEDEN ÖNCE DATAGRİDVİEW'DA VERİLERİN GÖRÜNTÜLENMESİ GEREKİYOR DİĞER TÜRLÜ PK EN SON KOLONA GEÇİYOR
-        private void AddSinavSonucToDatabase(DataTable dataTable)
+        private void AddClassLessonToDatabase(DataTable dataTable)
         {
             SqlCommand command = null;
             try
@@ -733,17 +733,16 @@ namespace DershaneYonetimSistemi
                 {
                     try
                     {
-                        command = new SqlCommand("INSERT INTO SinavSonuc (ExamID, StudentID, AlinanPuan, CourseID) VALUES (@ExamID, @StudentID, @AlinanPuan, @CourseID)", baglanti);
-                        command.Parameters.AddWithValue("@ExamID", row["ExamID"]);
-                        command.Parameters.AddWithValue("@StudentID", row["StudentID"]);
-                        command.Parameters.AddWithValue("@AlinanPuan", row["AlinanPuan"]);
+                        command = new SqlCommand("INSERT INTO SinifDers (ClassID, CourseID, TeacherID) VALUES (@ClassID, @CourseID, @TeacherID)", baglanti);
+                        command.Parameters.AddWithValue("@ClassID", row["ClassID"]);
                         command.Parameters.AddWithValue("@CourseID", row["CourseID"]);
+                        command.Parameters.AddWithValue("@TeacherID", row["TeacherID"]);
                         command.ExecuteNonQuery();
                     }
                     catch (SqlException ex)
                     {
                         // Satır hatalarını yakala
-                        MessageBox.Show($"Bir hata oluştu: {ex.Message}\nHatalı veri: {row["ExamID"]}, {row["StudentID"]}, {row["AlinanPuan"]}, {row["CourseID"]}",
+                        MessageBox.Show($"Bir hata oluştu: {ex.Message}\nHatalı veri: {row["ClassID"]}, {row["CourseID"]}, {row["TeacherID"]}",
                                         "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -759,7 +758,7 @@ namespace DershaneYonetimSistemi
                 baglanti.Close();
             }
         }
-        private void buttonVeriAlSinavSonuc_Click(object sender, EventArgs e)
+        private void buttonVeriAlSinifDers_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -769,10 +768,10 @@ namespace DershaneYonetimSistemi
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                ImportExamResults(openFileDialog.FileName);
+                ImportClassLessons(openFileDialog.FileName);
             }
         }
-        private void ExportToExcelSinavSonuc(string filePath)
+        private void ExportToExcelSinifDersler(string filePath)
         {
             try
             {
@@ -782,17 +781,17 @@ namespace DershaneYonetimSistemi
                     var worksheet = package.Workbook.Worksheets.Add("ExportedData");
 
                     // DataGridView'in kolon başlıklarını yaz
-                    for (int col = 0; col < dataGridViewSinavSonuclari.Columns.Count; col++)
+                    for (int col = 0; col < dataGridViewSinifDersler.Columns.Count; col++)
                     {
-                        worksheet.Cells[1, col + 1].Value = dataGridViewSinavSonuclari.Columns[col].HeaderText;
+                        worksheet.Cells[1, col + 1].Value = dataGridViewSinifDersler.Columns[col].HeaderText;
                     }
 
                     // DataGridView'in verilerini yaz
-                    for (int row = 0; row < dataGridViewSinavSonuclari.Rows.Count; row++)
+                    for (int row = 0; row < dataGridViewSinifDersler.Rows.Count; row++)
                     {
-                        for (int col = 0; col < dataGridViewSinavSonuclari.Columns.Count; col++)
+                        for (int col = 0; col < dataGridViewSinifDersler.Columns.Count; col++)
                         {
-                            worksheet.Cells[row + 2, col + 1].Value = dataGridViewSinavSonuclari.Rows[row].Cells[col].Value;
+                            worksheet.Cells[row + 2, col + 1].Value = dataGridViewSinifDersler.Rows[row].Cells[col].Value;
                         }
                     }
 
@@ -807,7 +806,7 @@ namespace DershaneYonetimSistemi
                 MessageBox.Show($"Hata: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void buttonSaveExcelSinavSonuc_Click(object sender, EventArgs e)
+        private void buttonSaveExcelSinifDers_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -817,9 +816,8 @@ namespace DershaneYonetimSistemi
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                ExportToExcelSinavSonuc(saveFileDialog.FileName);
+                ExportToExcelSinifDersler(saveFileDialog.FileName);
             }
         }
     }
 }
-

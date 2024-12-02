@@ -31,7 +31,7 @@
             buttonSinavSonucSil = new Button();
             labelSilinecekSinavSonucID = new Label();
             buttonSinavSil = new Button();
-            labelSilinecekRol = new Label();
+            labelSilinecekSinavID = new Label();
             groupBox4 = new GroupBox();
             dataGridViewSinavSonuclari = new DataGridView();
             groupBox3 = new GroupBox();
@@ -65,6 +65,14 @@
             comboBoxSilinecekSinavID = new ComboBox();
             comboBoxSilinecekSinavSonucID = new ComboBox();
             labelSinavSonucCRUD = new Label();
+            buttonSaveAsWordExamResults = new Button();
+            buttonSaveAsWordExams = new Button();
+            buttonSaveExcelSinav = new Button();
+            buttonVeriAlSinav = new Button();
+            buttonSaveExcelSinavSonuc = new Button();
+            buttonVeriAlSinavSonuc = new Button();
+            comboBoxCourseID2 = new ComboBox();
+            label1 = new Label();
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSinavSonuclari).BeginInit();
             groupBox3.SuspendLayout();
@@ -86,7 +94,7 @@
             // labelSilinecekSinavSonucID
             // 
             labelSilinecekSinavSonucID.AutoSize = true;
-            labelSilinecekSinavSonucID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSilinecekSinavSonucID.Font = new Font("Century", 9F);
             labelSilinecekSinavSonucID.Location = new Point(798, 363);
             labelSilinecekSinavSonucID.Name = "labelSilinecekSinavSonucID";
             labelSilinecekSinavSonucID.Size = new Size(264, 16);
@@ -103,20 +111,20 @@
             buttonSinavSil.UseVisualStyleBackColor = true;
             buttonSinavSil.Click += buttonSinavSil_Click;
             // 
-            // labelSilinecekRol
+            // labelSilinecekSinavID
             // 
-            labelSilinecekRol.AutoSize = true;
-            labelSilinecekRol.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            labelSilinecekRol.Location = new Point(67, 372);
-            labelSilinecekRol.Name = "labelSilinecekRol";
-            labelSilinecekRol.Size = new Size(215, 16);
-            labelSilinecekRol.TabIndex = 24;
-            labelSilinecekRol.Text = "Silinecek Sınavın ID değerini seçiniz :";
+            labelSilinecekSinavID.AutoSize = true;
+            labelSilinecekSinavID.Font = new Font("Century", 9F);
+            labelSilinecekSinavID.Location = new Point(67, 372);
+            labelSilinecekSinavID.Name = "labelSilinecekSinavID";
+            labelSilinecekSinavID.Size = new Size(215, 16);
+            labelSilinecekSinavID.TabIndex = 24;
+            labelSilinecekSinavID.Text = "Silinecek Sınavın ID değerini seçiniz :";
             // 
             // groupBox4
             // 
             groupBox4.Controls.Add(dataGridViewSinavSonuclari);
-            groupBox4.Location = new Point(735, 448);
+            groupBox4.Location = new Point(738, 432);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(597, 266);
             groupBox4.TabIndex = 23;
@@ -159,6 +167,8 @@
             // 
             // groupBox2
             // 
+            groupBox2.Controls.Add(comboBoxCourseID2);
+            groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(labelOgrenciID);
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(textBoxAlinanPuan);
@@ -172,7 +182,7 @@
             groupBox2.Controls.Add(labelAlinanPuan);
             groupBox2.Location = new Point(831, 57);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(449, 280);
+            groupBox2.Size = new Size(449, 289);
             groupBox2.TabIndex = 21;
             groupBox2.TabStop = false;
             groupBox2.Text = "Sınav Sonuç İşlemleri";
@@ -180,7 +190,7 @@
             // labelOgrenciID
             // 
             labelOgrenciID.AutoSize = true;
-            labelOgrenciID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelOgrenciID.Font = new Font("Century", 9F);
             labelOgrenciID.Location = new Point(17, 122);
             labelOgrenciID.Name = "labelOgrenciID";
             labelOgrenciID.Size = new Size(71, 16);
@@ -189,7 +199,7 @@
             // 
             // label2
             // 
-            label2.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Segoe UI", 6.75F);
             label2.Location = new Point(6, 176);
             label2.Name = "label2";
             label2.Size = new Size(101, 37);
@@ -239,7 +249,7 @@
             // 
             // buttonSinavSonucGuncelle
             // 
-            buttonSinavSonucGuncelle.Location = new Point(235, 216);
+            buttonSinavSonucGuncelle.Location = new Point(235, 245);
             buttonSinavSonucGuncelle.Name = "buttonSinavSonucGuncelle";
             buttonSinavSonucGuncelle.Size = new Size(87, 38);
             buttonSinavSonucGuncelle.TabIndex = 17;
@@ -249,7 +259,7 @@
             // 
             // buttonSinavSonucEkle
             // 
-            buttonSinavSonucEkle.Location = new Point(347, 216);
+            buttonSinavSonucEkle.Location = new Point(347, 245);
             buttonSinavSonucEkle.Name = "buttonSinavSonucEkle";
             buttonSinavSonucEkle.Size = new Size(87, 38);
             buttonSinavSonucEkle.TabIndex = 16;
@@ -260,7 +270,7 @@
             // labelExamID
             // 
             labelExamID.AutoSize = true;
-            labelExamID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelExamID.Font = new Font("Century", 9F);
             labelExamID.Location = new Point(17, 81);
             labelExamID.Name = "labelExamID";
             labelExamID.Size = new Size(61, 16);
@@ -270,7 +280,7 @@
             // labelAlinanPuan
             // 
             labelAlinanPuan.AutoSize = true;
-            labelAlinanPuan.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelAlinanPuan.Font = new Font("Century", 9F);
             labelAlinanPuan.Location = new Point(17, 160);
             labelAlinanPuan.Name = "labelAlinanPuan";
             labelAlinanPuan.Size = new Size(83, 16);
@@ -358,7 +368,7 @@
             // labelSinavIsmi
             // 
             labelSinavIsmi.AutoSize = true;
-            labelSinavIsmi.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSinavIsmi.Font = new Font("Century", 9F);
             labelSinavIsmi.Location = new Point(16, 124);
             labelSinavIsmi.Name = "labelSinavIsmi";
             labelSinavIsmi.Size = new Size(76, 16);
@@ -368,7 +378,7 @@
             // labelCourseID
             // 
             labelCourseID.AutoSize = true;
-            labelCourseID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCourseID.Font = new Font("Century", 9F);
             labelCourseID.Location = new Point(16, 91);
             labelCourseID.Name = "labelCourseID";
             labelCourseID.Size = new Size(68, 16);
@@ -378,7 +388,7 @@
             // labelSinavTarihi
             // 
             labelSinavTarihi.AutoSize = true;
-            labelSinavTarihi.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSinavTarihi.Font = new Font("Century", 9F);
             labelSinavTarihi.Location = new Point(16, 157);
             labelSinavTarihi.Name = "labelSinavTarihi";
             labelSinavTarihi.Size = new Size(83, 16);
@@ -397,9 +407,9 @@
             // 
             // buttonSinavSonucGoruntule
             // 
-            buttonSinavSonucGoruntule.Location = new Point(759, 720);
+            buttonSinavSonucGoruntule.Location = new Point(763, 716);
             buttonSinavSonucGoruntule.Name = "buttonSinavSonucGoruntule";
-            buttonSinavSonucGoruntule.Size = new Size(113, 38);
+            buttonSinavSonucGoruntule.Size = new Size(115, 42);
             buttonSinavSonucGoruntule.TabIndex = 31;
             buttonSinavSonucGoruntule.Text = "Sınav Sonuçlarını Görüntüle";
             buttonSinavSonucGoruntule.UseVisualStyleBackColor = true;
@@ -407,7 +417,7 @@
             // 
             // labelSinavCRUD
             // 
-            labelSinavCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelSinavCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold);
             labelSinavCRUD.Location = new Point(67, 26);
             labelSinavCRUD.Name = "labelSinavCRUD";
             labelSinavCRUD.Size = new Size(411, 18);
@@ -432,18 +442,102 @@
             // 
             // labelSinavSonucCRUD
             // 
-            labelSinavSonucCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelSinavSonucCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold);
             labelSinavSonucCRUD.Location = new Point(831, 21);
             labelSinavSonucCRUD.Name = "labelSinavSonucCRUD";
             labelSinavSonucCRUD.Size = new Size(449, 23);
             labelSinavSonucCRUD.TabIndex = 95;
             labelSinavSonucCRUD.Text = "Sınav Sonuç Ekleme/Güncelleme/Silme/Görüntüleme İşlemleri";
             // 
+            // buttonSaveAsWordExamResults
+            // 
+            buttonSaveAsWordExamResults.Location = new Point(895, 716);
+            buttonSaveAsWordExamResults.Name = "buttonSaveAsWordExamResults";
+            buttonSaveAsWordExamResults.Size = new Size(114, 42);
+            buttonSaveAsWordExamResults.TabIndex = 96;
+            buttonSaveAsWordExamResults.Text = "Word dosyası olarak kaydet";
+            buttonSaveAsWordExamResults.UseVisualStyleBackColor = true;
+            buttonSaveAsWordExamResults.Click += buttonSaveAsWordExamResults_Click;
+            // 
+            // buttonSaveAsWordExams
+            // 
+            buttonSaveAsWordExams.Location = new Point(179, 720);
+            buttonSaveAsWordExams.Name = "buttonSaveAsWordExams";
+            buttonSaveAsWordExams.Size = new Size(113, 38);
+            buttonSaveAsWordExams.TabIndex = 97;
+            buttonSaveAsWordExams.Text = "Word dosyası olarak kaydet";
+            buttonSaveAsWordExams.UseVisualStyleBackColor = true;
+            buttonSaveAsWordExams.Click += buttonSaveAsWordExams_Click;
+            // 
+            // buttonSaveExcelSinav
+            // 
+            buttonSaveExcelSinav.Location = new Point(471, 720);
+            buttonSaveExcelSinav.Name = "buttonSaveExcelSinav";
+            buttonSaveExcelSinav.Size = new Size(113, 38);
+            buttonSaveExcelSinav.TabIndex = 113;
+            buttonSaveExcelSinav.Text = "Excel dosyası olarak kaydet";
+            buttonSaveExcelSinav.UseVisualStyleBackColor = true;
+            buttonSaveExcelSinav.Click += buttonSaveExcelSinav_Click;
+            // 
+            // buttonVeriAlSinav
+            // 
+            buttonVeriAlSinav.Location = new Point(322, 720);
+            buttonVeriAlSinav.Name = "buttonVeriAlSinav";
+            buttonVeriAlSinav.Size = new Size(113, 38);
+            buttonVeriAlSinav.TabIndex = 112;
+            buttonVeriAlSinav.Text = "Veri Al";
+            buttonVeriAlSinav.UseVisualStyleBackColor = true;
+            buttonVeriAlSinav.Click += buttonVeriAlSinav_Click;
+            // 
+            // buttonSaveExcelSinavSonuc
+            // 
+            buttonSaveExcelSinavSonuc.Location = new Point(1189, 718);
+            buttonSaveExcelSinavSonuc.Name = "buttonSaveExcelSinavSonuc";
+            buttonSaveExcelSinavSonuc.Size = new Size(113, 38);
+            buttonSaveExcelSinavSonuc.TabIndex = 115;
+            buttonSaveExcelSinavSonuc.Text = "Excel dosyası olarak kaydet";
+            buttonSaveExcelSinavSonuc.UseVisualStyleBackColor = true;
+            buttonSaveExcelSinavSonuc.Click += buttonSaveExcelSinavSonuc_Click;
+            // 
+            // buttonVeriAlSinavSonuc
+            // 
+            buttonVeriAlSinavSonuc.Location = new Point(1040, 718);
+            buttonVeriAlSinavSonuc.Name = "buttonVeriAlSinavSonuc";
+            buttonVeriAlSinavSonuc.Size = new Size(113, 38);
+            buttonVeriAlSinavSonuc.TabIndex = 114;
+            buttonVeriAlSinavSonuc.Text = "Veri Al";
+            buttonVeriAlSinavSonuc.UseVisualStyleBackColor = true;
+            buttonVeriAlSinavSonuc.Click += buttonVeriAlSinavSonuc_Click;
+            // 
+            // comboBoxCourseID2
+            // 
+            comboBoxCourseID2.FormattingEnabled = true;
+            comboBoxCourseID2.Location = new Point(110, 214);
+            comboBoxCourseID2.Name = "comboBoxCourseID2";
+            comboBoxCourseID2.Size = new Size(121, 23);
+            comboBoxCourseID2.TabIndex = 35;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century", 9F);
+            label1.Location = new Point(17, 216);
+            label1.Name = "label1";
+            label1.Size = new Size(68, 16);
+            label1.TabIndex = 34;
+            label1.Text = "Course ID :";
+            // 
             // FormExamMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1356, 766);
+            Controls.Add(buttonSaveExcelSinavSonuc);
+            Controls.Add(buttonVeriAlSinavSonuc);
+            Controls.Add(buttonSaveExcelSinav);
+            Controls.Add(buttonVeriAlSinav);
+            Controls.Add(buttonSaveAsWordExams);
+            Controls.Add(buttonSaveAsWordExamResults);
             Controls.Add(labelSinavSonucCRUD);
             Controls.Add(comboBoxSilinecekSinavSonucID);
             Controls.Add(comboBoxSilinecekSinavID);
@@ -453,7 +547,7 @@
             Controls.Add(buttonSinavSonucSil);
             Controls.Add(labelSilinecekSinavSonucID);
             Controls.Add(buttonSinavSil);
-            Controls.Add(labelSilinecekRol);
+            Controls.Add(labelSilinecekSinavID);
             Controls.Add(groupBox4);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
@@ -478,7 +572,7 @@
         private Button buttonSinavSonucSil;
         private Label labelSilinecekSinavSonucID;
         private Button buttonSinavSil;
-        private Label labelSilinecekRol;
+        private Label labelSilinecekSinavID;
         private GroupBox groupBox4;
         private DataGridView dataGridViewSinavSonuclari;
         private GroupBox groupBox3;
@@ -519,5 +613,13 @@
         private ComboBox comboBoxTemporarySinavSonucID;
         private ComboBox comboBoxSilinecekSinavID;
         private ComboBox comboBoxSilinecekSinavSonucID;
+        private Button buttonSaveAsWordExamResults;
+        private Button buttonSaveAsWordExams;
+        private Button buttonSaveExcelSinav;
+        private Button buttonVeriAlSinav;
+        private Button buttonSaveExcelSinavSonuc;
+        private Button buttonVeriAlSinavSonuc;
+        private ComboBox comboBoxCourseID2;
+        private Label label1;
     }
 }

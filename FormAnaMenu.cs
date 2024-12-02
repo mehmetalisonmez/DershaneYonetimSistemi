@@ -21,6 +21,7 @@ namespace DershaneYonetimSistemi
         FormYetkilendirmeMenu formYetkilendirmeMenu;
         FormTchANDLessonMenu formTchANDLessonMenu;
         FormOdemeMenu formOdemeMenu;
+        FormSinifMenu formSinifMenu;
         private string kullaniciRol;
         private KullaniciYetkileri kullaniciYetkileri;
         public FormAnaMenu(string rol, KullaniciYetkileri yetkiler)
@@ -30,7 +31,7 @@ namespace DershaneYonetimSistemi
             kullaniciYetkileri = yetkiler; // Yetkileri saklıyoruz
         }
 
-        
+
 
         private void Yedekle()
         {
@@ -52,7 +53,7 @@ namespace DershaneYonetimSistemi
             {
                 MessageBox.Show("Yedekleme sırasında hata: " + ex.Message);
             }
-           
+
         }
         private void YedektenDon()
         {
@@ -134,6 +135,12 @@ namespace DershaneYonetimSistemi
         private void buttonYedekdenDon_Click(object sender, EventArgs e)
         {
             YedektenDon();
+        }
+
+        private void buttonSinifİslemleri_Click(object sender, EventArgs e)
+        {
+            formSinifMenu = new FormSinifMenu(kullaniciYetkileri);
+            formSinifMenu.Show();
         }
     }
 }

@@ -93,6 +93,17 @@
             comboBoxStudentLessonID = new ComboBox();
             comboBoxDevamsizlikID = new ComboBox();
             comboBoxOgrenciID = new ComboBox();
+            buttonSaveWordStudents = new Button();
+            buttonSaveWordStudentLessons = new Button();
+            buttonSaveWordDevamsizliklar = new Button();
+            buttonVeriAlOgrenci = new Button();
+            buttonVeriAlDevamsizlik = new Button();
+            buttonVeriAlOgrenciDers = new Button();
+            buttonSaveExcelOgrenciler = new Button();
+            buttonSaveExcelOgrenciDers = new Button();
+            buttonSaveExcelDevamsizliklar = new Button();
+            comboBoxSinifDersID = new ComboBox();
+            labelSinifDersID = new Label();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewOgrenciler).BeginInit();
             groupBox2.SuspendLayout();
@@ -126,7 +137,7 @@
             // 
             // labelSilinecekDevamsizlikID
             // 
-            labelSilinecekDevamsizlikID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSilinecekDevamsizlikID.Font = new Font("Century", 9F);
             labelSilinecekDevamsizlikID.Location = new Point(1069, 356);
             labelSilinecekDevamsizlikID.Name = "labelSilinecekDevamsizlikID";
             labelSilinecekDevamsizlikID.Size = new Size(162, 36);
@@ -145,7 +156,7 @@
             // 
             // labelSilinecekOgrenci
             // 
-            labelSilinecekOgrenci.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSilinecekOgrenci.Font = new Font("Century", 9F);
             labelSilinecekOgrenci.Location = new Point(41, 480);
             labelSilinecekOgrenci.Name = "labelSilinecekOgrenci";
             labelSilinecekOgrenci.Size = new Size(149, 39);
@@ -212,7 +223,7 @@
             // labelDevamsizlikBilgisi
             // 
             labelDevamsizlikBilgisi.AutoSize = true;
-            labelDevamsizlikBilgisi.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelDevamsizlikBilgisi.Font = new Font("Century", 9F);
             labelDevamsizlikBilgisi.Location = new Point(17, 143);
             labelDevamsizlikBilgisi.Name = "labelDevamsizlikBilgisi";
             labelDevamsizlikBilgisi.Size = new Size(137, 16);
@@ -229,7 +240,7 @@
             // labelDevamsizlikTarihi
             // 
             labelDevamsizlikTarihi.AutoSize = true;
-            labelDevamsizlikTarihi.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelDevamsizlikTarihi.Font = new Font("Century", 9F);
             labelDevamsizlikTarihi.Location = new Point(16, 176);
             labelDevamsizlikTarihi.Name = "labelDevamsizlikTarihi";
             labelDevamsizlikTarihi.Size = new Size(121, 16);
@@ -238,7 +249,7 @@
             // 
             // labelTemporaryDevamsizlikID
             // 
-            labelTemporaryDevamsizlikID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelTemporaryDevamsizlikID.Font = new Font("Century", 9F);
             labelTemporaryDevamsizlikID.Location = new Point(17, 11);
             labelTemporaryDevamsizlikID.Name = "labelTemporaryDevamsizlikID";
             labelTemporaryDevamsizlikID.Size = new Size(189, 80);
@@ -277,7 +288,7 @@
             // labelOgrenciDersID
             // 
             labelOgrenciDersID.AutoSize = true;
-            labelOgrenciDersID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelOgrenciDersID.Font = new Font("Century", 9F);
             labelOgrenciDersID.Location = new Point(17, 104);
             labelOgrenciDersID.Name = "labelOgrenciDersID";
             labelOgrenciDersID.Size = new Size(100, 16);
@@ -331,7 +342,7 @@
             // labelStudentID
             // 
             labelStudentID.AutoSize = true;
-            labelStudentID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelStudentID.Font = new Font("Century", 9F);
             labelStudentID.Location = new Point(13, 113);
             labelStudentID.Name = "labelStudentID";
             labelStudentID.Size = new Size(71, 16);
@@ -349,7 +360,7 @@
             // labelOgrenciAdres
             // 
             labelOgrenciAdres.AutoSize = true;
-            labelOgrenciAdres.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelOgrenciAdres.Font = new Font("Century", 9F);
             labelOgrenciAdres.Location = new Point(15, 361);
             labelOgrenciAdres.Name = "labelOgrenciAdres";
             labelOgrenciAdres.Size = new Size(46, 16);
@@ -366,7 +377,7 @@
             // labelOgrenciAlan
             // 
             labelOgrenciAlan.AutoSize = true;
-            labelOgrenciAlan.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelOgrenciAlan.Font = new Font("Century", 9F);
             labelOgrenciAlan.Location = new Point(15, 321);
             labelOgrenciAlan.Name = "labelOgrenciAlan";
             labelOgrenciAlan.Size = new Size(85, 16);
@@ -383,7 +394,7 @@
             // labelKayitTarihi
             // 
             labelKayitTarihi.AutoSize = true;
-            labelKayitTarihi.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelKayitTarihi.Font = new Font("Century", 9F);
             labelKayitTarihi.Location = new Point(14, 286);
             labelKayitTarihi.Name = "labelKayitTarihi";
             labelKayitTarihi.Size = new Size(82, 16);
@@ -392,7 +403,7 @@
             // 
             // label12
             // 
-            label12.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.Font = new Font("Segoe UI", 6.75F);
             label12.Location = new Point(12, 266);
             label12.Name = "label12";
             label12.Size = new Size(75, 13);
@@ -410,7 +421,7 @@
             // labelCinsiyet
             // 
             labelCinsiyet.AutoSize = true;
-            labelCinsiyet.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelCinsiyet.Font = new Font("Century", 9F);
             labelCinsiyet.Location = new Point(14, 251);
             labelCinsiyet.Name = "labelCinsiyet";
             labelCinsiyet.Size = new Size(60, 16);
@@ -450,7 +461,7 @@
             // 
             // labelTemporaryOGrenciID
             // 
-            labelTemporaryOGrenciID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelTemporaryOGrenciID.Font = new Font("Century", 9F);
             labelTemporaryOGrenciID.Location = new Point(15, 19);
             labelTemporaryOGrenciID.Name = "labelTemporaryOGrenciID";
             labelTemporaryOGrenciID.Size = new Size(187, 84);
@@ -471,7 +482,7 @@
             // labelSoyad
             // 
             labelSoyad.AutoSize = true;
-            labelSoyad.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSoyad.Font = new Font("Century", 9F);
             labelSoyad.Location = new Point(11, 185);
             labelSoyad.Name = "labelSoyad";
             labelSoyad.Size = new Size(103, 16);
@@ -481,7 +492,7 @@
             // labelFirstName
             // 
             labelFirstName.AutoSize = true;
-            labelFirstName.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelFirstName.Font = new Font("Century", 9F);
             labelFirstName.Location = new Point(11, 152);
             labelFirstName.Name = "labelFirstName";
             labelFirstName.Size = new Size(78, 16);
@@ -491,7 +502,7 @@
             // labelDogumTarihi
             // 
             labelDogumTarihi.AutoSize = true;
-            labelDogumTarihi.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelDogumTarihi.Font = new Font("Century", 9F);
             labelDogumTarihi.Location = new Point(14, 221);
             labelDogumTarihi.Name = "labelDogumTarihi";
             labelDogumTarihi.Size = new Size(90, 16);
@@ -501,7 +512,7 @@
             // groupBox5
             // 
             groupBox5.Controls.Add(dataGridViewDevamsizliklar);
-            groupBox5.Location = new Point(1043, 474);
+            groupBox5.Location = new Point(1030, 474);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(492, 255);
             groupBox5.TabIndex = 44;
@@ -522,7 +533,7 @@
             // 
             // labelOgrenciCRUD
             // 
-            labelOgrenciCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelOgrenciCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold);
             labelOgrenciCRUD.Location = new Point(12, 6);
             labelOgrenciCRUD.Name = "labelOgrenciCRUD";
             labelOgrenciCRUD.Size = new Size(411, 18);
@@ -531,7 +542,7 @@
             // 
             // labelDevamsizlikCRUD
             // 
-            labelDevamsizlikCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelDevamsizlikCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold);
             labelDevamsizlikCRUD.Location = new Point(1069, 6);
             labelDevamsizlikCRUD.Name = "labelDevamsizlikCRUD";
             labelDevamsizlikCRUD.Size = new Size(441, 16);
@@ -540,7 +551,7 @@
             // 
             // label3
             // 
-            label3.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Font = new Font("Century", 9F);
             label3.Location = new Point(19, 888);
             label3.Name = "label3";
             label3.Size = new Size(161, 36);
@@ -549,6 +560,8 @@
             // 
             // groupBox6
             // 
+            groupBox6.Controls.Add(comboBoxSinifDersID);
+            groupBox6.Controls.Add(labelSinifDersID);
             groupBox6.Controls.Add(buttonOgrenciDersGuncelle);
             groupBox6.Controls.Add(dateTimePickerDerseKayitTarihi);
             groupBox6.Controls.Add(comboBoxTemporaryOgrenciDersID);
@@ -567,7 +580,7 @@
             // 
             // buttonOgrenciDersGuncelle
             // 
-            buttonOgrenciDersGuncelle.Location = new Point(69, 225);
+            buttonOgrenciDersGuncelle.Location = new Point(114, 266);
             buttonOgrenciDersGuncelle.Name = "buttonOgrenciDersGuncelle";
             buttonOgrenciDersGuncelle.Size = new Size(87, 38);
             buttonOgrenciDersGuncelle.TabIndex = 74;
@@ -592,7 +605,7 @@
             // 
             // labelTemporaryOgrenciDersID
             // 
-            labelTemporaryOgrenciDersID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelTemporaryOgrenciDersID.Font = new Font("Century", 9F);
             labelTemporaryOgrenciDersID.Location = new Point(10, 19);
             labelTemporaryOgrenciDersID.Name = "labelTemporaryOgrenciDersID";
             labelTemporaryOgrenciDersID.Size = new Size(168, 67);
@@ -603,7 +616,7 @@
             // labelDersID
             // 
             labelDersID.AutoSize = true;
-            labelDersID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelDersID.Font = new Font("Century", 9F);
             labelDersID.Location = new Point(11, 141);
             labelDersID.Name = "labelDersID";
             labelDersID.Size = new Size(55, 16);
@@ -628,7 +641,7 @@
             // 
             // buttonOgrenciDersEkle
             // 
-            buttonOgrenciDersEkle.Location = new Point(193, 225);
+            buttonOgrenciDersEkle.Location = new Point(238, 266);
             buttonOgrenciDersEkle.Name = "buttonOgrenciDersEkle";
             buttonOgrenciDersEkle.Size = new Size(87, 38);
             buttonOgrenciDersEkle.TabIndex = 16;
@@ -639,7 +652,7 @@
             // labelOgrenciID
             // 
             labelOgrenciID.AutoSize = true;
-            labelOgrenciID.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelOgrenciID.Font = new Font("Century", 9F);
             labelOgrenciID.Location = new Point(11, 100);
             labelOgrenciID.Name = "labelOgrenciID";
             labelOgrenciID.Size = new Size(74, 16);
@@ -649,7 +662,7 @@
             // labelDerseKayitTarihi
             // 
             labelDerseKayitTarihi.AutoSize = true;
-            labelDerseKayitTarihi.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            labelDerseKayitTarihi.Font = new Font("Century", 9F);
             labelDerseKayitTarihi.Location = new Point(11, 179);
             labelDerseKayitTarihi.Name = "labelDerseKayitTarihi";
             labelDerseKayitTarihi.Size = new Size(117, 16);
@@ -658,7 +671,7 @@
             // 
             // labelOgrenciDersCRUD
             // 
-            labelOgrenciDersCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelOgrenciDersCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold);
             labelOgrenciDersCRUD.Location = new Point(12, 534);
             labelOgrenciDersCRUD.Name = "labelOgrenciDersCRUD";
             labelOgrenciDersCRUD.Size = new Size(446, 18);
@@ -699,7 +712,7 @@
             // 
             // buttonDevamsizlikGoruntule
             // 
-            buttonDevamsizlikGoruntule.Location = new Point(1046, 735);
+            buttonDevamsizlikGoruntule.Location = new Point(1019, 735);
             buttonDevamsizlikGoruntule.Name = "buttonDevamsizlikGoruntule";
             buttonDevamsizlikGoruntule.Size = new Size(113, 38);
             buttonDevamsizlikGoruntule.TabIndex = 70;
@@ -741,11 +754,128 @@
             comboBoxOgrenciID.Size = new Size(121, 23);
             comboBoxOgrenciID.TabIndex = 75;
             // 
+            // buttonSaveWordStudents
+            // 
+            buttonSaveWordStudents.Location = new Point(613, 313);
+            buttonSaveWordStudents.Name = "buttonSaveWordStudents";
+            buttonSaveWordStudents.Size = new Size(113, 38);
+            buttonSaveWordStudents.TabIndex = 105;
+            buttonSaveWordStudents.Text = "Word dosyası olarak kaydet";
+            buttonSaveWordStudents.UseVisualStyleBackColor = true;
+            buttonSaveWordStudents.Click += buttonSaveWordStudents_Click;
+            // 
+            // buttonSaveWordStudentLessons
+            // 
+            buttonSaveWordStudentLessons.Location = new Point(613, 868);
+            buttonSaveWordStudentLessons.Name = "buttonSaveWordStudentLessons";
+            buttonSaveWordStudentLessons.Size = new Size(113, 38);
+            buttonSaveWordStudentLessons.TabIndex = 106;
+            buttonSaveWordStudentLessons.Text = "Word dosyası olarak kaydet";
+            buttonSaveWordStudentLessons.UseVisualStyleBackColor = true;
+            buttonSaveWordStudentLessons.Click += buttonSaveWordStudentLessons_Click;
+            // 
+            // buttonSaveWordDevamsizliklar
+            // 
+            buttonSaveWordDevamsizliklar.Location = new Point(1157, 735);
+            buttonSaveWordDevamsizliklar.Name = "buttonSaveWordDevamsizliklar";
+            buttonSaveWordDevamsizliklar.Size = new Size(113, 38);
+            buttonSaveWordDevamsizliklar.TabIndex = 107;
+            buttonSaveWordDevamsizliklar.Text = "Word dosyası olarak kaydet";
+            buttonSaveWordDevamsizliklar.UseVisualStyleBackColor = true;
+            buttonSaveWordDevamsizliklar.Click += buttonSaveWordDevamsizliklar_Click;
+            // 
+            // buttonVeriAlOgrenci
+            // 
+            buttonVeriAlOgrenci.Location = new Point(745, 313);
+            buttonVeriAlOgrenci.Name = "buttonVeriAlOgrenci";
+            buttonVeriAlOgrenci.Size = new Size(113, 38);
+            buttonVeriAlOgrenci.TabIndex = 108;
+            buttonVeriAlOgrenci.Text = "Veri Al";
+            buttonVeriAlOgrenci.UseVisualStyleBackColor = true;
+            buttonVeriAlOgrenci.Click += buttonVeriAlOgrenci_Click;
+            // 
+            // buttonVeriAlDevamsizlik
+            // 
+            buttonVeriAlDevamsizlik.Location = new Point(1290, 735);
+            buttonVeriAlDevamsizlik.Name = "buttonVeriAlDevamsizlik";
+            buttonVeriAlDevamsizlik.Size = new Size(113, 38);
+            buttonVeriAlDevamsizlik.TabIndex = 109;
+            buttonVeriAlDevamsizlik.Text = "Veri Al";
+            buttonVeriAlDevamsizlik.UseVisualStyleBackColor = true;
+            buttonVeriAlDevamsizlik.Click += buttonVeriAlDevamsizlik_Click;
+            // 
+            // buttonVeriAlOgrenciDers
+            // 
+            buttonVeriAlOgrenciDers.Location = new Point(755, 868);
+            buttonVeriAlOgrenciDers.Name = "buttonVeriAlOgrenciDers";
+            buttonVeriAlOgrenciDers.Size = new Size(113, 38);
+            buttonVeriAlOgrenciDers.TabIndex = 110;
+            buttonVeriAlOgrenciDers.Text = "Veri Al";
+            buttonVeriAlOgrenciDers.UseVisualStyleBackColor = true;
+            buttonVeriAlOgrenciDers.Click += buttonVeriAlOgrenciDers_Click;
+            // 
+            // buttonSaveExcelOgrenciler
+            // 
+            buttonSaveExcelOgrenciler.Location = new Point(883, 313);
+            buttonSaveExcelOgrenciler.Name = "buttonSaveExcelOgrenciler";
+            buttonSaveExcelOgrenciler.Size = new Size(113, 38);
+            buttonSaveExcelOgrenciler.TabIndex = 111;
+            buttonSaveExcelOgrenciler.Text = "Excel dosyası olarak kaydet";
+            buttonSaveExcelOgrenciler.UseVisualStyleBackColor = true;
+            buttonSaveExcelOgrenciler.Click += buttonSaveExcelOgrenciler_Click;
+            // 
+            // buttonSaveExcelOgrenciDers
+            // 
+            buttonSaveExcelOgrenciDers.Location = new Point(892, 868);
+            buttonSaveExcelOgrenciDers.Name = "buttonSaveExcelOgrenciDers";
+            buttonSaveExcelOgrenciDers.Size = new Size(113, 38);
+            buttonSaveExcelOgrenciDers.TabIndex = 112;
+            buttonSaveExcelOgrenciDers.Text = "Excel dosyası olarak kaydet";
+            buttonSaveExcelOgrenciDers.UseVisualStyleBackColor = true;
+            buttonSaveExcelOgrenciDers.Click += buttonSaveExcelOgrenciDers_Click;
+            // 
+            // buttonSaveExcelDevamsizliklar
+            // 
+            buttonSaveExcelDevamsizliklar.Location = new Point(1409, 735);
+            buttonSaveExcelDevamsizliklar.Name = "buttonSaveExcelDevamsizliklar";
+            buttonSaveExcelDevamsizliklar.Size = new Size(113, 38);
+            buttonSaveExcelDevamsizliklar.TabIndex = 113;
+            buttonSaveExcelDevamsizliklar.Text = "Excel dosyası olarak kaydet";
+            buttonSaveExcelDevamsizliklar.UseVisualStyleBackColor = true;
+            buttonSaveExcelDevamsizliklar.Click += buttonSaveExcelDevamsizliklar_Click;
+            // 
+            // comboBoxSinifDersID
+            // 
+            comboBoxSinifDersID.FormattingEnabled = true;
+            comboBoxSinifDersID.Location = new Point(105, 214);
+            comboBoxSinifDersID.Name = "comboBoxSinifDersID";
+            comboBoxSinifDersID.Size = new Size(121, 23);
+            comboBoxSinifDersID.TabIndex = 76;
+            // 
+            // labelSinifDersID
+            // 
+            labelSinifDersID.AutoSize = true;
+            labelSinifDersID.Font = new Font("Century", 9F);
+            labelSinifDersID.Location = new Point(12, 216);
+            labelSinifDersID.Name = "labelSinifDersID";
+            labelSinifDersID.Size = new Size(85, 16);
+            labelSinifDersID.TabIndex = 75;
+            labelSinifDersID.Text = "Sınıf Ders ID :";
+            // 
             // FormOgrMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1539, 953);
+            Controls.Add(buttonSaveExcelDevamsizliklar);
+            Controls.Add(buttonSaveExcelOgrenciDers);
+            Controls.Add(buttonSaveExcelOgrenciler);
+            Controls.Add(buttonVeriAlOgrenciDers);
+            Controls.Add(buttonVeriAlDevamsizlik);
+            Controls.Add(buttonVeriAlOgrenci);
+            Controls.Add(buttonSaveWordDevamsizliklar);
+            Controls.Add(buttonSaveWordStudentLessons);
+            Controls.Add(buttonSaveWordStudents);
             Controls.Add(comboBoxOgrenciID);
             Controls.Add(comboBoxDevamsizlikID);
             Controls.Add(comboBoxStudentLessonID);
@@ -865,5 +995,16 @@
         private ComboBox comboBoxStudentLessonID;
         private ComboBox comboBoxDevamsizlikID;
         private ComboBox comboBoxOgrenciID;
+        private Button buttonSaveWordStudents;
+        private Button buttonSaveWordStudentLessons;
+        private Button buttonSaveWordDevamsizliklar;
+        private Button buttonVeriAlOgrenci;
+        private Button buttonVeriAlDevamsizlik;
+        private Button buttonVeriAlOgrenciDers;
+        private Button buttonSaveExcelOgrenciler;
+        private Button buttonSaveExcelOgrenciDers;
+        private Button buttonSaveExcelDevamsizliklar;
+        private ComboBox comboBoxSinifDersID;
+        private Label labelSinifDersID;
     }
 }

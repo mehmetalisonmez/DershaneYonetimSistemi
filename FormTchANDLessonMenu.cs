@@ -1,4 +1,5 @@
 ﻿using DershaneYonetimSistemi.Models;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Xceed.Words.NET;
 
 namespace DershaneYonetimSistemi
 {
@@ -177,8 +179,7 @@ namespace DershaneYonetimSistemi
                 finally
                 {
                     baglanti.Close();
-                }
-                ogretmenleriGoster();
+                }               
                 teacherIDYukle();
             }
             else
@@ -210,8 +211,7 @@ namespace DershaneYonetimSistemi
                 finally
                 {
                     baglanti.Close();
-                }
-                ogretmenleriGoster();
+                }                
                 teacherIDYukle();
             }
             else
@@ -238,8 +238,7 @@ namespace DershaneYonetimSistemi
                 finally
                 {
                     baglanti.Close();
-                }
-                ogretmenleriGoster();
+                }                
                 teacherIDYukle();
             }
             else
@@ -267,8 +266,7 @@ namespace DershaneYonetimSistemi
                 finally
                 {
                     baglanti.Close();
-                }
-                dersleriGoster();
+                }                
                 dersIDYukle();
             }
             else
@@ -297,8 +295,7 @@ namespace DershaneYonetimSistemi
                 finally
                 {
                     baglanti.Close();
-                }
-                dersleriGoster();
+                }                
                 dersIDYukle();
             }
             else
@@ -325,8 +322,7 @@ namespace DershaneYonetimSistemi
                 finally
                 {
                     baglanti.Close();
-                }
-                dersleriGoster();
+                }                
                 dersIDYukle();
             }
             else
@@ -384,6 +380,384 @@ namespace DershaneYonetimSistemi
         private void buttonDersleriGoruntule_Click(object sender, EventArgs e)
         {
             dersleriGoster();
+        }
+
+
+
+
+
+
+
+        private void SaveAsWordTeachers(string filePath)
+        {
+            using (var doc = DocX.Create(filePath))
+            {
+                int rowCount = dataGridViewOgretmenler.Rows.Count;
+                int colCount = dataGridViewOgretmenler.Columns.Count;
+
+                var table = doc.AddTable(rowCount + 1, colCount);
+
+                for (int col = 0; col < colCount; col++)
+                {
+                    table.Rows[0].Cells[col].Paragraphs[0].Append(dataGridViewOgretmenler.Columns[col].HeaderText).Bold();
+                }
+
+                for (int row = 0; row < rowCount; row++)
+                {
+                    for (int col = 0; col < colCount; col++)
+                    {
+                        var cellValue = dataGridViewOgretmenler.Rows[row].Cells[col].Value?.ToString() ?? string.Empty;
+                        table.Rows[row + 1].Cells[col].Paragraphs[0].Append(cellValue);
+                    }
+                }
+
+                doc.InsertTable(table);
+                doc.Save();
+            }
+
+            MessageBox.Show("Word belgesi başarıyla kaydedildi.");
+        }
+        private void SaveAsWordLessons(string filePath)
+        {
+            using (var doc = DocX.Create(filePath))
+            {
+                int rowCount = dataGridViewDersler.Rows.Count;
+                int colCount = dataGridViewDersler.Columns.Count;
+
+                var table = doc.AddTable(rowCount + 1, colCount);
+
+                for (int col = 0; col < colCount; col++)
+                {
+                    table.Rows[0].Cells[col].Paragraphs[0].Append(dataGridViewDersler.Columns[col].HeaderText).Bold();
+                }
+
+                for (int row = 0; row < rowCount; row++)
+                {
+                    for (int col = 0; col < colCount; col++)
+                    {
+                        var cellValue = dataGridViewDersler.Rows[row].Cells[col].Value?.ToString() ?? string.Empty;
+                        table.Rows[row + 1].Cells[col].Paragraphs[0].Append(cellValue);
+                    }
+                }
+
+                doc.InsertTable(table);
+                doc.Save();
+            }
+
+            MessageBox.Show("Word belgesi başarıyla kaydedildi.");
+        }
+
+        private void buttonSaveWordTeachers_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Word Documents (*.docx)|*.docx",
+                Title = "Raporu Kaydet"
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+                SaveAsWordTeachers(filePath);
+            }
+        }
+        private void buttonSaveWordLessons_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Word Documents (*.docx)|*.docx",
+                Title = "Raporu Kaydet"
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+                SaveAsWordLessons(filePath);
+            }
+        }
+
+
+
+
+
+
+
+        private void ImportTeachers(string filePath)
+        {
+            using (var package = new ExcelPackage(new FileInfo(filePath)))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+
+                DataTable dataTable = new DataTable();
+                dataTable.Columns.Add("TeacherID", typeof(string));
+                dataTable.Columns.Add("CourseID", typeof(short));
+                dataTable.Columns.Add("FirstName", typeof(string));
+                dataTable.Columns.Add("LastName", typeof(string));
+                dataTable.Columns.Add("HireDate", typeof(DateTime));
+                dataTable.Columns.Add("Alan", typeof(string));
+
+                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                {
+                    DataRow dataRow = dataTable.NewRow();
+                    dataRow["TeacherID"] = worksheet.Cells[row, 1].Text;
+                    dataRow["CourseID"] = worksheet.Cells[row, 2].Text;
+                    dataRow["FirstName"] = worksheet.Cells[row, 3].Text;
+                    dataRow["LastName"] = worksheet.Cells[row, 4].Text;
+                    dataRow["HireDate"] = DateTime.Parse(worksheet.Cells[row, 5].Text);
+                    dataRow["Alan"] = worksheet.Cells[row, 6].Text; ;
+                    dataTable.Rows.Add(dataRow);
+                }
+
+                if (dataGridViewOgretmenler.DataSource != null)
+                {
+                    DataTable existingTable = (DataTable)dataGridViewOgretmenler.DataSource;
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        existingTable.ImportRow(row);
+                    }
+                    dataGridViewOgretmenler.DataSource = existingTable;
+                }
+                else
+                {
+                    dataGridViewOgretmenler.DataSource = dataTable;
+                }
+
+                AddTeachersToDatabase(dataTable);
+            }
+        }
+        private void AddTeachersToDatabase(DataTable dataTable)
+        {
+            SqlCommand command = null;
+            try
+            {
+                baglanti.Open();
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    try
+                    {
+                        command = new SqlCommand("INSERT INTO OGretmen (TeacherID, CourseID, FirstName, LastName, HireDate, Alan) VALUES (@TeacherID, @CourseID, @FirstName, @LastName, @HireDate, @Alan)", baglanti);
+                        command.Parameters.AddWithValue("@TeacherID", row["TeacherID"]);
+                        command.Parameters.AddWithValue("@CourseID", row["CourseID"]);
+                        command.Parameters.AddWithValue("@FirstName", row["FirstName"]);
+                        command.Parameters.AddWithValue("@LastName", row["LastName"]);
+                        command.Parameters.AddWithValue("@HireDate", row["HireDate"]);
+                        command.Parameters.AddWithValue("@Alan", row["Alan"]);
+                        command.ExecuteNonQuery();
+                    }
+                    catch (SqlException ex)
+                    {
+                        // Satır hatalarını yakala
+                        MessageBox.Show("Bir hata oluştu." + ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Genel hataları yakala
+                MessageBox.Show($"Veritabanı bağlantısı sırasında bir hata oluştu: {ex.Message}",
+                                "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                baglanti.Close();
+            }
+
+        }
+        private void buttonVeriAlOgretmen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Excel Files (*.xlsx)|*.xlsx",
+                Title = "Excel Dosyası Seç"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                ImportTeachers(openFileDialog.FileName);
+            }
+        }
+        private void ExportToExcelOgretmen(string filePath)
+        {
+            try
+            {
+                using (var package = new ExcelPackage())
+                {
+                    // Yeni bir çalışma sayfası oluştur
+                    var worksheet = package.Workbook.Worksheets.Add("ExportedData");
+
+                    // DataGridView'in kolon başlıklarını yaz
+                    for (int col = 0; col < dataGridViewOgretmenler.Columns.Count; col++)
+                    {
+                        worksheet.Cells[1, col + 1].Value = dataGridViewOgretmenler.Columns[col].HeaderText;
+                    }
+
+                    // DataGridView'in verilerini yaz
+                    for (int row = 0; row < dataGridViewOgretmenler.Rows.Count; row++)
+                    {
+                        for (int col = 0; col < dataGridViewOgretmenler.Columns.Count; col++)
+                        {
+                            worksheet.Cells[row + 2, col + 1].Value = dataGridViewOgretmenler.Rows[row].Cells[col].Value;
+                        }
+                    }
+
+                    // Excel dosyasını kaydet
+                    package.SaveAs(new FileInfo(filePath));
+
+                    MessageBox.Show("Veriler başarıyla Excel'e aktarıldı!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hata: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void buttonSaveExcelOgretmen_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Excel Files (*.xlsx)|*.xlsx",
+                Title = "Excel Dosyasını Kaydet"
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                ExportToExcelOgretmen(saveFileDialog.FileName);
+            }
+        }
+
+
+
+
+        private void ImportLessons(string filePath)
+        {
+            using (var package = new ExcelPackage(new FileInfo(filePath)))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+
+                DataTable dataTable = new DataTable();
+                dataTable.Columns.Add("CourseName", typeof(string));
+                dataTable.Columns.Add("HaftalikSaat", typeof(byte));
+
+
+                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                {
+                    DataRow dataRow = dataTable.NewRow();
+                    dataRow["CourseName"] = worksheet.Cells[row, 1].Text;
+                    dataRow["HaftalikSaat"] = byte.Parse(worksheet.Cells[row, 2].Text);
+                    dataTable.Rows.Add(dataRow);
+                }
+
+                if (dataGridViewDersler.DataSource != null)
+                {
+                    DataTable existingTable = (DataTable)dataGridViewDersler.DataSource;
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        existingTable.ImportRow(row);
+                    }
+                    dataGridViewDersler.DataSource = existingTable;
+                }
+                else
+                {
+                    dataGridViewDersler.DataSource = dataTable;
+                }
+
+                AddLessonToDatabase(dataTable);
+            }
+        } //İMPORT ETMEDEN ÖNCE DATAGRİDVİEW'DA VERİLERİN GÖRÜNTÜLENMESİ GEREKİYOR DİĞER TÜRLÜ PK EN SON KOLONA GEÇİYOR
+        private void AddLessonToDatabase(DataTable dataTable)
+        {
+            SqlCommand command = null;
+            try
+            {
+                baglanti.Open();
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    try
+                    {
+                        command = new SqlCommand("INSERT INTO Ders (CourseName, HaftalikSaat) VALUES (@CourseName, @HaftalikSaat)", baglanti);
+                        command.Parameters.AddWithValue("@CourseName", row["CourseName"]);
+                        command.Parameters.AddWithValue("@HaftalikSaat", row["HaftalikSaat"]);
+                        command.ExecuteNonQuery();
+                    }
+                    catch (SqlException ex)
+                    {
+                        // Satır hatalarını yakala
+                        MessageBox.Show($"Bir hata oluştu: {ex.Message}\nHatalı veri: {row["CourseName"]}, {row["HaftalikSaat"]}",
+                                        "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Genel hataları yakala
+                MessageBox.Show($"Veritabanı bağlantısı sırasında bir hata oluştu: {ex.Message}",
+                                "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                baglanti.Close();
+            }
+        }
+        private void buttonVeriAlDers_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Excel Files (*.xlsx)|*.xlsx",
+                Title = "Excel Dosyası Seç"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                ImportLessons(openFileDialog.FileName);
+            }
+        }
+        private void ExportToExcelDersler(string filePath)
+        {
+            try
+            {
+                using (var package = new ExcelPackage())
+                {
+                    // Yeni bir çalışma sayfası oluştur
+                    var worksheet = package.Workbook.Worksheets.Add("ExportedData");
+
+                    // DataGridView'in kolon başlıklarını yaz
+                    for (int col = 0; col < dataGridViewDersler.Columns.Count; col++)
+                    {
+                        worksheet.Cells[1, col + 1].Value = dataGridViewDersler.Columns[col].HeaderText;
+                    }
+
+                    // DataGridView'in verilerini yaz
+                    for (int row = 0; row < dataGridViewDersler.Rows.Count; row++)
+                    {
+                        for (int col = 0; col < dataGridViewDersler.Columns.Count; col++)
+                        {
+                            worksheet.Cells[row + 2, col + 1].Value = dataGridViewDersler.Rows[row].Cells[col].Value;
+                        }
+                    }
+
+                    // Excel dosyasını kaydet
+                    package.SaveAs(new FileInfo(filePath));
+
+                    MessageBox.Show("Veriler başarıyla Excel'e aktarıldı!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hata: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void buttonSaveExcelDers_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Excel Files (*.xlsx)|*.xlsx",
+                Title = "Excel Dosyasını Kaydet"
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                ExportToExcelDersler(saveFileDialog.FileName);
+            }
         }
     }
 }

@@ -43,6 +43,8 @@
             buttonYedekdenDon = new Button();
             label4 = new Label();
             buttonYedekle = new Button();
+            label8 = new Label();
+            buttonSinifİslemleri = new Button();
             SuspendLayout();
             // 
             // buttonStdDersTch
@@ -71,14 +73,14 @@
             buttonExam.Name = "buttonExam";
             buttonExam.Size = new Size(152, 48);
             buttonExam.TabIndex = 2;
-            buttonExam.Text = "Sınav işlemlerine git.";
+            buttonExam.Text = "Sınav işlemlerine git";
             buttonExam.UseVisualStyleBackColor = true;
             buttonExam.Click += buttonExam_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Lucida Bright", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Lucida Bright", 12F);
             label1.ForeColor = Color.Green;
             label1.Location = new Point(143, 19);
             label1.Name = "label1";
@@ -89,7 +91,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Font = new Font("Verdana", 9.75F, FontStyle.Bold);
             label5.Location = new Point(30, 65);
             label5.Name = "label5";
             label5.Size = new Size(244, 16);
@@ -99,7 +101,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Font = new Font("Verdana", 9.75F, FontStyle.Bold);
             label6.Location = new Point(31, 170);
             label6.Name = "label6";
             label6.Size = new Size(115, 16);
@@ -109,7 +111,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Font = new Font("Verdana", 9.75F, FontStyle.Bold);
             label7.Location = new Point(31, 278);
             label7.Name = "label7";
             label7.Size = new Size(197, 16);
@@ -122,14 +124,14 @@
             buttonQuit.Name = "buttonQuit";
             buttonQuit.Size = new Size(122, 40);
             buttonQuit.TabIndex = 10;
-            buttonQuit.Text = "Sistemden Çıkış yap.";
+            buttonQuit.Text = "Sistemden Çıkış yap";
             buttonQuit.UseVisualStyleBackColor = true;
             buttonQuit.Click += buttonQuit_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Font = new Font("Verdana", 9.75F, FontStyle.Bold);
             label2.Location = new Point(358, 65);
             label2.Name = "label2";
             label2.Size = new Size(207, 16);
@@ -159,7 +161,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.Font = new Font("Verdana", 9.75F, FontStyle.Bold);
             label3.Location = new Point(358, 170);
             label3.Name = "label3";
             label3.Size = new Size(127, 16);
@@ -179,7 +181,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.Font = new Font("Verdana", 9.75F, FontStyle.Bold);
             label4.Location = new Point(358, 278);
             label4.Name = "label4";
             label4.Size = new Size(306, 16);
@@ -196,11 +198,33 @@
             buttonYedekle.UseVisualStyleBackColor = true;
             buttonYedekle.Click += buttonYedekle_Click;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Verdana", 9.75F, FontStyle.Bold);
+            label8.Location = new Point(31, 389);
+            label8.Name = "label8";
+            label8.Size = new Size(106, 16);
+            label8.TabIndex = 19;
+            label8.Text = "Sınıf İşlemleri";
+            // 
+            // buttonSinifİslemleri
+            // 
+            buttonSinifİslemleri.Location = new Point(107, 424);
+            buttonSinifİslemleri.Name = "buttonSinifİslemleri";
+            buttonSinifİslemleri.Size = new Size(152, 48);
+            buttonSinifİslemleri.TabIndex = 18;
+            buttonSinifİslemleri.Text = "Sınıf işlemlerine git";
+            buttonSinifİslemleri.UseVisualStyleBackColor = true;
+            buttonSinifİslemleri.Click += buttonSinifİslemleri_Click;
+            // 
             // FormAnaMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(769, 496);
+            Controls.Add(label8);
+            Controls.Add(buttonSinifİslemleri);
             Controls.Add(buttonYedekle);
             Controls.Add(buttonYedekdenDon);
             Controls.Add(label4);
@@ -245,5 +269,7 @@
         private Button buttonYedekdenDon;
         private Label label4;
         private Button buttonYedekle;
+        private Label label8;
+        private Button buttonSinifİslemleri;
     }
 }
