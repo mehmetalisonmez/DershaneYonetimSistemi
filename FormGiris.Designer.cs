@@ -28,34 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGiris));
             buttonGiris = new Button();
             textBoxKullaniciAdi = new TextBox();
             textBoxSifre = new TextBox();
             label1 = new Label();
             label2 = new Label();
-            label3 = new Label();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // buttonGiris
             // 
-            buttonGiris.Location = new Point(155, 151);
+            buttonGiris.BackColor = Color.Teal;
+            buttonGiris.Font = new Font("Ravie", 9.75F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            buttonGiris.Location = new Point(150, 187);
             buttonGiris.Name = "buttonGiris";
-            buttonGiris.Size = new Size(110, 38);
+            buttonGiris.Size = new Size(132, 46);
             buttonGiris.TabIndex = 0;
             buttonGiris.Text = "Giriş Yap";
-            buttonGiris.UseVisualStyleBackColor = true;
+            buttonGiris.UseVisualStyleBackColor = false;
             buttonGiris.Click += buttonGiris_Click;
             // 
             // textBoxKullaniciAdi
             // 
-            textBoxKullaniciAdi.Location = new Point(155, 57);
+            textBoxKullaniciAdi.Location = new Point(161, 93);
             textBoxKullaniciAdi.Name = "textBoxKullaniciAdi";
             textBoxKullaniciAdi.Size = new Size(110, 23);
             textBoxKullaniciAdi.TabIndex = 1;
             // 
             // textBoxSifre
             // 
-            textBoxSifre.Location = new Point(155, 104);
+            textBoxSifre.Location = new Point(161, 140);
             textBoxSifre.Name = "textBoxSifre";
             textBoxSifre.Size = new Size(110, 23);
             textBoxSifre.TabIndex = 2;
@@ -64,36 +68,43 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(55, 63);
+            label1.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(61, 99);
             label1.Name = "label1";
-            label1.Size = new Size(79, 15);
+            label1.Size = new Size(92, 14);
             label1.TabIndex = 3;
             label1.Text = "Kullanıcı Adı :";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(57, 107);
+            label2.Font = new Font("Rockwell", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(81, 143);
             label2.Name = "label2";
-            label2.Size = new Size(36, 15);
+            label2.Size = new Size(42, 14);
             label2.TabIndex = 4;
             label2.Text = "Şifre :";
             // 
-            // label3
+            // pictureBox1
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(278, 240);
-            label3.Name = "label3";
-            label3.Size = new Size(38, 15);
-            label3.TabIndex = 5;
-            label3.Text = "label3";
+            pictureBox1.BackColor = SystemColors.Control;
+            pictureBox1.Cursor = Cursors.Cross;
+            pictureBox1.Dock = DockStyle.Right;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(345, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(449, 487);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
             // 
             // FormGiris
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(463, 380);
-            Controls.Add(label3);
+            BackColor = SystemColors.ButtonShadow;
+            ClientSize = new Size(794, 487);
+            Controls.Add(pictureBox1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(textBoxSifre);
@@ -101,6 +112,7 @@
             Controls.Add(buttonGiris);
             Name = "FormGiris";
             Text = "Giriş Ekranı";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -112,6 +124,6 @@
         private TextBox textBoxSifre;
         private Label label1;
         private Label label2;
-        private Label label3;
+        private PictureBox pictureBox1;
     }
 }

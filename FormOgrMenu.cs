@@ -170,37 +170,6 @@ namespace DershaneYonetimSistemi
                 baglanti.Close();
             }
         }
-        private void sinifDersIDYukle()
-        {
-            try
-            {
-                // Bağlantıyı açıyoruz
-                baglanti.Open();
-
-                // SQL sorgusu ile rolleri çekiyoruz
-                SqlCommand komut = new SqlCommand("SELECT SinifDersID FROM SinifDers", baglanti);
-                SqlDataReader reader = komut.ExecuteReader();
-
-                // ComboBox'ı temizliyoruz (yeniden yüklenirse eski değerler kalmasın)
-                comboBoxSinifDersID.Items.Clear();
-
-                // Gelen rolleri ComboBox'a ekliyoruz
-                while (reader.Read())
-                {
-                    comboBoxSinifDersID.Items.Add(reader["SinifDersID"].ToString());
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Sınıf Ders ID'ler yüklenirken bir hata oluştu: " + ex.Message);
-            }
-            finally
-            {
-                // Bağlantıyı kapatıyoruz
-                baglanti.Close();
-            }
-        }
         private void ogrencileriGoster()
         {
             if (kullaniciYetkileri.CanRead)
@@ -278,8 +247,8 @@ namespace DershaneYonetimSistemi
                     sqlCommand.Parameters.AddWithValue("@P6", dateTimePickerKayitTarihi.Value);
                     sqlCommand.Parameters.AddWithValue("@P7", richTextBoxOgrenciAdres.Text);
                     sqlCommand.Parameters.AddWithValue("@P8", textBoxOgrenciAlan.Text);
-
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla eklendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -314,6 +283,7 @@ namespace DershaneYonetimSistemi
                     sqlCommand.Parameters.AddWithValue("@P8", textBoxOgrenciAlan.Text);
                     sqlCommand.Parameters.AddWithValue("@P9", comboBoxTemporaryStudentID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla güncellendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -340,6 +310,7 @@ namespace DershaneYonetimSistemi
                     SqlCommand sqlCommand = new SqlCommand("DELETE FROM Ogrenci WHERE StudentID = @P1", baglanti);
                     sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla silindi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -364,12 +335,12 @@ namespace DershaneYonetimSistemi
                 try
                 {
                     baglanti.Open();
-                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO OgrenciDers (StudentID, CourseID, DerseKayitTarihi, SinifDersID) VALUES (@P1, @P2, @P3, @P4)", baglanti);
+                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO OgrenciDers (StudentID, CourseID, DerseKayitTarihi) VALUES (@P1, @P2, @P3)", baglanti);
                     sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciNo.SelectedItem.ToString());
                     sqlCommand.Parameters.AddWithValue("@P2", comboBoxDersID.SelectedItem.ToString());
                     sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDerseKayitTarihi.Value);
-                    sqlCommand.Parameters.AddWithValue("@P4", comboBoxSinifDersID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla eklendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -393,13 +364,13 @@ namespace DershaneYonetimSistemi
                 try
                 {
                     baglanti.Open();
-                    SqlCommand sqlCommand = new SqlCommand("UPDATE OgrenciDers SET StudentID = @P1, CourseID = @P2, DerseKayitTarihi = @P3, SinifDersID = @P4 WHERE StudentCourseID = @P5", baglanti);
+                    SqlCommand sqlCommand = new SqlCommand("UPDATE OgrenciDers SET StudentID = @P1, CourseID = @P2, DerseKayitTarihi = @P3 WHERE StudentCourseID = @P4", baglanti);
                     sqlCommand.Parameters.AddWithValue("@P1", comboBoxOgrenciNo.SelectedItem.ToString());
                     sqlCommand.Parameters.AddWithValue("@P2", comboBoxDersID.SelectedItem.ToString());
                     sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDerseKayitTarihi.Value);
-                    sqlCommand.Parameters.AddWithValue("@P4", comboBoxSinifDersID.SelectedItem.ToString());
-                    sqlCommand.Parameters.AddWithValue("@P5", comboBoxTemporaryOgrenciDersID.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@P4", comboBoxTemporaryOgrenciDersID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla güncellendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -426,6 +397,7 @@ namespace DershaneYonetimSistemi
                     SqlCommand sqlCommand = new SqlCommand("DELETE FROM OgrenciDers WHERE StudentCourseID = @P1", baglanti);
                     sqlCommand.Parameters.AddWithValue("@P1", comboBoxStudentLessonID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla silindi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -455,6 +427,7 @@ namespace DershaneYonetimSistemi
                     sqlCommand.Parameters.AddWithValue("@P2", checkBoxDevamsizlikBilgisi.Checked ? 1 : 0);
                     sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDevamsizlikTarihi.Value);
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla eklendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -484,6 +457,7 @@ namespace DershaneYonetimSistemi
                     sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerDevamsizlikTarihi.Value);
                     sqlCommand.Parameters.AddWithValue("@P4", comboBoxTemporaryDevamsizlikID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla güncellendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -510,6 +484,7 @@ namespace DershaneYonetimSistemi
                     SqlCommand sqlCommand = new SqlCommand("DELETE FROM Devamsizlik WHERE AttendanceId = @P1", baglanti);
                     sqlCommand.Parameters.AddWithValue("@P1", comboBoxDevamsizlikID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla silindi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -533,7 +508,6 @@ namespace DershaneYonetimSistemi
             studentCourseIDYukle();
             CourseIDYukle();
             AttendanceIdYukle();
-            sinifDersIDYukle();
         }
 
         private void buttonOgrenciEkle_Click(object sender, EventArgs e)
@@ -899,7 +873,6 @@ namespace DershaneYonetimSistemi
                 dataTable.Columns.Add("StudentID", typeof(string));
                 dataTable.Columns.Add("CourseID", typeof(short));
                 dataTable.Columns.Add("DerseKayitTarihi", typeof(DateTime));
-                dataTable.Columns.Add("SinifDersID", typeof(int));
 
                 for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
                 {
@@ -907,7 +880,6 @@ namespace DershaneYonetimSistemi
                     dataRow["StudentID"] = worksheet.Cells[row, 1].Text;
                     dataRow["CourseID"] = short.Parse(worksheet.Cells[row, 2].Text);
                     dataRow["DerseKayitTarihi"] = DateTime.Parse(worksheet.Cells[row, 3].Text);
-                    dataRow["SinifDersID"] = worksheet.Cells[row, 4].Text;
                     dataTable.Rows.Add(dataRow);
                 }
 
@@ -942,14 +914,13 @@ namespace DershaneYonetimSistemi
                         command.Parameters.AddWithValue("@StudentID", row["StudentID"]);
                         command.Parameters.AddWithValue("@CourseID", row["CourseID"]);
                         command.Parameters.AddWithValue("@DerseKayitTarihi", row["DerseKayitTarihi"]);
-                        command.Parameters.AddWithValue("@SinifDersID", row["SinifDersID"]);
 
                         command.ExecuteNonQuery();
                     }
                     catch (SqlException ex)
                     {
                         // Satır hatalarını yakala
-                        MessageBox.Show($"Bir hata oluştu: {ex.Message}\nHatalı veri: {row["StudentID"]}, {row["CourseID"]}, {row["DerseKayitTarihi"]}, {row["SinifDersID"]}",
+                        MessageBox.Show($"Bir hata oluştu: {ex.Message}\nHatalı veri: {row["StudentID"]}, {row["CourseID"]}, {row["DerseKayitTarihi"]}",
                                         "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }

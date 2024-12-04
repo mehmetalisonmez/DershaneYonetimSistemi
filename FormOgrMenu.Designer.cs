@@ -102,8 +102,7 @@
             buttonSaveExcelOgrenciler = new Button();
             buttonSaveExcelOgrenciDers = new Button();
             buttonSaveExcelDevamsizliklar = new Button();
-            comboBoxSinifDersID = new ComboBox();
-            labelSinifDersID = new Label();
+            treeView1 = new TreeView();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewOgrenciler).BeginInit();
             groupBox2.SuspendLayout();
@@ -117,28 +116,30 @@
             // 
             // buttonOgrencileriGoruntule
             // 
-            buttonOgrencileriGoruntule.Location = new Point(479, 313);
+            buttonOgrencileriGoruntule.BackColor = Color.Lavender;
+            buttonOgrencileriGoruntule.Location = new Point(465, 308);
             buttonOgrencileriGoruntule.Name = "buttonOgrencileriGoruntule";
             buttonOgrencileriGoruntule.Size = new Size(108, 38);
             buttonOgrencileriGoruntule.TabIndex = 42;
             buttonOgrencileriGoruntule.Text = "Öğrencileri Görüntüle";
-            buttonOgrencileriGoruntule.UseVisualStyleBackColor = true;
+            buttonOgrencileriGoruntule.UseVisualStyleBackColor = false;
             buttonOgrencileriGoruntule.Click += buttonOgrencileriGoruntule_Click;
             // 
             // buttonDevamsızlıkSil
             // 
-            buttonDevamsızlıkSil.Location = new Point(1401, 354);
+            buttonDevamsızlıkSil.BackColor = Color.SteelBlue;
+            buttonDevamsızlıkSil.Location = new Point(1418, 376);
             buttonDevamsızlıkSil.Name = "buttonDevamsızlıkSil";
             buttonDevamsızlıkSil.Size = new Size(87, 38);
             buttonDevamsızlıkSil.TabIndex = 41;
             buttonDevamsızlıkSil.Text = "Devamsızlık Sil";
-            buttonDevamsızlıkSil.UseVisualStyleBackColor = true;
+            buttonDevamsızlıkSil.UseVisualStyleBackColor = false;
             buttonDevamsızlıkSil.Click += buttonDevamsızlıkSil_Click;
             // 
             // labelSilinecekDevamsizlikID
             // 
             labelSilinecekDevamsizlikID.Font = new Font("Century", 9F);
-            labelSilinecekDevamsizlikID.Location = new Point(1069, 356);
+            labelSilinecekDevamsizlikID.Location = new Point(1086, 378);
             labelSilinecekDevamsizlikID.Name = "labelSilinecekDevamsizlikID";
             labelSilinecekDevamsizlikID.Size = new Size(162, 36);
             labelSilinecekDevamsizlikID.TabIndex = 39;
@@ -146,18 +147,19 @@
             // 
             // buttonOgrenciSil
             // 
-            buttonOgrenciSil.Location = new Point(329, 481);
+            buttonOgrenciSil.BackColor = Color.SteelBlue;
+            buttonOgrenciSil.Location = new Point(337, 481);
             buttonOgrenciSil.Name = "buttonOgrenciSil";
             buttonOgrenciSil.Size = new Size(87, 38);
             buttonOgrenciSil.TabIndex = 38;
             buttonOgrenciSil.Text = "Öğrenci Sil";
-            buttonOgrenciSil.UseVisualStyleBackColor = true;
+            buttonOgrenciSil.UseVisualStyleBackColor = false;
             buttonOgrenciSil.Click += buttonOgrenciSil_Click;
             // 
             // labelSilinecekOgrenci
             // 
             labelSilinecekOgrenci.Font = new Font("Century", 9F);
-            labelSilinecekOgrenci.Location = new Point(41, 480);
+            labelSilinecekOgrenci.Location = new Point(44, 484);
             labelSilinecekOgrenci.Name = "labelSilinecekOgrenci";
             labelSilinecekOgrenci.Size = new Size(149, 39);
             labelSilinecekOgrenci.TabIndex = 36;
@@ -166,7 +168,7 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(dataGridViewOgrenciler);
-            groupBox3.Location = new Point(476, 38);
+            groupBox3.Location = new Point(462, 38);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(573, 260);
             groupBox3.TabIndex = 34;
@@ -177,6 +179,7 @@
             // 
             dataGridViewOgrenciler.AllowUserToAddRows = false;
             dataGridViewOgrenciler.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewOgrenciler.BackgroundColor = SystemColors.GradientInactiveCaption;
             dataGridViewOgrenciler.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewOgrenciler.Dock = DockStyle.Fill;
             dataGridViewOgrenciler.Location = new Point(3, 19);
@@ -197,7 +200,7 @@
             groupBox2.Controls.Add(buttonSinavDevamsizlikGuncelle);
             groupBox2.Controls.Add(buttonOgrenciDevamsizlikEkle);
             groupBox2.Controls.Add(labelOgrenciDersID);
-            groupBox2.Location = new Point(1069, 25);
+            groupBox2.Location = new Point(1108, 28);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(419, 303);
             groupBox2.TabIndex = 33;
@@ -267,22 +270,24 @@
             // 
             // buttonSinavDevamsizlikGuncelle
             // 
+            buttonSinavDevamsizlikGuncelle.BackColor = Color.Lavender;
             buttonSinavDevamsizlikGuncelle.Location = new Point(67, 232);
             buttonSinavDevamsizlikGuncelle.Name = "buttonSinavDevamsizlikGuncelle";
             buttonSinavDevamsizlikGuncelle.Size = new Size(107, 41);
             buttonSinavDevamsizlikGuncelle.TabIndex = 17;
             buttonSinavDevamsizlikGuncelle.Text = "Devamsızlık Güncelle";
-            buttonSinavDevamsizlikGuncelle.UseVisualStyleBackColor = true;
+            buttonSinavDevamsizlikGuncelle.UseVisualStyleBackColor = false;
             buttonSinavDevamsizlikGuncelle.Click += buttonSinavDevamsizlikGuncelle_Click;
             // 
             // buttonOgrenciDevamsizlikEkle
             // 
+            buttonOgrenciDevamsizlikEkle.BackColor = Color.Lavender;
             buttonOgrenciDevamsizlikEkle.Location = new Point(201, 232);
             buttonOgrenciDevamsizlikEkle.Name = "buttonOgrenciDevamsizlikEkle";
             buttonOgrenciDevamsizlikEkle.Size = new Size(108, 41);
             buttonOgrenciDevamsizlikEkle.TabIndex = 16;
             buttonOgrenciDevamsizlikEkle.Text = "Yeni Devamsızlık Ekle";
-            buttonOgrenciDevamsizlikEkle.UseVisualStyleBackColor = true;
+            buttonOgrenciDevamsizlikEkle.UseVisualStyleBackColor = false;
             buttonOgrenciDevamsizlikEkle.Click += buttonOgrenciDevamsizlikEkle_Click;
             // 
             // labelOgrenciDersID
@@ -318,7 +323,7 @@
             groupBox1.Controls.Add(labelSoyad);
             groupBox1.Controls.Add(labelFirstName);
             groupBox1.Controls.Add(labelDogumTarihi);
-            groupBox1.Location = new Point(9, 30);
+            groupBox1.Location = new Point(9, 26);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(431, 447);
             groupBox1.TabIndex = 32;
@@ -451,12 +456,13 @@
             // 
             // buttonOgrenciGuncelle
             // 
+            buttonOgrenciGuncelle.BackColor = Color.Lavender;
             buttonOgrenciGuncelle.Location = new Point(215, 399);
             buttonOgrenciGuncelle.Name = "buttonOgrenciGuncelle";
             buttonOgrenciGuncelle.Size = new Size(90, 38);
             buttonOgrenciGuncelle.TabIndex = 20;
             buttonOgrenciGuncelle.Text = "Öğrenci Güncelle";
-            buttonOgrenciGuncelle.UseVisualStyleBackColor = true;
+            buttonOgrenciGuncelle.UseVisualStyleBackColor = false;
             buttonOgrenciGuncelle.Click += buttonOgrenciGuncelle_Click;
             // 
             // labelTemporaryOGrenciID
@@ -471,12 +477,13 @@
             // 
             // buttonOgrenciEkle
             // 
+            buttonOgrenciEkle.BackColor = Color.Lavender;
             buttonOgrenciEkle.Location = new Point(328, 399);
             buttonOgrenciEkle.Name = "buttonOgrenciEkle";
             buttonOgrenciEkle.Size = new Size(87, 38);
             buttonOgrenciEkle.TabIndex = 15;
             buttonOgrenciEkle.Text = "Yeni Öğrenci Ekle";
-            buttonOgrenciEkle.UseVisualStyleBackColor = true;
+            buttonOgrenciEkle.UseVisualStyleBackColor = false;
             buttonOgrenciEkle.Click += buttonOgrenciEkle_Click;
             // 
             // labelSoyad
@@ -512,7 +519,7 @@
             // groupBox5
             // 
             groupBox5.Controls.Add(dataGridViewDevamsizliklar);
-            groupBox5.Location = new Point(1030, 474);
+            groupBox5.Location = new Point(1062, 474);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(492, 255);
             groupBox5.TabIndex = 44;
@@ -523,6 +530,7 @@
             // 
             dataGridViewDevamsizliklar.AllowUserToAddRows = false;
             dataGridViewDevamsizliklar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewDevamsizliklar.BackgroundColor = SystemColors.GradientInactiveCaption;
             dataGridViewDevamsizliklar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewDevamsizliklar.Dock = DockStyle.Fill;
             dataGridViewDevamsizliklar.Location = new Point(3, 19);
@@ -543,7 +551,7 @@
             // labelDevamsizlikCRUD
             // 
             labelDevamsizlikCRUD.Font = new Font("Century", 9.75F, FontStyle.Bold);
-            labelDevamsizlikCRUD.Location = new Point(1069, 6);
+            labelDevamsizlikCRUD.Location = new Point(1108, 9);
             labelDevamsizlikCRUD.Name = "labelDevamsizlikCRUD";
             labelDevamsizlikCRUD.Size = new Size(441, 16);
             labelDevamsizlikCRUD.TabIndex = 51;
@@ -560,8 +568,6 @@
             // 
             // groupBox6
             // 
-            groupBox6.Controls.Add(comboBoxSinifDersID);
-            groupBox6.Controls.Add(labelSinifDersID);
             groupBox6.Controls.Add(buttonOgrenciDersGuncelle);
             groupBox6.Controls.Add(dateTimePickerDerseKayitTarihi);
             groupBox6.Controls.Add(comboBoxTemporaryOgrenciDersID);
@@ -580,12 +586,13 @@
             // 
             // buttonOgrenciDersGuncelle
             // 
+            buttonOgrenciDersGuncelle.BackColor = Color.Lavender;
             buttonOgrenciDersGuncelle.Location = new Point(114, 266);
             buttonOgrenciDersGuncelle.Name = "buttonOgrenciDersGuncelle";
             buttonOgrenciDersGuncelle.Size = new Size(87, 38);
             buttonOgrenciDersGuncelle.TabIndex = 74;
             buttonOgrenciDersGuncelle.Text = "Öğrenci Ders Güncelle";
-            buttonOgrenciDersGuncelle.UseVisualStyleBackColor = true;
+            buttonOgrenciDersGuncelle.UseVisualStyleBackColor = false;
             buttonOgrenciDersGuncelle.Click += buttonOgrenciDersGuncelle_Click;
             // 
             // dateTimePickerDerseKayitTarihi
@@ -641,12 +648,13 @@
             // 
             // buttonOgrenciDersEkle
             // 
+            buttonOgrenciDersEkle.BackColor = Color.Lavender;
             buttonOgrenciDersEkle.Location = new Point(238, 266);
             buttonOgrenciDersEkle.Name = "buttonOgrenciDersEkle";
             buttonOgrenciDersEkle.Size = new Size(87, 38);
             buttonOgrenciDersEkle.TabIndex = 16;
             buttonOgrenciDersEkle.Text = "Öğrenci Ders Ekle";
-            buttonOgrenciDersEkle.UseVisualStyleBackColor = true;
+            buttonOgrenciDersEkle.UseVisualStyleBackColor = false;
             buttonOgrenciDersEkle.Click += buttonOgrenciDersEkle_Click;
             // 
             // labelOgrenciID
@@ -680,12 +688,13 @@
             // 
             // buttonOgrenciDersleriGoruntule
             // 
+            buttonOgrenciDersleriGoruntule.BackColor = Color.Lavender;
             buttonOgrenciDersleriGoruntule.Location = new Point(482, 868);
             buttonOgrenciDersleriGoruntule.Name = "buttonOgrenciDersleriGoruntule";
             buttonOgrenciDersleriGoruntule.Size = new Size(113, 38);
             buttonOgrenciDersleriGoruntule.TabIndex = 58;
             buttonOgrenciDersleriGoruntule.Text = "Öğrenci Dersleri Görüntüle";
-            buttonOgrenciDersleriGoruntule.UseVisualStyleBackColor = true;
+            buttonOgrenciDersleriGoruntule.UseVisualStyleBackColor = false;
             buttonOgrenciDersleriGoruntule.Click += buttonOgrenciDersleriGoruntule_Click;
             // 
             // groupBox4
@@ -702,6 +711,7 @@
             // 
             dataGridViewOgrenciDersleri.AllowUserToAddRows = false;
             dataGridViewOgrenciDersleri.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewOgrenciDersleri.BackgroundColor = SystemColors.GradientInactiveCaption;
             dataGridViewOgrenciDersleri.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewOgrenciDersleri.Dock = DockStyle.Fill;
             dataGridViewOgrenciDersleri.Location = new Point(3, 19);
@@ -712,22 +722,24 @@
             // 
             // buttonDevamsizlikGoruntule
             // 
-            buttonDevamsizlikGoruntule.Location = new Point(1019, 735);
+            buttonDevamsizlikGoruntule.BackColor = Color.Lavender;
+            buttonDevamsizlikGoruntule.Location = new Point(1069, 735);
             buttonDevamsizlikGoruntule.Name = "buttonDevamsizlikGoruntule";
             buttonDevamsizlikGoruntule.Size = new Size(113, 38);
             buttonDevamsizlikGoruntule.TabIndex = 70;
             buttonDevamsizlikGoruntule.Text = "Devamsızlıkları Görüntüle";
-            buttonDevamsizlikGoruntule.UseVisualStyleBackColor = true;
+            buttonDevamsizlikGoruntule.UseVisualStyleBackColor = false;
             buttonDevamsizlikGoruntule.Click += buttonDevamsizlikGoruntule_Click;
             // 
             // buttonOgrenciDersSil
             // 
+            buttonOgrenciDersSil.BackColor = Color.SteelBlue;
             buttonOgrenciDersSil.Location = new Point(336, 888);
             buttonOgrenciDersSil.Name = "buttonOgrenciDersSil";
             buttonOgrenciDersSil.Size = new Size(87, 38);
             buttonOgrenciDersSil.TabIndex = 71;
             buttonOgrenciDersSil.Text = "Öğrenci Ders Sil";
-            buttonOgrenciDersSil.UseVisualStyleBackColor = true;
+            buttonOgrenciDersSil.UseVisualStyleBackColor = false;
             buttonOgrenciDersSil.Click += buttonOgrenciDersSil_Click;
             // 
             // comboBoxStudentLessonID
@@ -741,7 +753,7 @@
             // comboBoxDevamsizlikID
             // 
             comboBoxDevamsizlikID.FormattingEnabled = true;
-            comboBoxDevamsizlikID.Location = new Point(1248, 363);
+            comboBoxDevamsizlikID.Location = new Point(1265, 385);
             comboBoxDevamsizlikID.Name = "comboBoxDevamsizlikID";
             comboBoxDevamsizlikID.Size = new Size(121, 23);
             comboBoxDevamsizlikID.TabIndex = 74;
@@ -749,124 +761,125 @@
             // comboBoxOgrenciID
             // 
             comboBoxOgrenciID.FormattingEnabled = true;
-            comboBoxOgrenciID.Location = new Point(193, 483);
+            comboBoxOgrenciID.Location = new Point(193, 488);
             comboBoxOgrenciID.Name = "comboBoxOgrenciID";
             comboBoxOgrenciID.Size = new Size(121, 23);
             comboBoxOgrenciID.TabIndex = 75;
             // 
             // buttonSaveWordStudents
             // 
-            buttonSaveWordStudents.Location = new Point(613, 313);
+            buttonSaveWordStudents.BackColor = Color.Lavender;
+            buttonSaveWordStudents.Location = new Point(599, 308);
             buttonSaveWordStudents.Name = "buttonSaveWordStudents";
             buttonSaveWordStudents.Size = new Size(113, 38);
             buttonSaveWordStudents.TabIndex = 105;
             buttonSaveWordStudents.Text = "Word dosyası olarak kaydet";
-            buttonSaveWordStudents.UseVisualStyleBackColor = true;
+            buttonSaveWordStudents.UseVisualStyleBackColor = false;
             buttonSaveWordStudents.Click += buttonSaveWordStudents_Click;
             // 
             // buttonSaveWordStudentLessons
             // 
+            buttonSaveWordStudentLessons.BackColor = Color.Lavender;
             buttonSaveWordStudentLessons.Location = new Point(613, 868);
             buttonSaveWordStudentLessons.Name = "buttonSaveWordStudentLessons";
             buttonSaveWordStudentLessons.Size = new Size(113, 38);
             buttonSaveWordStudentLessons.TabIndex = 106;
             buttonSaveWordStudentLessons.Text = "Word dosyası olarak kaydet";
-            buttonSaveWordStudentLessons.UseVisualStyleBackColor = true;
+            buttonSaveWordStudentLessons.UseVisualStyleBackColor = false;
             buttonSaveWordStudentLessons.Click += buttonSaveWordStudentLessons_Click;
             // 
             // buttonSaveWordDevamsizliklar
             // 
-            buttonSaveWordDevamsizliklar.Location = new Point(1157, 735);
+            buttonSaveWordDevamsizliklar.BackColor = Color.Lavender;
+            buttonSaveWordDevamsizliklar.Location = new Point(1192, 734);
             buttonSaveWordDevamsizliklar.Name = "buttonSaveWordDevamsizliklar";
             buttonSaveWordDevamsizliklar.Size = new Size(113, 38);
             buttonSaveWordDevamsizliklar.TabIndex = 107;
             buttonSaveWordDevamsizliklar.Text = "Word dosyası olarak kaydet";
-            buttonSaveWordDevamsizliklar.UseVisualStyleBackColor = true;
+            buttonSaveWordDevamsizliklar.UseVisualStyleBackColor = false;
             buttonSaveWordDevamsizliklar.Click += buttonSaveWordDevamsizliklar_Click;
             // 
             // buttonVeriAlOgrenci
             // 
-            buttonVeriAlOgrenci.Location = new Point(745, 313);
+            buttonVeriAlOgrenci.BackColor = Color.Lavender;
+            buttonVeriAlOgrenci.Location = new Point(731, 308);
             buttonVeriAlOgrenci.Name = "buttonVeriAlOgrenci";
             buttonVeriAlOgrenci.Size = new Size(113, 38);
             buttonVeriAlOgrenci.TabIndex = 108;
             buttonVeriAlOgrenci.Text = "Veri Al";
-            buttonVeriAlOgrenci.UseVisualStyleBackColor = true;
+            buttonVeriAlOgrenci.UseVisualStyleBackColor = false;
             buttonVeriAlOgrenci.Click += buttonVeriAlOgrenci_Click;
             // 
             // buttonVeriAlDevamsizlik
             // 
-            buttonVeriAlDevamsizlik.Location = new Point(1290, 735);
+            buttonVeriAlDevamsizlik.BackColor = Color.Lavender;
+            buttonVeriAlDevamsizlik.Location = new Point(1315, 734);
             buttonVeriAlDevamsizlik.Name = "buttonVeriAlDevamsizlik";
             buttonVeriAlDevamsizlik.Size = new Size(113, 38);
             buttonVeriAlDevamsizlik.TabIndex = 109;
             buttonVeriAlDevamsizlik.Text = "Veri Al";
-            buttonVeriAlDevamsizlik.UseVisualStyleBackColor = true;
+            buttonVeriAlDevamsizlik.UseVisualStyleBackColor = false;
             buttonVeriAlDevamsizlik.Click += buttonVeriAlDevamsizlik_Click;
             // 
             // buttonVeriAlOgrenciDers
             // 
+            buttonVeriAlOgrenciDers.BackColor = Color.Lavender;
             buttonVeriAlOgrenciDers.Location = new Point(755, 868);
             buttonVeriAlOgrenciDers.Name = "buttonVeriAlOgrenciDers";
             buttonVeriAlOgrenciDers.Size = new Size(113, 38);
             buttonVeriAlOgrenciDers.TabIndex = 110;
             buttonVeriAlOgrenciDers.Text = "Veri Al";
-            buttonVeriAlOgrenciDers.UseVisualStyleBackColor = true;
+            buttonVeriAlOgrenciDers.UseVisualStyleBackColor = false;
             buttonVeriAlOgrenciDers.Click += buttonVeriAlOgrenciDers_Click;
             // 
             // buttonSaveExcelOgrenciler
             // 
-            buttonSaveExcelOgrenciler.Location = new Point(883, 313);
+            buttonSaveExcelOgrenciler.BackColor = Color.Lavender;
+            buttonSaveExcelOgrenciler.Location = new Point(869, 308);
             buttonSaveExcelOgrenciler.Name = "buttonSaveExcelOgrenciler";
             buttonSaveExcelOgrenciler.Size = new Size(113, 38);
             buttonSaveExcelOgrenciler.TabIndex = 111;
             buttonSaveExcelOgrenciler.Text = "Excel dosyası olarak kaydet";
-            buttonSaveExcelOgrenciler.UseVisualStyleBackColor = true;
+            buttonSaveExcelOgrenciler.UseVisualStyleBackColor = false;
             buttonSaveExcelOgrenciler.Click += buttonSaveExcelOgrenciler_Click;
             // 
             // buttonSaveExcelOgrenciDers
             // 
+            buttonSaveExcelOgrenciDers.BackColor = Color.Lavender;
             buttonSaveExcelOgrenciDers.Location = new Point(892, 868);
             buttonSaveExcelOgrenciDers.Name = "buttonSaveExcelOgrenciDers";
             buttonSaveExcelOgrenciDers.Size = new Size(113, 38);
             buttonSaveExcelOgrenciDers.TabIndex = 112;
             buttonSaveExcelOgrenciDers.Text = "Excel dosyası olarak kaydet";
-            buttonSaveExcelOgrenciDers.UseVisualStyleBackColor = true;
+            buttonSaveExcelOgrenciDers.UseVisualStyleBackColor = false;
             buttonSaveExcelOgrenciDers.Click += buttonSaveExcelOgrenciDers_Click;
             // 
             // buttonSaveExcelDevamsizliklar
             // 
-            buttonSaveExcelDevamsizliklar.Location = new Point(1409, 735);
+            buttonSaveExcelDevamsizliklar.BackColor = Color.Lavender;
+            buttonSaveExcelDevamsizliklar.Location = new Point(1436, 734);
             buttonSaveExcelDevamsizliklar.Name = "buttonSaveExcelDevamsizliklar";
             buttonSaveExcelDevamsizliklar.Size = new Size(113, 38);
             buttonSaveExcelDevamsizliklar.TabIndex = 113;
             buttonSaveExcelDevamsizliklar.Text = "Excel dosyası olarak kaydet";
-            buttonSaveExcelDevamsizliklar.UseVisualStyleBackColor = true;
+            buttonSaveExcelDevamsizliklar.UseVisualStyleBackColor = false;
             buttonSaveExcelDevamsizliklar.Click += buttonSaveExcelDevamsizliklar_Click;
             // 
-            // comboBoxSinifDersID
+            // treeView1
             // 
-            comboBoxSinifDersID.FormattingEnabled = true;
-            comboBoxSinifDersID.Location = new Point(105, 214);
-            comboBoxSinifDersID.Name = "comboBoxSinifDersID";
-            comboBoxSinifDersID.Size = new Size(121, 23);
-            comboBoxSinifDersID.TabIndex = 76;
-            // 
-            // labelSinifDersID
-            // 
-            labelSinifDersID.AutoSize = true;
-            labelSinifDersID.Font = new Font("Century", 9F);
-            labelSinifDersID.Location = new Point(12, 216);
-            labelSinifDersID.Name = "labelSinifDersID";
-            labelSinifDersID.Size = new Size(85, 16);
-            labelSinifDersID.TabIndex = 75;
-            labelSinifDersID.Text = "Sınıf Ders ID :";
+            treeView1.BackColor = Color.Thistle;
+            treeView1.Location = new Point(1041, -1);
+            treeView1.Name = "treeView1";
+            treeView1.Size = new Size(10, 952);
+            treeView1.TabIndex = 114;
             // 
             // FormOgrMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1539, 953);
+            BackColor = SystemColors.ButtonShadow;
+            ClientSize = new Size(1598, 953);
+            Controls.Add(treeView1);
             Controls.Add(buttonSaveExcelDevamsizliklar);
             Controls.Add(buttonSaveExcelOgrenciDers);
             Controls.Add(buttonSaveExcelOgrenciler);
@@ -1004,7 +1017,6 @@
         private Button buttonSaveExcelOgrenciler;
         private Button buttonSaveExcelOgrenciDers;
         private Button buttonSaveExcelDevamsizliklar;
-        private ComboBox comboBoxSinifDersID;
-        private Label labelSinifDersID;
+        private TreeView treeView1;
     }
 }

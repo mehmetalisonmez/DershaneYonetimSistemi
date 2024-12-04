@@ -81,6 +81,7 @@ namespace DershaneYonetimSistemi
                 dataGridViewKullanicilar.DataSource = dataTable;
             }
         }
+
         private void rolEkle()
         {
             try
@@ -94,8 +95,8 @@ namespace DershaneYonetimSistemi
                 sqlCommand.Parameters.AddWithValue("@P3", checkBoxCanInsert.Checked ? 1 : 0);
                 sqlCommand.Parameters.AddWithValue("@P4", checkBoxCanDelete.Checked ? 1 : 0);
                 sqlCommand.Parameters.AddWithValue("@P5", checkBoxCanUpdate.Checked ? 1 : 0);
-
                 sqlCommand.ExecuteNonQuery();
+                MessageBox.Show("--------- Başarıyla eklendi ---------");
             }
             catch (Exception ex)
             {
@@ -119,8 +120,8 @@ namespace DershaneYonetimSistemi
                 sqlCommand.Parameters.AddWithValue("@P4", checkBoxCanDelete.Checked ? 1 : 0);
                 sqlCommand.Parameters.AddWithValue("@P5", checkBoxCanUpdate.Checked ? 1 : 0);
                 sqlCommand.Parameters.AddWithValue("@P6", textBoxTemporaryRol.Text);
-
                 sqlCommand.ExecuteNonQuery();
+                MessageBox.Show("--------- Başarıyla güncellendi ---------");
             }
             catch (Exception ex)
             {
@@ -141,6 +142,7 @@ namespace DershaneYonetimSistemi
                 SqlCommand sqlCommand = new SqlCommand("DELETE FROM Yetki WHERE Rol = @P1 ", baglanti);
                 sqlCommand.Parameters.AddWithValue("@P1", textBoxsilinecekRol.Text);
                 sqlCommand.ExecuteNonQuery();
+                MessageBox.Show("--------- Başarıyla silindi ---------");
             }
             catch (Exception ex)
             {
@@ -152,6 +154,7 @@ namespace DershaneYonetimSistemi
             }
             rolleriGoster();
         }
+
         private void kullaniciEkle()
         {
             try
@@ -164,6 +167,7 @@ namespace DershaneYonetimSistemi
                 sqlCommand.Parameters.AddWithValue("@P2", textBoxSifre.Text);
                 sqlCommand.Parameters.AddWithValue("@P3", comboBoxKullaniciRolleri.SelectedItem.ToString());
                 sqlCommand.ExecuteNonQuery();
+                MessageBox.Show("--------- Başarıyla eklendi ---------");
             }
             catch (Exception ex)
             {
@@ -186,6 +190,7 @@ namespace DershaneYonetimSistemi
                 sqlCommand.Parameters.AddWithValue("@P3", comboBoxKullaniciRolleri.SelectedItem.ToString());
                 sqlCommand.Parameters.AddWithValue("@P4", textBoxTemporaryYoneticiID.Text);
                 sqlCommand.ExecuteNonQuery();
+                MessageBox.Show("--------- Başarıyla güncellendi ---------");
             }
             catch (Exception ex)
             {
@@ -206,6 +211,7 @@ namespace DershaneYonetimSistemi
                 SqlCommand sqlCommand = new SqlCommand("DELETE FROM DershaneSistemiYonetici WHERE YoneticiID = @P1 ", baglanti);
                 sqlCommand.Parameters.AddWithValue("@P1", textBoxSilinecekKullanici.Text);
                 sqlCommand.ExecuteNonQuery();
+                MessageBox.Show("--------- Başarıyla silindi ---------");
             }
             catch (Exception ex)
             {

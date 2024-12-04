@@ -117,15 +117,15 @@ namespace DershaneYonetimSistemi
                 if (yetkiler != null)
                 {
                     // Ana menü formuna yetkileri gönder
-                    formAnamenu = new FormAnaMenu(rol,yetkiler);
+                    formAnamenu = new FormAnaMenu(rol, yetkiler);
                     formAnamenu.Show();
-                    
+
                 }
                 else
                 {
                     MessageBox.Show("Yetkiler alýnamadý!");
                 }
-                
+
 
             }
             else

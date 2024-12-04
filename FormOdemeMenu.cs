@@ -134,6 +134,7 @@ namespace DershaneYonetimSistemi
                     sqlCommand.Parameters.AddWithValue("@P3", numericUpDownOdemeMiktari.Value);
                     sqlCommand.Parameters.AddWithValue("@P4", comboBoxOdemeTuru.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla eklendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -142,7 +143,7 @@ namespace DershaneYonetimSistemi
                 finally
                 {
                     baglanti.Close();
-                }                
+                }
                 odemeIDYukle();
             }
             else
@@ -165,6 +166,7 @@ namespace DershaneYonetimSistemi
                     sqlCommand.Parameters.AddWithValue("@P4", comboBoxOdemeTuru.SelectedItem.ToString());
                     sqlCommand.Parameters.AddWithValue("@P5", comboBoxTemporaryPaymentD.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla güncellendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -173,7 +175,7 @@ namespace DershaneYonetimSistemi
                 finally
                 {
                     baglanti.Close();
-                }                
+                }
                 odemeIDYukle();
             }
             else
@@ -192,6 +194,7 @@ namespace DershaneYonetimSistemi
                     SqlCommand sqlCommand = new SqlCommand("DELETE FROM Odemeler WHERE PaymentID = @P1", baglanti);
                     sqlCommand.Parameters.AddWithValue("@P1", comboBoxSilinecekOdemeID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla silindi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -200,7 +203,7 @@ namespace DershaneYonetimSistemi
                 finally
                 {
                     baglanti.Close();
-                }                
+                }
                 odemeIDYukle();
             }
             else

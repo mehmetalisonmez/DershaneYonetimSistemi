@@ -37,6 +37,8 @@
             groupBox3 = new GroupBox();
             dataGridViewSinavlar = new DataGridView();
             groupBox2 = new GroupBox();
+            comboBoxCourseID2 = new ComboBox();
+            label1 = new Label();
             labelOgrenciID = new Label();
             label2 = new Label();
             textBoxAlinanPuan = new TextBox();
@@ -71,8 +73,7 @@
             buttonVeriAlSinav = new Button();
             buttonSaveExcelSinavSonuc = new Button();
             buttonVeriAlSinavSonuc = new Button();
-            comboBoxCourseID2 = new ComboBox();
-            label1 = new Label();
+            treeView1 = new TreeView();
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSinavSonuclari).BeginInit();
             groupBox3.SuspendLayout();
@@ -83,19 +84,20 @@
             // 
             // buttonSinavSonucSil
             // 
-            buttonSinavSonucSil.Location = new Point(1196, 352);
+            buttonSinavSonucSil.BackColor = Color.SteelBlue;
+            buttonSinavSonucSil.Location = new Point(1196, 361);
             buttonSinavSonucSil.Name = "buttonSinavSonucSil";
             buttonSinavSonucSil.Size = new Size(87, 38);
             buttonSinavSonucSil.TabIndex = 29;
             buttonSinavSonucSil.Text = "Sınav sonucunu sil";
-            buttonSinavSonucSil.UseVisualStyleBackColor = true;
+            buttonSinavSonucSil.UseVisualStyleBackColor = false;
             buttonSinavSonucSil.Click += buttonSinavSonucSil_Click;
             // 
             // labelSilinecekSinavSonucID
             // 
             labelSilinecekSinavSonucID.AutoSize = true;
             labelSilinecekSinavSonucID.Font = new Font("Century", 9F);
-            labelSilinecekSinavSonucID.Location = new Point(798, 363);
+            labelSilinecekSinavSonucID.Location = new Point(798, 372);
             labelSilinecekSinavSonucID.Name = "labelSilinecekSinavSonucID";
             labelSilinecekSinavSonucID.Size = new Size(264, 16);
             labelSilinecekSinavSonucID.TabIndex = 27;
@@ -103,12 +105,13 @@
             // 
             // buttonSinavSil
             // 
-            buttonSinavSil.Location = new Point(432, 361);
+            buttonSinavSil.BackColor = Color.SteelBlue;
+            buttonSinavSil.Location = new Point(427, 364);
             buttonSinavSil.Name = "buttonSinavSil";
             buttonSinavSil.Size = new Size(87, 38);
             buttonSinavSil.TabIndex = 26;
             buttonSinavSil.Text = "Sınavı Sil";
-            buttonSinavSil.UseVisualStyleBackColor = true;
+            buttonSinavSil.UseVisualStyleBackColor = false;
             buttonSinavSil.Click += buttonSinavSil_Click;
             // 
             // labelSilinecekSinavID
@@ -135,6 +138,7 @@
             // 
             dataGridViewSinavSonuclari.AllowUserToAddRows = false;
             dataGridViewSinavSonuclari.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewSinavSonuclari.BackgroundColor = SystemColors.GradientInactiveCaption;
             dataGridViewSinavSonuclari.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewSinavSonuclari.Dock = DockStyle.Fill;
             dataGridViewSinavSonuclari.Location = new Point(3, 19);
@@ -157,6 +161,7 @@
             // 
             dataGridViewSinavlar.AllowUserToAddRows = false;
             dataGridViewSinavlar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewSinavlar.BackgroundColor = SystemColors.GradientInactiveCaption;
             dataGridViewSinavlar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewSinavlar.Dock = DockStyle.Fill;
             dataGridViewSinavlar.Location = new Point(3, 19);
@@ -186,6 +191,24 @@
             groupBox2.TabIndex = 21;
             groupBox2.TabStop = false;
             groupBox2.Text = "Sınav Sonuç İşlemleri";
+            // 
+            // comboBoxCourseID2
+            // 
+            comboBoxCourseID2.FormattingEnabled = true;
+            comboBoxCourseID2.Location = new Point(110, 214);
+            comboBoxCourseID2.Name = "comboBoxCourseID2";
+            comboBoxCourseID2.Size = new Size(121, 23);
+            comboBoxCourseID2.TabIndex = 35;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century", 9F);
+            label1.Location = new Point(17, 216);
+            label1.Name = "label1";
+            label1.Size = new Size(68, 16);
+            label1.TabIndex = 34;
+            label1.Text = "Course ID :";
             // 
             // labelOgrenciID
             // 
@@ -249,22 +272,24 @@
             // 
             // buttonSinavSonucGuncelle
             // 
+            buttonSinavSonucGuncelle.BackColor = Color.Lavender;
             buttonSinavSonucGuncelle.Location = new Point(235, 245);
             buttonSinavSonucGuncelle.Name = "buttonSinavSonucGuncelle";
             buttonSinavSonucGuncelle.Size = new Size(87, 38);
             buttonSinavSonucGuncelle.TabIndex = 17;
             buttonSinavSonucGuncelle.Text = "Sınav Sonuç Güncelle";
-            buttonSinavSonucGuncelle.UseVisualStyleBackColor = true;
+            buttonSinavSonucGuncelle.UseVisualStyleBackColor = false;
             buttonSinavSonucGuncelle.Click += buttonSinavSonucGuncelle_Click;
             // 
             // buttonSinavSonucEkle
             // 
+            buttonSinavSonucEkle.BackColor = Color.Lavender;
             buttonSinavSonucEkle.Location = new Point(347, 245);
             buttonSinavSonucEkle.Name = "buttonSinavSonucEkle";
             buttonSinavSonucEkle.Size = new Size(87, 38);
             buttonSinavSonucEkle.TabIndex = 16;
             buttonSinavSonucEkle.Text = "Sınav Sonuç Ekle";
-            buttonSinavSonucEkle.UseVisualStyleBackColor = true;
+            buttonSinavSonucEkle.UseVisualStyleBackColor = false;
             buttonSinavSonucEkle.Click += buttonSinavSonucEkle_Click;
             // 
             // labelExamID
@@ -338,12 +363,13 @@
             // 
             // buttonSinavGuncelle
             // 
+            buttonSinavGuncelle.BackColor = Color.Lavender;
             buttonSinavGuncelle.Location = new Point(179, 219);
             buttonSinavGuncelle.Name = "buttonSinavGuncelle";
             buttonSinavGuncelle.Size = new Size(90, 38);
             buttonSinavGuncelle.TabIndex = 20;
             buttonSinavGuncelle.Text = "Sınav Güncelle";
-            buttonSinavGuncelle.UseVisualStyleBackColor = true;
+            buttonSinavGuncelle.UseVisualStyleBackColor = false;
             buttonSinavGuncelle.Click += buttonSinavGuncelle_Click;
             // 
             // labelTemporarySinavID
@@ -357,12 +383,13 @@
             // 
             // buttonSinavEkle
             // 
+            buttonSinavEkle.BackColor = Color.Lavender;
             buttonSinavEkle.Location = new Point(306, 219);
             buttonSinavEkle.Name = "buttonSinavEkle";
             buttonSinavEkle.Size = new Size(87, 38);
             buttonSinavEkle.TabIndex = 15;
             buttonSinavEkle.Text = "Yeni Sınav Ekle";
-            buttonSinavEkle.UseVisualStyleBackColor = true;
+            buttonSinavEkle.UseVisualStyleBackColor = false;
             buttonSinavEkle.Click += buttonSinavEkle_Click;
             // 
             // labelSinavIsmi
@@ -397,22 +424,24 @@
             // 
             // buttonSinavlariGoruntule
             // 
+            buttonSinavlariGoruntule.BackColor = Color.Lavender;
             buttonSinavlariGoruntule.Location = new Point(38, 720);
             buttonSinavlariGoruntule.Name = "buttonSinavlariGoruntule";
             buttonSinavlariGoruntule.Size = new Size(108, 38);
             buttonSinavlariGoruntule.TabIndex = 30;
             buttonSinavlariGoruntule.Text = "Sınavları Görüntüle";
-            buttonSinavlariGoruntule.UseVisualStyleBackColor = true;
+            buttonSinavlariGoruntule.UseVisualStyleBackColor = false;
             buttonSinavlariGoruntule.Click += buttonSinavlariGoruntule_Click;
             // 
             // buttonSinavSonucGoruntule
             // 
+            buttonSinavSonucGoruntule.BackColor = Color.Lavender;
             buttonSinavSonucGoruntule.Location = new Point(763, 716);
             buttonSinavSonucGoruntule.Name = "buttonSinavSonucGoruntule";
             buttonSinavSonucGoruntule.Size = new Size(115, 42);
             buttonSinavSonucGoruntule.TabIndex = 31;
             buttonSinavSonucGoruntule.Text = "Sınav Sonuçlarını Görüntüle";
-            buttonSinavSonucGoruntule.UseVisualStyleBackColor = true;
+            buttonSinavSonucGoruntule.UseVisualStyleBackColor = false;
             buttonSinavSonucGoruntule.Click += buttonSinavSonucGoruntule_Click;
             // 
             // labelSinavCRUD
@@ -435,7 +464,7 @@
             // comboBoxSilinecekSinavSonucID
             // 
             comboBoxSilinecekSinavSonucID.FormattingEnabled = true;
-            comboBoxSilinecekSinavSonucID.Location = new Point(1066, 361);
+            comboBoxSilinecekSinavSonucID.Location = new Point(1066, 370);
             comboBoxSilinecekSinavSonucID.Name = "comboBoxSilinecekSinavSonucID";
             comboBoxSilinecekSinavSonucID.Size = new Size(121, 23);
             comboBoxSilinecekSinavSonucID.TabIndex = 94;
@@ -451,87 +480,85 @@
             // 
             // buttonSaveAsWordExamResults
             // 
+            buttonSaveAsWordExamResults.BackColor = Color.Lavender;
             buttonSaveAsWordExamResults.Location = new Point(895, 716);
             buttonSaveAsWordExamResults.Name = "buttonSaveAsWordExamResults";
             buttonSaveAsWordExamResults.Size = new Size(114, 42);
             buttonSaveAsWordExamResults.TabIndex = 96;
             buttonSaveAsWordExamResults.Text = "Word dosyası olarak kaydet";
-            buttonSaveAsWordExamResults.UseVisualStyleBackColor = true;
+            buttonSaveAsWordExamResults.UseVisualStyleBackColor = false;
             buttonSaveAsWordExamResults.Click += buttonSaveAsWordExamResults_Click;
             // 
             // buttonSaveAsWordExams
             // 
+            buttonSaveAsWordExams.BackColor = Color.Lavender;
             buttonSaveAsWordExams.Location = new Point(179, 720);
             buttonSaveAsWordExams.Name = "buttonSaveAsWordExams";
             buttonSaveAsWordExams.Size = new Size(113, 38);
             buttonSaveAsWordExams.TabIndex = 97;
             buttonSaveAsWordExams.Text = "Word dosyası olarak kaydet";
-            buttonSaveAsWordExams.UseVisualStyleBackColor = true;
+            buttonSaveAsWordExams.UseVisualStyleBackColor = false;
             buttonSaveAsWordExams.Click += buttonSaveAsWordExams_Click;
             // 
             // buttonSaveExcelSinav
             // 
+            buttonSaveExcelSinav.BackColor = Color.Lavender;
             buttonSaveExcelSinav.Location = new Point(471, 720);
             buttonSaveExcelSinav.Name = "buttonSaveExcelSinav";
             buttonSaveExcelSinav.Size = new Size(113, 38);
             buttonSaveExcelSinav.TabIndex = 113;
             buttonSaveExcelSinav.Text = "Excel dosyası olarak kaydet";
-            buttonSaveExcelSinav.UseVisualStyleBackColor = true;
+            buttonSaveExcelSinav.UseVisualStyleBackColor = false;
             buttonSaveExcelSinav.Click += buttonSaveExcelSinav_Click;
             // 
             // buttonVeriAlSinav
             // 
+            buttonVeriAlSinav.BackColor = Color.Lavender;
             buttonVeriAlSinav.Location = new Point(322, 720);
             buttonVeriAlSinav.Name = "buttonVeriAlSinav";
             buttonVeriAlSinav.Size = new Size(113, 38);
             buttonVeriAlSinav.TabIndex = 112;
             buttonVeriAlSinav.Text = "Veri Al";
-            buttonVeriAlSinav.UseVisualStyleBackColor = true;
+            buttonVeriAlSinav.UseVisualStyleBackColor = false;
             buttonVeriAlSinav.Click += buttonVeriAlSinav_Click;
             // 
             // buttonSaveExcelSinavSonuc
             // 
+            buttonSaveExcelSinavSonuc.BackColor = Color.Lavender;
             buttonSaveExcelSinavSonuc.Location = new Point(1189, 718);
             buttonSaveExcelSinavSonuc.Name = "buttonSaveExcelSinavSonuc";
             buttonSaveExcelSinavSonuc.Size = new Size(113, 38);
             buttonSaveExcelSinavSonuc.TabIndex = 115;
             buttonSaveExcelSinavSonuc.Text = "Excel dosyası olarak kaydet";
-            buttonSaveExcelSinavSonuc.UseVisualStyleBackColor = true;
+            buttonSaveExcelSinavSonuc.UseVisualStyleBackColor = false;
             buttonSaveExcelSinavSonuc.Click += buttonSaveExcelSinavSonuc_Click;
             // 
             // buttonVeriAlSinavSonuc
             // 
+            buttonVeriAlSinavSonuc.BackColor = Color.Lavender;
             buttonVeriAlSinavSonuc.Location = new Point(1040, 718);
             buttonVeriAlSinavSonuc.Name = "buttonVeriAlSinavSonuc";
             buttonVeriAlSinavSonuc.Size = new Size(113, 38);
             buttonVeriAlSinavSonuc.TabIndex = 114;
             buttonVeriAlSinavSonuc.Text = "Veri Al";
-            buttonVeriAlSinavSonuc.UseVisualStyleBackColor = true;
+            buttonVeriAlSinavSonuc.UseVisualStyleBackColor = false;
             buttonVeriAlSinavSonuc.Click += buttonVeriAlSinavSonuc_Click;
             // 
-            // comboBoxCourseID2
+            // treeView1
             // 
-            comboBoxCourseID2.FormattingEnabled = true;
-            comboBoxCourseID2.Location = new Point(110, 214);
-            comboBoxCourseID2.Name = "comboBoxCourseID2";
-            comboBoxCourseID2.Size = new Size(121, 23);
-            comboBoxCourseID2.TabIndex = 35;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Century", 9F);
-            label1.Location = new Point(17, 216);
-            label1.Name = "label1";
-            label1.Size = new Size(68, 16);
-            label1.TabIndex = 34;
-            label1.Text = "Course ID :";
+            treeView1.BackColor = Color.Thistle;
+            treeView1.Location = new Point(706, 0);
+            treeView1.Name = "treeView1";
+            treeView1.Size = new Size(10, 783);
+            treeView1.TabIndex = 116;
             // 
             // FormExamMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ButtonShadow;
             ClientSize = new Size(1356, 766);
+            Controls.Add(treeView1);
             Controls.Add(buttonSaveExcelSinavSonuc);
             Controls.Add(buttonVeriAlSinavSonuc);
             Controls.Add(buttonSaveExcelSinav);
@@ -621,5 +648,6 @@
         private Button buttonVeriAlSinavSonuc;
         private ComboBox comboBoxCourseID2;
         private Label label1;
+        private TreeView treeView1;
     }
 }

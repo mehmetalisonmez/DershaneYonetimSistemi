@@ -21,7 +21,7 @@ namespace DershaneYonetimSistemi
         FormYetkilendirmeMenu formYetkilendirmeMenu;
         FormTchANDLessonMenu formTchANDLessonMenu;
         FormOdemeMenu formOdemeMenu;
-        FormSinifMenu formSinifMenu;
+        FormRaporMenu formRaporMenu;
         private string kullaniciRol;
         private KullaniciYetkileri kullaniciYetkileri;
         public FormAnaMenu(string rol, KullaniciYetkileri yetkiler)
@@ -121,7 +121,11 @@ namespace DershaneYonetimSistemi
             formOdemeMenu = new FormOdemeMenu(kullaniciYetkileri);
             formOdemeMenu.Show();
         }
-
+        private void buttonRaporMenu_Click(object sender, EventArgs e)
+        {
+            formRaporMenu = new FormRaporMenu(kullaniciYetkileri);
+            formRaporMenu.Show();
+        }
         private void FormAnaMenu_Load(object sender, EventArgs e)
         {
 
@@ -137,10 +141,6 @@ namespace DershaneYonetimSistemi
             YedektenDon();
         }
 
-        private void buttonSinifİslemleri_Click(object sender, EventArgs e)
-        {
-            formSinifMenu = new FormSinifMenu(kullaniciYetkileri);
-            formSinifMenu.Show();
-        }
+
     }
 }

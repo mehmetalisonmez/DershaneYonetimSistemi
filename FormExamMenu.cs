@@ -24,7 +24,7 @@ namespace DershaneYonetimSistemi
             InitializeComponent();
             kullaniciYetkileri = yetkiler;
         }
-      
+
         private void courseIDYukle()
         {
             try
@@ -227,8 +227,8 @@ namespace DershaneYonetimSistemi
                     sqlCommand.Parameters.AddWithValue("@P1", comboBoxCourseID.SelectedItem.ToString());
                     sqlCommand.Parameters.AddWithValue("@P2", textBoxSinavIsmi.Text);
                     sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerSinavTarihi.Value);
-
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla eklendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -257,8 +257,8 @@ namespace DershaneYonetimSistemi
                     sqlCommand.Parameters.AddWithValue("@P2", textBoxSinavIsmi.Text);
                     sqlCommand.Parameters.AddWithValue("@P3", dateTimePickerSinavTarihi.Value);
                     sqlCommand.Parameters.AddWithValue("@P4", comboBoxTemporarySinavID.SelectedItem.ToString());
-
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla güncellendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -286,6 +286,7 @@ namespace DershaneYonetimSistemi
                     SqlCommand sqlCommand = new SqlCommand("DELETE FROM Sinav WHERE ExamID = @P1", baglanti);
                     sqlCommand.Parameters.AddWithValue("@P1", comboBoxSilinecekSinavID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla silindi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -316,8 +317,8 @@ namespace DershaneYonetimSistemi
                     sqlCommand.Parameters.AddWithValue("@P2", comboBoxStudentID.SelectedItem.ToString());
                     sqlCommand.Parameters.AddWithValue("@P3", textBoxAlinanPuan.Text);
                     sqlCommand.Parameters.AddWithValue("@P4", comboBoxCourseID2.SelectedItem.ToString());
-
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla eklendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -348,8 +349,8 @@ namespace DershaneYonetimSistemi
                     sqlCommand.Parameters.AddWithValue("@P3", textBoxAlinanPuan.Text);
                     sqlCommand.Parameters.AddWithValue("@P4", comboBoxCourseID2.SelectedItem.ToString());
                     sqlCommand.Parameters.AddWithValue("@P5", comboBoxTemporarySinavSonucID.SelectedItem.ToString());
-
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla güncellendi ---------");
                 }
                 catch (Exception ex)
                 {
@@ -376,6 +377,7 @@ namespace DershaneYonetimSistemi
                     SqlCommand sqlCommand = new SqlCommand("DELETE FROM SinavSonuc WHERE ResultID = @P1", baglanti);
                     sqlCommand.Parameters.AddWithValue("@P1", comboBoxSilinecekSinavSonucID.SelectedItem.ToString());
                     sqlCommand.ExecuteNonQuery();
+                    MessageBox.Show("--------- Başarıyla silindi ---------");
                 }
                 catch (Exception ex)
                 {

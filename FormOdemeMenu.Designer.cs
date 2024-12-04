@@ -60,19 +60,20 @@
             // comboBoxSilinecekOdemeID
             // 
             comboBoxSilinecekOdemeID.FormattingEnabled = true;
-            comboBoxSilinecekOdemeID.Location = new Point(196, 389);
+            comboBoxSilinecekOdemeID.Location = new Point(196, 397);
             comboBoxSilinecekOdemeID.Name = "comboBoxSilinecekOdemeID";
             comboBoxSilinecekOdemeID.Size = new Size(121, 23);
             comboBoxSilinecekOdemeID.TabIndex = 103;
             // 
             // buttonOdemeSil
             // 
-            buttonOdemeSil.Location = new Point(336, 380);
+            buttonOdemeSil.BackColor = Color.SteelBlue;
+            buttonOdemeSil.Location = new Point(336, 388);
             buttonOdemeSil.Name = "buttonOdemeSil";
             buttonOdemeSil.Size = new Size(87, 38);
             buttonOdemeSil.TabIndex = 102;
             buttonOdemeSil.Text = "Ödeme Sil";
-            buttonOdemeSil.UseVisualStyleBackColor = true;
+            buttonOdemeSil.UseVisualStyleBackColor = false;
             buttonOdemeSil.Click += buttonOdemeSil_Click;
             // 
             // labelOdemeCRUD
@@ -87,7 +88,7 @@
             // label3
             // 
             label3.Font = new Font("Century", 9F);
-            label3.Location = new Point(19, 380);
+            label3.Location = new Point(19, 388);
             label3.Name = "label3";
             label3.Size = new Size(161, 36);
             label3.TabIndex = 101;
@@ -123,22 +124,24 @@
             // 
             // buttonOdemeEkle
             // 
+            buttonOdemeEkle.BackColor = Color.Lavender;
             buttonOdemeEkle.Location = new Point(305, 266);
             buttonOdemeEkle.Name = "buttonOdemeEkle";
             buttonOdemeEkle.Size = new Size(99, 38);
             buttonOdemeEkle.TabIndex = 97;
             buttonOdemeEkle.Text = "Yeni Ödeme Ekle";
-            buttonOdemeEkle.UseVisualStyleBackColor = true;
+            buttonOdemeEkle.UseVisualStyleBackColor = false;
             buttonOdemeEkle.Click += buttonOdemeEkle_Click;
             // 
             // buttonOdemeGuncelle
             // 
+            buttonOdemeGuncelle.BackColor = Color.Lavender;
             buttonOdemeGuncelle.Location = new Point(186, 266);
             buttonOdemeGuncelle.Name = "buttonOdemeGuncelle";
             buttonOdemeGuncelle.Size = new Size(99, 38);
             buttonOdemeGuncelle.TabIndex = 98;
             buttonOdemeGuncelle.Text = "Ödeme Güncelle";
-            buttonOdemeGuncelle.UseVisualStyleBackColor = true;
+            buttonOdemeGuncelle.UseVisualStyleBackColor = false;
             buttonOdemeGuncelle.Click += buttonOdemeGuncelle_Click;
             // 
             // dateTimePickerOdemeTarihi
@@ -224,12 +227,13 @@
             // 
             // buttonOdemeleriGoruntule
             // 
+            buttonOdemeleriGoruntule.BackColor = Color.Lavender;
             buttonOdemeleriGoruntule.Location = new Point(483, 321);
             buttonOdemeleriGoruntule.Name = "buttonOdemeleriGoruntule";
             buttonOdemeleriGoruntule.Size = new Size(113, 38);
             buttonOdemeleriGoruntule.TabIndex = 99;
             buttonOdemeleriGoruntule.Text = "Ödemeleri Görüntüle";
-            buttonOdemeleriGoruntule.UseVisualStyleBackColor = true;
+            buttonOdemeleriGoruntule.UseVisualStyleBackColor = false;
             buttonOdemeleriGoruntule.Click += buttonOdemeleriGoruntule_Click;
             // 
             // groupBox4
@@ -246,6 +250,7 @@
             // 
             dataGridViewOdemeler.AllowUserToAddRows = false;
             dataGridViewOdemeler.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewOdemeler.BackgroundColor = SystemColors.GradientInactiveCaption;
             dataGridViewOdemeler.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewOdemeler.Dock = DockStyle.Fill;
             dataGridViewOdemeler.Location = new Point(3, 19);
@@ -256,38 +261,42 @@
             // 
             // buttonSaveWord
             // 
+            buttonSaveWord.BackColor = Color.Lavender;
             buttonSaveWord.Location = new Point(621, 321);
             buttonSaveWord.Name = "buttonSaveWord";
             buttonSaveWord.Size = new Size(113, 38);
             buttonSaveWord.TabIndex = 104;
             buttonSaveWord.Text = "Word dosyası olarak kaydet";
-            buttonSaveWord.UseVisualStyleBackColor = true;
+            buttonSaveWord.UseVisualStyleBackColor = false;
             buttonSaveWord.Click += buttonSavePdf_Click;
             // 
             // buttonVeriAl
             // 
+            buttonVeriAl.BackColor = Color.Lavender;
             buttonVeriAl.Location = new Point(756, 321);
             buttonVeriAl.Name = "buttonVeriAl";
             buttonVeriAl.Size = new Size(113, 38);
             buttonVeriAl.TabIndex = 105;
             buttonVeriAl.Text = "Veri al";
-            buttonVeriAl.UseVisualStyleBackColor = true;
+            buttonVeriAl.UseVisualStyleBackColor = false;
             buttonVeriAl.Click += buttonVeriAl_Click;
             // 
             // buttonSaveExcelOdemeler
             // 
+            buttonSaveExcelOdemeler.BackColor = Color.Lavender;
             buttonSaveExcelOdemeler.Location = new Point(884, 321);
             buttonSaveExcelOdemeler.Name = "buttonSaveExcelOdemeler";
             buttonSaveExcelOdemeler.Size = new Size(113, 38);
             buttonSaveExcelOdemeler.TabIndex = 106;
             buttonSaveExcelOdemeler.Text = "Excel dosyası olarak kaydet";
-            buttonSaveExcelOdemeler.UseVisualStyleBackColor = true;
+            buttonSaveExcelOdemeler.UseVisualStyleBackColor = false;
             buttonSaveExcelOdemeler.Click += buttonSaveExcelOdemeler_Click;
             // 
             // FormOdemeMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ButtonShadow;
             ClientSize = new Size(1000, 568);
             Controls.Add(buttonSaveExcelOdemeler);
             Controls.Add(buttonVeriAl);
