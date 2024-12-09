@@ -40,7 +40,11 @@
             buttonRaporMenu = new Button();
             label2 = new Label();
             groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            buttonDbFullDon = new Button();
+            buttonDbSil = new Button();
             groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // buttonStdDersTch
@@ -92,7 +96,7 @@
             // buttonQuit
             // 
             buttonQuit.BackColor = Color.LemonChiffon;
-            buttonQuit.Location = new Point(401, 379);
+            buttonQuit.Location = new Point(498, 339);
             buttonQuit.Name = "buttonQuit";
             buttonQuit.Size = new Size(122, 40);
             buttonQuit.TabIndex = 10;
@@ -180,12 +184,46 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Yedekleme İşlemleri";
             // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(buttonDbFullDon);
+            groupBox2.Controls.Add(buttonDbSil);
+            groupBox2.Location = new Point(352, 402);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(261, 100);
+            groupBox2.TabIndex = 21;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Silme İşlemleri";
+            // 
+            // buttonDbFullDon
+            // 
+            buttonDbFullDon.BackColor = SystemColors.InactiveCaption;
+            buttonDbFullDon.Location = new Point(136, 30);
+            buttonDbFullDon.Name = "buttonDbFullDon";
+            buttonDbFullDon.Size = new Size(107, 53);
+            buttonDbFullDon.TabIndex = 16;
+            buttonDbFullDon.Text = "Veritabanı full dön";
+            buttonDbFullDon.UseVisualStyleBackColor = false;
+            buttonDbFullDon.Click += buttonDbFullDon_Click;
+            // 
+            // buttonDbSil
+            // 
+            buttonDbSil.BackColor = SystemColors.InactiveCaption;
+            buttonDbSil.Location = new Point(6, 30);
+            buttonDbSil.Name = "buttonDbSil";
+            buttonDbSil.Size = new Size(110, 53);
+            buttonDbSil.TabIndex = 17;
+            buttonDbSil.Text = "Veritabanı sil";
+            buttonDbSil.UseVisualStyleBackColor = false;
+            buttonDbSil.Click += buttonDbSil_Click;
+            // 
             // FormAnaMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonShadow;
             ClientSize = new Size(794, 514);
+            Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(label2);
             Controls.Add(buttonRaporMenu);
@@ -204,6 +242,7 @@
             Text = "Dershane Yönetim Sistemi";
             Load += FormAnaMenu_Load;
             groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -223,5 +262,8 @@
         private Button buttonRaporMenu;
         private Label label2;
         private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private Button buttonDbFullDon;
+        private Button buttonDbSil;
     }
 }

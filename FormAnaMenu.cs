@@ -35,25 +35,31 @@ namespace DershaneYonetimSistemi
 
         private void Yedekle()
         {
+
             string connectionString = "Data Source=DESKTOP-T90QPC7\\SQLEXPRESS;Initial Catalog=DERSHANE;Integrated Security=True;TrustServerCertificate=True";
             string sql = "BACKUP DATABASE [DERSHANE] TO DISK = 'C:\\DershaneVeritabaniYedekler\\DershaneYedek.bak' WITH INIT;";
-
-            try
+            if (kullaniciRol == "Admin")
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                try
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Veritabanı başarıyla yedeklendi!");
-                    connection.Close();
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Veritabanı başarıyla yedeklendi!");
+                        connection.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Yedekleme sırasında hata: " + ex.Message);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Yedekleme sırasında hata: " + ex.Message);
+                MessageBox.Show("Bu işlem için yetkiniz yoktur. Yöneticinizle iletişime geçiniz!");
             }
-
         }
         private void YedektenDon()
         {
@@ -61,22 +67,95 @@ namespace DershaneYonetimSistemi
             string sql = @" ALTER DATABASE [DERSHANE] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
                             RESTORE DATABASE [DERSHANE] FROM DISK = 'C:\\DershaneVeritabaniYedekler\\DershaneYedek.bak' WITH REPLACE;
                             ALTER DATABASE [DERSHANE] SET MULTI_USER;";
-
-            try
+            if (kullaniciRol == "Admin")
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                try
                 {
-                    connection.Open();
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Veritabanı başarıyla geri yüklendi!");
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Veritabanı başarıyla geri yüklendi!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Geri yükleme sırasında hata: " + ex.Message);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Geri yükleme sırasında hata: " + ex.Message);
+                MessageBox.Show("Bu işlem için yetkiniz yoktur. Yöneticinizle iletişime geçiniz!");
             }
         }
+
+        private void VeritabaniSil()
+        {
+            string connectionString = "Data Source=DESKTOP-T90QPC7\\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;TrustServerCertificate=True";
+            string sql = @"IF EXISTS(SELECT * FROM sys.databases WHERE name = 'DERSHANE')
+                   BEGIN
+                       ALTER DATABASE [DERSHANE] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+                       DROP DATABASE [DERSHANE];
+                   END";
+
+
+            if (kullaniciRol == "Admin")
+            {
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Veritabanı başarıyla silindi!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Veritabanını silme sırasında hata: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Bu işlem için yetkiniz yoktur. Yöneticinizle iletişime geçiniz!");
+            }
+        }
+
+        private void YedektenYeniVeritabaniOlustur()
+        {
+            string connectionString = "Data Source=DESKTOP-T90QPC7\\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;TrustServerCertificate=True";
+            string sql = @"RESTORE DATABASE [DERSHANE] 
+                   FROM DISK = 'C:\\DershaneVeritabaniYedekler\\DershaneYedek.bak' 
+                   WITH MOVE 'DERSHANE' TO 'C:\\DershaneVeritabaniYedekler\\DERSHANE.mdf',
+                        MOVE 'DERSHANE_log' TO 'C:\\DershaneVeritabaniYedekler\\DERSHANE_log.ldf',
+                        REPLACE;";
+            if (kullaniciRol == "Admin")
+            {
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Yedekten yeni veritabanı başarıyla oluşturuldu!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Yedekten yeni veritabanı oluşturma sırasında hata: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Bu işlem için yetkiniz yoktur. Yöneticinizle iletişime geçiniz!");
+            }
+
+        }
+
+
 
         private void buttonQuit_Click(object sender, EventArgs e)
         {
@@ -141,6 +220,14 @@ namespace DershaneYonetimSistemi
             YedektenDon();
         }
 
+        private void buttonDbSil_Click(object sender, EventArgs e)
+        {
+            VeritabaniSil();
+        }
 
+        private void buttonDbFullDon_Click(object sender, EventArgs e)
+        {
+            YedektenYeniVeritabaniOlustur();
+        }
     }
 }
