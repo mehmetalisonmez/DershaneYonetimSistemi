@@ -35,6 +35,7 @@
             label1 = new Label();
             label2 = new Label();
             pictureBox1 = new PictureBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -98,12 +99,25 @@
             pictureBox1.TabIndex = 6;
             pictureBox1.TabStop = false;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Teal;
+            button1.Font = new Font("Yu Gothic", 11.25F, FontStyle.Bold | FontStyle.Underline, GraphicsUnit.Point, 162);
+            button1.Location = new Point(161, 404);
+            button1.Name = "button1";
+            button1.Size = new Size(160, 62);
+            button1.TabIndex = 7;
+            button1.Text = "Yedekten Full Dön";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
             // FormGiris
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonShadow;
             ClientSize = new Size(794, 487);
+            Controls.Add(button1);
             Controls.Add(pictureBox1);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -125,5 +139,6 @@
         private Label label1;
         private Label label2;
         private PictureBox pictureBox1;
+        private Button button1;
     }
 }

@@ -94,6 +94,33 @@ namespace DershaneYonetimSistemi
             }
         }
 
+
+        private void YedektenYeniVeritabaniOlustur()
+        {
+            string connectionString = "Data Source=DESKTOP-T90QPC7\\SQLEXPRESS;Initial Catalog=master;Integrated Security=True;TrustServerCertificate=True";
+            string sql = @"RESTORE DATABASE [DERSHANE] 
+                   FROM DISK = 'C:\\DershaneVeritabaniYedekler\\DershaneYedek.bak' 
+                   WITH MOVE 'DERSHANE' TO 'C:\\DershaneVeritabaniYedekler\\DERSHANE.mdf',
+                        MOVE 'DERSHANE_log' TO 'C:\\DershaneVeritabaniYedekler\\DERSHANE_log.ldf',
+                        REPLACE;";
+            
+                try
+                {
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Yedekten yeni veritabaný baþarýyla oluþturuldu!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Yedekten yeni veritabaný oluþturma sýrasýnda hata: " + ex.Message);
+                }
+           
+
+        }
         private void buttonGiris_Click(object sender, EventArgs e)
         {
 
@@ -133,8 +160,13 @@ namespace DershaneYonetimSistemi
                 MessageBox.Show("Kullanýcý adý veya Þifre hatalý");
             }
 
+        }
 
 
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            YedektenYeniVeritabaniOlustur();
         }
 
         //UseSystemPasswordChar = True  yaparsak ilgili textBox üzerine girilen string þifreli gözükür.
