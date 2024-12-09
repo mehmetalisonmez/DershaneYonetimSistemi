@@ -187,7 +187,8 @@ namespace DershaneYonetimSistemi
             }
             else
             {
-                MessageBox.Show("Öğrencileri görüntüleme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
+                MessageBox.Show("Öğrencileri görüntüleme yetkiniz yok. " +
+                    "Lütfen yöneticinizle iletişime geçiniz ! ");
             }
         }
         private void ogrenciDersleriGoster()
@@ -327,7 +328,6 @@ namespace DershaneYonetimSistemi
                 MessageBox.Show("Öğrenci silme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
         }
-
         private void ogrenciDersEkle()
         {
             if (kullaniciYetkileri.CanInsert)
@@ -414,7 +414,6 @@ namespace DershaneYonetimSistemi
                 MessageBox.Show("Öğrenci ders silme yetkiniz yok. Lütfen yöneticinizle iletişime geçiniz ! ");
             }
         }
-
         private void devamsizlikEkle()
         {
             if (kullaniciYetkileri.CanInsert)
@@ -755,6 +754,7 @@ namespace DershaneYonetimSistemi
                 }
 
                 AddStudentsToDatabase(dataTable);
+                studentIDYukle();
             }
         }
         private void AddStudentsToDatabase(DataTable dataTable)
@@ -838,7 +838,8 @@ namespace DershaneYonetimSistemi
                     // Excel dosyasını kaydet
                     package.SaveAs(new FileInfo(filePath));
 
-                    MessageBox.Show("Veriler başarıyla Excel'e aktarıldı!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Veriler başarıyla Excel'e aktarıldı!", "Başarılı", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -898,6 +899,7 @@ namespace DershaneYonetimSistemi
                 }
 
                 AddStudentCoursesToDatabase(dataTable);
+                studentCourseIDYukle();
             }
         }    //İMPORT ETMEDEN ÖNCE DATAGRİDVİEW'DA VERİLERİN GÖRÜNTÜLENMESİ GEREKİYOR DİĞER TÜRLÜ PK EN SON KOLONA GEÇİYOR
         private void AddStudentCoursesToDatabase(DataTable dataTable)
@@ -1039,6 +1041,7 @@ namespace DershaneYonetimSistemi
                 }
 
                 AddAttendanceToDatabase(dataTable);
+                AttendanceIdYukle();
             }
         } //İMPORT ETMEDEN ÖNCE DATAGRİDVİEW'DA VERİLERİN GÖRÜNTÜLENMESİ GEREKİYOR DİĞER TÜRLÜ PK EN SON KOLONA GEÇİYOR
         private void AddAttendanceToDatabase(DataTable dataTable)

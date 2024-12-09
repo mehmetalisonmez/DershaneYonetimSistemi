@@ -336,7 +336,6 @@ namespace DershaneYonetimSistemi
         }
 
 
-
         private void FormTchANDLessonMenu_Load(object sender, EventArgs e)
         {
             dersAdYukle();
@@ -526,6 +525,7 @@ namespace DershaneYonetimSistemi
                 }
 
                 AddTeachersToDatabase(dataTable);
+                teacherIDYukle();
             }
         }
         private void AddTeachersToDatabase(DataTable dataTable)
@@ -665,6 +665,7 @@ namespace DershaneYonetimSistemi
                 }
 
                 AddLessonToDatabase(dataTable);
+                dersIDYukle();
             }
         } //İMPORT ETMEDEN ÖNCE DATAGRİDVİEW'DA VERİLERİN GÖRÜNTÜLENMESİ GEREKİYOR DİĞER TÜRLÜ PK EN SON KOLONA GEÇİYOR
         private void AddLessonToDatabase(DataTable dataTable)

@@ -37,7 +37,7 @@
             groupBox4 = new GroupBox();
             dataGridViewGetTeachers = new DataGridView();
             groupBox5 = new GroupBox();
-            dataGridView4 = new DataGridView();
+            dataGridViewDerseGorePuanlar = new DataGridView();
             textBoxOgrenciAd = new TextBox();
             buttonSearchGrades = new Button();
             labelOgrenciAd = new Label();
@@ -64,6 +64,21 @@
             treeView2 = new TreeView();
             treeView3 = new TreeView();
             treeView4 = new TreeView();
+            label7 = new Label();
+            label8 = new Label();
+            textBoxDersAdı2 = new TextBox();
+            numericUpDownMinPuan = new NumericUpDown();
+            buttonSearchExamResults = new Button();
+            labelTemporarySonucID = new Label();
+            label9 = new Label();
+            label10 = new Label();
+            label11 = new Label();
+            label12 = new Label();
+            buttonSaveAsWord = new Button();
+            buttonSaveAsWord5 = new Button();
+            buttonSaveAsWord4 = new Button();
+            buttonSaveAsWord3 = new Button();
+            buttonSaveAsWord2 = new Button();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewGetStudentGradesByName).BeginInit();
             groupBox1.SuspendLayout();
@@ -73,7 +88,8 @@
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewGetTeachers).BeginInit();
             groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewDerseGorePuanlar).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownMinPuan).BeginInit();
             SuspendLayout();
             // 
             // groupBox3
@@ -170,26 +186,26 @@
             // 
             // groupBox5
             // 
-            groupBox5.Controls.Add(dataGridView4);
+            groupBox5.Controls.Add(dataGridViewDerseGorePuanlar);
             groupBox5.Location = new Point(1040, 54);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(458, 260);
             groupBox5.TabIndex = 27;
             groupBox5.TabStop = false;
-            groupBox5.Text = "Sınav Listesi";
+            groupBox5.Text = "Derse göre sınav sonuçları";
             // 
-            // dataGridView4
+            // dataGridViewDerseGorePuanlar
             // 
-            dataGridView4.AllowUserToAddRows = false;
-            dataGridView4.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView4.BackgroundColor = SystemColors.GradientInactiveCaption;
-            dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView4.Dock = DockStyle.Fill;
-            dataGridView4.Location = new Point(3, 19);
-            dataGridView4.Name = "dataGridView4";
-            dataGridView4.RowTemplate.Height = 25;
-            dataGridView4.Size = new Size(452, 238);
-            dataGridView4.TabIndex = 0;
+            dataGridViewDerseGorePuanlar.AllowUserToAddRows = false;
+            dataGridViewDerseGorePuanlar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewDerseGorePuanlar.BackgroundColor = SystemColors.GradientInactiveCaption;
+            dataGridViewDerseGorePuanlar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewDerseGorePuanlar.Dock = DockStyle.Fill;
+            dataGridViewDerseGorePuanlar.Location = new Point(3, 19);
+            dataGridViewDerseGorePuanlar.Name = "dataGridViewDerseGorePuanlar";
+            dataGridViewDerseGorePuanlar.RowTemplate.Height = 25;
+            dataGridViewDerseGorePuanlar.Size = new Size(452, 238);
+            dataGridViewDerseGorePuanlar.TabIndex = 0;
             // 
             // textBoxOgrenciAd
             // 
@@ -426,12 +442,175 @@
             treeView4.Size = new Size(10, 482);
             treeView4.TabIndex = 53;
             // 
+            // label7
+            // 
+            label7.AllowDrop = true;
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label7.Location = new Point(1168, 9);
+            label7.Name = "label7";
+            label7.Size = new Size(96, 15);
+            label7.TabIndex = 57;
+            label7.Text = "Minimum Puan :";
+            // 
+            // label8
+            // 
+            label8.AllowDrop = true;
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label8.Location = new Point(1040, 9);
+            label8.Name = "label8";
+            label8.Size = new Size(60, 15);
+            label8.TabIndex = 56;
+            label8.Text = "Ders Adı :";
+            // 
+            // textBoxDersAdı2
+            // 
+            textBoxDersAdı2.AllowDrop = true;
+            textBoxDersAdı2.Location = new Point(1041, 28);
+            textBoxDersAdı2.Name = "textBoxDersAdı2";
+            textBoxDersAdı2.Size = new Size(100, 23);
+            textBoxDersAdı2.TabIndex = 54;
+            // 
+            // numericUpDownMinPuan
+            // 
+            numericUpDownMinPuan.Location = new Point(1178, 27);
+            numericUpDownMinPuan.Name = "numericUpDownMinPuan";
+            numericUpDownMinPuan.Size = new Size(120, 23);
+            numericUpDownMinPuan.TabIndex = 58;
+            // 
+            // buttonSearchExamResults
+            // 
+            buttonSearchExamResults.BackColor = Color.Lavender;
+            buttonSearchExamResults.Location = new Point(1043, 320);
+            buttonSearchExamResults.Name = "buttonSearchExamResults";
+            buttonSearchExamResults.Size = new Size(101, 41);
+            buttonSearchExamResults.TabIndex = 59;
+            buttonSearchExamResults.Text = "Ara";
+            buttonSearchExamResults.UseVisualStyleBackColor = false;
+            buttonSearchExamResults.Click += buttonSearchExamResults_Click;
+            // 
+            // labelTemporarySonucID
+            // 
+            labelTemporarySonucID.Location = new Point(146, 320);
+            labelTemporarySonucID.Name = "labelTemporarySonucID";
+            labelTemporarySonucID.Size = new Size(279, 63);
+            labelTemporarySonucID.TabIndex = 60;
+            labelTemporarySonucID.Text = "NOT :  texbox’lara girilen Öğretmen adı veya öğretmen branşına göre Öğretmenin adını ve branşını ekranda listeliyoruz";
+            labelTemporarySonucID.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label9
+            // 
+            label9.Location = new Point(646, 320);
+            label9.Name = "label9";
+            label9.Size = new Size(279, 63);
+            label9.TabIndex = 61;
+            label9.Text = "NOT :  texbox’lara girilen Öğrenci adı, soyadı veya ders adına göre Öğrencinin adı, soyadı, ders adı, devamsızlık durumu ve devamsızlık tarihini ekranda listeliyoruz";
+            label9.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label10
+            // 
+            label10.Location = new Point(364, 780);
+            label10.Name = "label10";
+            label10.Size = new Size(279, 63);
+            label10.TabIndex = 62;
+            label10.Text = "NOT : texbox’a girilen öğrenci adına göre Öğrencinin Adı, soyadı, ders adı ve sınav sonucu ekranda listeleniyor";
+            label10.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label11
+            // 
+            label11.Location = new Point(1168, 329);
+            label11.Name = "label11";
+            label11.Size = new Size(303, 63);
+            label11.TabIndex = 63;
+            label11.Text = "NOT :  texbox’lara girilen Ders adına veya minimum puana göre\r\n Ders adını, Öğrenci numarasını, adını, soyadını ve dersten alınan puanı ekranda listeliyoruz";
+            label11.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // label12
+            // 
+            label12.Location = new Point(1074, 761);
+            label12.Name = "label12";
+            label12.Size = new Size(279, 63);
+            label12.TabIndex = 64;
+            label12.Text = "NOT :  texbox’lara girilen Öğrenci adı, soyadı veya Ödeme türüne göre Öğrencinin numarası, adı, soyadı, yaptığı ödeme miktarı, ödeme tarihi ve ödeme türünü ekranda listeliyoruz";
+            label12.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // buttonSaveAsWord
+            // 
+            buttonSaveAsWord.BackColor = Color.Lavender;
+            buttonSaveAsWord.Location = new Point(15, 363);
+            buttonSaveAsWord.Name = "buttonSaveAsWord";
+            buttonSaveAsWord.Size = new Size(101, 41);
+            buttonSaveAsWord.TabIndex = 65;
+            buttonSaveAsWord.Text = "Save word";
+            buttonSaveAsWord.UseVisualStyleBackColor = false;
+            buttonSaveAsWord.Click += buttonSaveAsWord_Click;
+            // 
+            // buttonSaveAsWord5
+            // 
+            buttonSaveAsWord5.BackColor = Color.Lavender;
+            buttonSaveAsWord5.Location = new Point(915, 808);
+            buttonSaveAsWord5.Name = "buttonSaveAsWord5";
+            buttonSaveAsWord5.Size = new Size(101, 41);
+            buttonSaveAsWord5.TabIndex = 66;
+            buttonSaveAsWord5.Text = "Save word";
+            buttonSaveAsWord5.UseVisualStyleBackColor = false;
+            buttonSaveAsWord5.Click += buttonSaveAsWord5_Click;
+            // 
+            // buttonSaveAsWord4
+            // 
+            buttonSaveAsWord4.BackColor = Color.Lavender;
+            buttonSaveAsWord4.Location = new Point(191, 808);
+            buttonSaveAsWord4.Name = "buttonSaveAsWord4";
+            buttonSaveAsWord4.Size = new Size(101, 41);
+            buttonSaveAsWord4.TabIndex = 67;
+            buttonSaveAsWord4.Text = "Save word";
+            buttonSaveAsWord4.UseVisualStyleBackColor = false;
+            buttonSaveAsWord4.Click += buttonSaveAsWord4_Click;
+            // 
+            // buttonSaveAsWord3
+            // 
+            buttonSaveAsWord3.BackColor = Color.Lavender;
+            buttonSaveAsWord3.Location = new Point(1043, 363);
+            buttonSaveAsWord3.Name = "buttonSaveAsWord3";
+            buttonSaveAsWord3.Size = new Size(101, 41);
+            buttonSaveAsWord3.TabIndex = 68;
+            buttonSaveAsWord3.Text = "Save word";
+            buttonSaveAsWord3.UseVisualStyleBackColor = false;
+            buttonSaveAsWord3.Click += buttonSaveAsWord3_Click;
+            // 
+            // buttonSaveAsWord2
+            // 
+            buttonSaveAsWord2.BackColor = Color.Lavender;
+            buttonSaveAsWord2.Location = new Point(519, 363);
+            buttonSaveAsWord2.Name = "buttonSaveAsWord2";
+            buttonSaveAsWord2.Size = new Size(101, 41);
+            buttonSaveAsWord2.TabIndex = 69;
+            buttonSaveAsWord2.Text = "Save word";
+            buttonSaveAsWord2.UseVisualStyleBackColor = false;
+            buttonSaveAsWord2.Click += buttonSaveAsWord2_Click;
+            // 
             // FormRaporMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonShadow;
             ClientSize = new Size(1510, 888);
+            Controls.Add(buttonSaveAsWord2);
+            Controls.Add(buttonSaveAsWord3);
+            Controls.Add(buttonSaveAsWord4);
+            Controls.Add(buttonSaveAsWord5);
+            Controls.Add(buttonSaveAsWord);
+            Controls.Add(label12);
+            Controls.Add(label11);
+            Controls.Add(label10);
+            Controls.Add(label9);
+            Controls.Add(labelTemporarySonucID);
+            Controls.Add(buttonSearchExamResults);
+            Controls.Add(numericUpDownMinPuan);
+            Controls.Add(label7);
+            Controls.Add(label8);
+            Controls.Add(textBoxDersAdı2);
             Controls.Add(treeView4);
             Controls.Add(treeView3);
             Controls.Add(treeView2);
@@ -474,7 +653,8 @@
             groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewGetTeachers).EndInit();
             groupBox5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewDerseGorePuanlar).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDownMinPuan).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -490,7 +670,7 @@
         private GroupBox groupBox4;
         private DataGridView dataGridViewGetTeachers;
         private GroupBox groupBox5;
-        private DataGridView dataGridView4;
+        private DataGridView dataGridViewDerseGorePuanlar;
         private TextBox textBoxOgrenciAd;
         private Button buttonSearchGrades;
         private Label labelOgrenciAd;
@@ -517,5 +697,20 @@
         private TreeView treeView2;
         private TreeView treeView3;
         private TreeView treeView4;
+        private Label label7;
+        private Label label8;
+        private TextBox textBoxDersAdı2;
+        private NumericUpDown numericUpDownMinPuan;
+        private Button buttonSearchExamResults;
+        private Label labelTemporarySonucID;
+        private Label label9;
+        private Label label10;
+        private Label label11;
+        private Label label12;
+        private Button buttonSaveAsWord;
+        private Button buttonSaveAsWord5;
+        private Button buttonSaveAsWord4;
+        private Button buttonSaveAsWord3;
+        private Button buttonSaveAsWord2;
     }
 }

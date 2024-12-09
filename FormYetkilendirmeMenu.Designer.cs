@@ -35,8 +35,8 @@
             checkBoxCanUpdate = new CheckBox();
             checkBoxCanDelete = new CheckBox();
             checkBoxCanInsert = new CheckBox();
-            checkBoxCanRead = new CheckBox();
             buttonRolEkle = new Button();
+            checkBoxCanRead = new CheckBox();
             textBoxRol = new TextBox();
             labelCanInsert = new Label();
             label4 = new Label();
@@ -156,15 +156,6 @@
             checkBoxCanInsert.TabIndex = 16;
             checkBoxCanInsert.UseVisualStyleBackColor = true;
             // 
-            // checkBoxCanRead
-            // 
-            checkBoxCanRead.AutoSize = true;
-            checkBoxCanRead.Location = new Point(143, 84);
-            checkBoxCanRead.Name = "checkBoxCanRead";
-            checkBoxCanRead.Size = new Size(15, 14);
-            checkBoxCanRead.TabIndex = 4;
-            checkBoxCanRead.UseVisualStyleBackColor = true;
-            // 
             // buttonRolEkle
             // 
             buttonRolEkle.BackColor = Color.Lavender;
@@ -176,6 +167,15 @@
             buttonRolEkle.Text = "Yeni Rol Ekle";
             buttonRolEkle.UseVisualStyleBackColor = false;
             buttonRolEkle.Click += buttonRolEkle_Click;
+            // 
+            // checkBoxCanRead
+            // 
+            checkBoxCanRead.AutoSize = true;
+            checkBoxCanRead.Location = new Point(143, 84);
+            checkBoxCanRead.Name = "checkBoxCanRead";
+            checkBoxCanRead.Size = new Size(15, 14);
+            checkBoxCanRead.TabIndex = 4;
+            checkBoxCanRead.UseVisualStyleBackColor = true;
             // 
             // textBoxRol
             // 
@@ -259,10 +259,11 @@
             // 
             // comboBoxKullaniciRolleri
             // 
+            comboBoxKullaniciRolleri.Font = new Font("Imprint MT Shadow", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             comboBoxKullaniciRolleri.FormattingEnabled = true;
             comboBoxKullaniciRolleri.Location = new Point(107, 140);
             comboBoxKullaniciRolleri.Name = "comboBoxKullaniciRolleri";
-            comboBoxKullaniciRolleri.Size = new Size(121, 27);
+            comboBoxKullaniciRolleri.Size = new Size(121, 22);
             comboBoxKullaniciRolleri.TabIndex = 22;
             // 
             // textBoxTemporaryYoneticiID

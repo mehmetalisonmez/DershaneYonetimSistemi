@@ -213,7 +213,6 @@ namespace DershaneYonetimSistemi
         }
 
 
-
         private void FormOdemeMenu_Load(object sender, EventArgs e)
         {
             odemeTuruYukle();
@@ -343,6 +342,7 @@ namespace DershaneYonetimSistemi
 
                 // Veritabanına ekleme (isteğe bağlı)
                 AddDataToDatabase(dataTable);
+                odemeIDYukle();
             }
         }
         private void AddDataToDatabase(DataTable dataTable)

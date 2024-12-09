@@ -583,6 +583,7 @@ namespace DershaneYonetimSistemi
                 }
 
                 AddExamToDatabase(dataTable);
+                sinavIDYukle();
             }
         } //İMPORT ETMEDEN ÖNCE DATAGRİDVİEW'DA VERİLERİN GÖRÜNTÜLENMESİ GEREKİYOR DİĞER TÜRLÜ PK EN SON KOLONA GEÇİYOR
         private void AddExamToDatabase(DataTable dataTable)
@@ -723,6 +724,7 @@ namespace DershaneYonetimSistemi
                 }
 
                 AddSinavSonucToDatabase(dataTable);
+                sinavSonucIDYukle();
             }
         } //İMPORT ETMEDEN ÖNCE DATAGRİDVİEW'DA VERİLERİN GÖRÜNTÜLENMESİ GEREKİYOR DİĞER TÜRLÜ PK EN SON KOLONA GEÇİYOR
         private void AddSinavSonucToDatabase(DataTable dataTable)
